@@ -1,1 +1,645 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgroForte | Futuro Sustentável</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+</head>
+<body>
+    <!-- Preloader -->
+    <div class="preloader" id="preloader">
+        <div class="loader-content">
+            <div class="loader-leaf">
+                <i class="fas fa-leaf"></i>
+            </div>
+            <div class="loader-text">
+                <span>A</span><span>g</span><span>r</span><span>o</span><span>F</span><span>o</span><span>r</span><span>t</span><span>e</span>
+            </div>
+            <div class="loader-bar">
+                <div class="loader-progress"></div>
+            </div>
+        </div>
+    </div>
 
+    <!-- Cursor personalizado -->
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-follower" id="cursorFollower"></div>
+
+    <!-- Navegação -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <div class="logo-icon">
+                    <i class="fas fa-seedling"></i>
+                </div>
+                <span class="logo-text">Agro<span>Forte</span></span>
+            </div>
+            
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#home" class="nav-link active">Início</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#about" class="nav-link">Sobre Nós</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#solutions" class="nav-link">Soluções</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#impact" class="nav-link">Impacto</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#sustainability" class="nav-link">Sustentabilidade</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#contact" class="nav-link">Contato</a>
+                </li>
+            </ul>
+
+            <div class="nav-actions">
+                <button class="btn-outline">Portal do Produtor</button>
+                <button class="btn-primary">Começar</button>
+                <div class="menu-toggle" id="menuToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero-section">
+            <div class="hero-background">
+                <div class="gradient-overlay"></div>
+                <div class="particles-container" id="particlesContainer"></div>
+                <div class="hero-video-wrapper">
+                    <video autoplay muted loop playsinline id="heroVideo">
+                        <source src="https://cdn.pixabay.com/video/2023/09/25/182524-867562587_large.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+            
+            <div class="hero-content">
+                <div class="hero-badge" data-aos="fade-up">
+                    <i class="fas fa-globe-americas"></i>
+                    <span>Compromisso com o Futuro</span>
+                </div>
+                <h1 class="hero-title" data-aos="fade-up" data-aos-delay="100">
+                    Cultivando o
+                    <span class="gradient-text">Equilíbrio</span>
+                    entre Produção e Natureza
+                </h1>
+                <p class="hero-description" data-aos="fade-up" data-aos-delay="200">
+                    Tecnologia e sustentabilidade unidas para transformar o agronegócio brasileiro. 
+                    Aumente sua produtividade enquanto preserva o meio ambiente para as próximas gerações.
+                </p>
+                <div class="hero-buttons" data-aos="fade-up" data-aos-delay="300">
+                    <button class="btn-primary-large">
+                        <i class="fas fa-leaf"></i>
+                        Conheça Nossas Soluções
+                    </button>
+                    <button class="btn-outline-large">
+                        <i class="fas fa-play"></i>
+                        Ver Vídeo
+                    </button>
+                </div>
+                
+                <div class="hero-stats" data-aos="fade-up" data-aos-delay="400">
+                    <div class="stat-item">
+                        <div class="stat-number" data-target="5000">0</div>
+                        <div class="stat-label">Hectares Monitorados</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-target="1200">0</div>
+                        <div class="stat-label">Produtores Ativos</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-target="35">0</div>
+                        <div class="stat-label">% Redução de Impacto</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-target="98">0</div>
+                        <div class="stat-label">% Satisfação</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="scroll-indicator">
+                <div class="mouse">
+                    <div class="wheel"></div>
+                </div>
+                <p>Role para explorar</p>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about-section">
+            <div class="container">
+                <div class="section-header" data-aos="fade-up">
+                    <span class="section-tag">Nossa Missão</span>
+                    <h2 class="section-title">
+                        Revolucionando o
+                        <span class="gradient-text">Agronegócio Sustentável</span>
+                    </h2>
+                    <p class="section-description">
+                        A AgroForte nasceu da necessidade de unir tecnologia de ponta com práticas agrícolas regenerativas. 
+                        Acreditamos que é possível alimentar o mundo sem esgotar os recursos do planeta.
+                    </p>
+                </div>
+
+                <div class="about-grid">
+                    <div class="about-card" data-aos="fade-right">
+                        <div class="card-icon">
+                            <i class="fas fa-satellite"></i>
+                        </div>
+                        <h3>Monitoramento Inteligente</h3>
+                        <p>Utilizamos satélites e drones com IA para monitorar a saúde das plantações em tempo real, otimizando o uso de recursos.</p>
+                        <a href="#" class="card-link">
+                            Saiba mais
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                    <div class="about-card" data-aos="fade-up" data-aos-delay="100">
+                        <div class="card-icon">
+                            <i class="fas fa-water"></i>
+                        </div>
+                        <h3>Gestão Hídrica Eficiente</h3>
+                        <p>Sistemas de irrigação inteligentes que reduzem o consumo de água em até 40% mantendo a produtividade máxima.</p>
+                        <a href="#" class="card-link">
+                            Saiba mais
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                    <div class="about-card" data-aos="fade-left" data-aos-delay="200">
+                        <div class="card-icon">
+                            <i class="fas fa-recycle"></i>
+                        </div>
+                        <h3>Economia Circular</h3>
+                        <p>Transformamos resíduos agrícolas em bioenergia e fertilizantes orgânicos, fechando o ciclo produtivo.</p>
+                        <a href="#" class="card-link">
+                            Saiba mais
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Solutions Section -->
+        <section id="solutions" class="solutions-section">
+            <div class="container">
+                <div class="section-header" data-aos="fade-up">
+                    <span class="section-tag">Nossas Soluções</span>
+                    <h2 class="section-title">
+                        Tecnologia que
+                        <span class="gradient-text">Transforma</span>
+                    </h2>
+                    <p class="section-description">
+                        Combinamos inovação e sustentabilidade para oferecer soluções completas que atendem 
+                        às necessidades do produtor moderno.
+                    </p>
+                </div>
+
+                <div class="solutions-grid">
+                    <div class="solution-card" data-aos="zoom-in">
+                        <div class="solution-image">
+                            <img src="https://images.unsplash.com/photo-1586771107445-d3ca888129ff?w=800" alt="Agricultura de Precisão">
+                            <div class="solution-overlay"></div>
+                        </div>
+                        <div class="solution-content">
+                            <h3>Agricultura de Precisão</h3>
+                            <p>Sensores IoT, análise de solo e clima para decisões baseadas em dados.</p>
+                            <ul class="solution-features">
+                                <li><i class="fas fa-check-circle"></i> Mapeamento de produtividade</li>
+                                <li><i class="fas fa-check-circle"></i> Aplicação variável de insumos</li>
+                                <li><i class="fas fa-check-circle"></i> Redução de custos em 30%</li>
+                            </ul>
+                            <button class="solution-btn">Saiba Mais</button>
+                        </div>
+                    </div>
+
+                    <div class="solution-card" data-aos="zoom-in" data-aos-delay="100">
+                        <div class="solution-image">
+                            <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800" alt="Energia Renovável">
+                            <div class="solution-overlay"></div>
+                        </div>
+                        <div class="solution-content">
+                            <h3>Energia Renovável Rural</h3>
+                            <p>Implantação de sistemas solares e biodigestores para autonomia energética.</p>
+                            <ul class="solution-features">
+                                <li><i class="fas fa-check-circle"></i> Energia solar fotovoltaica</li>
+                                <li><i class="fas fa-check-circle"></i> Biogás de resíduos orgânicos</li>
+                                <li><i class="fas fa-check-circle"></i> Economia de até 70% na conta</li>
+                            </ul>
+                            <button class="solution-btn">Saiba Mais</button>
+                        </div>
+                    </div>
+
+                    <div class="solution-card" data-aos="zoom-in" data-aos-delay="200">
+                        <div class="solution-image">
+                            <img src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=800" alt="Rastreabilidade">
+                            <div class="solution-overlay"></div>
+                        </div>
+                        <div class="solution-content">
+                            <h3>Rastreabilidade Blockchain</h3>
+                            <p>Transparência total da cadeia produtiva do campo até a mesa do consumidor.</p>
+                            <ul class="solution-features">
+                                <li><i class="fas fa-check-circle"></i> Certificação digital</li>
+                                <li><i class="fas fa-check-circle"></i> Conformidade ESG</li>
+                                <li><i class="fas fa-check-circle"></i> Valorização do produto final</li>
+                            </ul>
+                            <button class="solution-btn">Saiba Mais</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Impact Section -->
+        <section id="impact" class="impact-section">
+            <div class="container">
+                <div class="impact-grid">
+                    <div class="impact-content" data-aos="fade-right">
+                        <span class="section-tag">Nosso Impacto</span>
+                        <h2>Resultados que Fazem a Diferença</h2>
+                        <p>A cada safra, ajudamos produtores a alcançarem melhores resultados enquanto protegem o meio ambiente.</p>
+                        
+                        <div class="impact-metrics">
+                            <div class="metric">
+                                <div class="metric-icon">
+                                    <i class="fas fa-tint"></i>
+                                </div>
+                                <div class="metric-info">
+                                    <div class="metric-value">2.5B</div>
+                                    <div class="metric-label">Litros de água economizados</div>
+                                </div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-icon">
+                                    <i class="fas fa-tree"></i>
+                                </div>
+                                <div class="metric-info">
+                                    <div class="metric-value">50k</div>
+                                    <div class="metric-label">Árvores preservadas</div>
+                                </div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-icon">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                </div>
+                                <div class="metric-info">
+                                    <div class="metric-value">15k</div>
+                                    <div class="metric-label">Toneladas de CO² evitadas</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button class="btn-primary-large">
+                            <i class="fas fa-chart-bar"></i>
+                            Ver Relatório Completo
+                        </button>
+                    </div>
+                    
+                    <div class="impact-visual" data-aos="fade-left">
+                        <div class="impact-circle">
+                            <svg viewBox="0 0 200 200">
+                                <circle cx="100" cy="100" r="90" fill="none" stroke="#e0e7ff" stroke-width="20"/>
+                                <circle cx="100" cy="100" r="90" fill="none" stroke="url(#gradient)" stroke-width="20" 
+                                        stroke-dasharray="565.48" stroke-dashoffset="113.1" stroke-linecap="round"/>
+                                <defs>
+                                    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" stop-color="#10b981"/>
+                                        <stop offset="100%" stop-color="#059669"/>
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                            <div class="circle-content">
+                                <span class="circle-percentage">80%</span>
+                                <span class="circle-label">Eficiência Hídrica</span>
+                            </div>
+                        </div>
+                        
+                        <div class="floating-elements">
+                            <div class="floating-item item1">
+                                <i class="fas fa-seedling"></i>
+                            </div>
+                            <div class="floating-item item2">
+                                <i class="fas fa-sun"></i>
+                            </div>
+                            <div class="floating-item item3">
+                                <i class="fas fa-droplet"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sustainability Section -->
+        <section id="sustainability" class="sustainability-section">
+            <div class="container">
+                <div class="section-header" data-aos="fade-up">
+                    <span class="section-tag">Nossos Pilares</span>
+                    <h2 class="section-title">
+                        Compromisso com o
+                        <span class="gradient-text">Futuro Sustentável</span>
+                    </h2>
+                </div>
+
+                <div class="pillars-grid">
+                    <div class="pillar-card" data-aos="flip-left">
+                        <div class="pillar-icon">
+                            <i class="fas fa-hand-holding-heart"></i>
+                        </div>
+                        <h3>Social</h3>
+                        <p>Valorização do produtor rural e desenvolvimento das comunidades locais através de programas de capacitação e tecnologia acessível.</p>
+                        <div class="pillar-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 85%"></div>
+                            </div>
+                            <span>85% de engajamento</span>
+                        </div>
+                    </div>
+                    
+                    <div class="pillar-card" data-aos="flip-left" data-aos-delay="100">
+                        <div class="pillar-icon">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <h3>Ambiental</h3>
+                        <p>Preservação de nascentes, recuperação de áreas degradadas e redução da pegada de carbono em toda a cadeia produtiva.</p>
+                        <div class="pillar-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 92%"></div>
+                            </div>
+                            <span>92% de conformidade</span>
+                        </div>
+                    </div>
+                    
+                    <div class="pillar-card" data-aos="flip-left" data-aos-delay="200">
+                        <div class="pillar-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3>Econômico</h3>
+                        <p>Otimização de recursos que gera economia real para o produtor e torna o negócio mais competitivo e resiliente.</p>
+                        <div class="pillar-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 78%"></div>
+                            </div>
+                            <span>78% de ROI médio</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="certifications" data-aos="fade-up">
+                    <h3>Certificações e Parcerias</h3>
+                    <div class="cert-logos">
+                        <div class="cert-logo">
+                            <i class="fab fa-pagelines"></i>
+                            <span>Rainforest Alliance</span>
+                        </div>
+                        <div class="cert-logo">
+                            <i class="fas fa-certificate"></i>
+                            <span>ISO 14001</span>
+                        </div>
+                        <div class="cert-logo">
+                            <i class="fas fa-leaf"></i>
+                            <span>Carbon Trust</span>
+                        </div>
+                        <div class="cert-logo">
+                            <i class="fas fa-recycle"></i>
+                            <span>B Corp</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="testimonials-section">
+            <div class="container">
+                <div class="section-header" data-aos="fade-up">
+                    <span class="section-tag">Depoimentos</span>
+                    <h2 class="section-title">
+                        Quem Confia na
+                        <span class="gradient-text">AgroForte</span>
+                    </h2>
+                </div>
+
+                <div class="swiper testimonials-slider" data-aos="fade-up">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <div class="testimonial-card">
+                                <div class="testimonial-quote">
+                                    <i class="fas fa-quote-right"></i>
+                                </div>
+                                <p class="testimonial-text">
+                                    "Com a AgroForte, reduzimos nosso consumo de água em 40% e aumentamos a produtividade em 25%. 
+                                    É tecnologia que realmente faz a diferença no campo."
+                                </p>
+                                <div class="testimonial-author">
+                                    <img src="https://ui-avatars.com/api/?name=Joao+Silva&background=10b981&color=fff" alt="João Silva">
+                                    <div class="author-info">
+                                        <h4>João Silva</h4>
+                                        <p>Produtor Rural - Mato Grosso</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="testimonial-card">
+                                <div class="testimonial-quote">
+                                    <i class="fas fa-quote-right"></i>
+                                </div>
+                                <p class="testimonial-text">
+                                    "A rastreabilidade blockchain nos ajudou a conquistar mercados internacionais exigentes. 
+                                    Nossa produção agora tem certificação digital completa."
+                                </p>
+                                <div class="testimonial-author">
+                                    <img src="https://ui-avatars.com/api/?name=Maria+Souza&background=10b981&color=fff" alt="Maria Souza">
+                                    <div class="author-info">
+                                        <h4>Maria Souza</h4>
+                                        <p>Exportadora de Café - Minas Gerais</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="testimonial-card">
+                                <div class="testimonial-quote">
+                                    <i class="fas fa-quote-right"></i>
+                                </div>
+                                <p class="testimonial-text">
+                                    "A instalação dos painéis solares e do biodigestor nos trouxe independência energética. 
+                                    Hoje produzimos nossa própria energia limpa."
+                                </p>
+                                <div class="testimonial-author">
+                                    <img src="https://ui-avatars.com/api/?name=Pedro+Oliveira&background=10b981&color=fff" alt="Pedro Oliveira">
+                                    <div class="author-info">
+                                        <h4>Pedro Oliveira</h4>
+                                        <p>Pecuarista - Goiás</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact-section">
+            <div class="container">
+                <div class="contact-grid">
+                    <div class="contact-info" data-aos="fade-right">
+                        <span class="section-tag">Contato</span>
+                        <h2>Vamos Cultivar o Futuro Juntos</h2>
+                        <p>Entre em contato com nossa equipe de especialistas e descubra como podemos ajudar sua produção a ser mais sustentável e lucrativa.</p>
+                        
+                        <div class="contact-methods">
+                            <div class="contact-method">
+                                <i class="fas fa-phone-alt"></i>
+                                <div>
+                                    <h4>Telefone</h4>
+                                    <p>0800 123 4567</p>
+                                </div>
+                            </div>
+                            <div class="contact-method">
+                                <i class="fas fa-envelope"></i>
+                                <div>
+                                    <h4>Email</h4>
+                                    <p>contato@agroforte.com.br</p>
+                                </div>
+                            </div>
+                            <div class="contact-method">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <div>
+                                    <h4>Escritório</h4>
+                                    <p>Av. Paulista, 1000 - São Paulo, SP</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                            <a href="#"><i class="fab fa-youtube"></i></a>
+                            <a href="#"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-form" data-aos="fade-left">
+                        <form id="contactForm">
+                            <div class="form-group">
+                                <input type="text" placeholder="Nome completo" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" placeholder="Email" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="tel" placeholder="Telefone">
+                            </div>
+                            <div class="form-group">
+                                <select required>
+                                    <option value="">Selecione o assunto</option>
+                                    <option value="consultoria">Consultoria em Sustentabilidade</option>
+                                    <option value="tecnologia">Tecnologia Agrícola</option>
+                                    <option value="parceria">Parceria Comercial</option>
+                                    <option value="outro">Outro Assunto</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <textarea placeholder="Como podemos ajudar?" rows="4" required></textarea>
+                            </div>
+                            <button type="submit" class="btn-primary-large">
+                                <i class="fas fa-paper-plane"></i>
+                                Enviar Mensagem
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <i class="fas fa-seedling"></i>
+                        <span>AgroForte</span>
+                    </div>
+                    <p>Tecnologia e sustentabilidade para o agronegócio do futuro.</p>
+                    <div class="footer-newsletter">
+                        <h4>Newsletter</h4>
+                        <form class="newsletter-form">
+                            <input type="email" placeholder="Seu email">
+                            <button type="submit">
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Links Rápidos</h4>
+                    <ul>
+                        <li><a href="#home">Início</a></li>
+                        <li><a href="#about">Sobre Nós</a></li>
+                        <li><a href="#solutions">Soluções</a></li>
+                        <li><a href="#impact">Impacto</a></li>
+                        <li><a href="#contact">Contato</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Soluções</h4>
+                    <ul>
+                        <li><a href="#">Agricultura de Precisão</a></li>
+                        <li><a href="#">Energia Renovável</a></li>
+                        <li><a href="#">Rastreabilidade</a></li>
+                        <li><a href="#">Gestão Hídrica</a></li>
+                        <li><a href="#">Consultoria ESG</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Recursos</h4>
+                    <ul>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Cases de Sucesso</a></li>
+                        <li><a href="#">E-books</a></li>
+                        <li><a href="#">Webinars</a></li>
+                        <li><a href="#">Suporte</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 AgroForte. Todos os direitos reservados.</p>
+                <div class="footer-legal">
+                    <a href="#">Política de Privacidade</a>
+                    <a href="#">Termos de Uso</a>
+                    <a href="#">LGPD</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
