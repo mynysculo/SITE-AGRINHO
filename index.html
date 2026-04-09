@@ -1,1 +1,1017 @@
-desenvolvendo
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <meta name="description" content="AgroForte - Revolução Sustentável no Agronegócio. Tecnologia de ponta, IA e práticas regenerativas para um futuro em equilíbrio com a natureza.">
+    <meta name="theme-color" content="#059669">
+    <title>AgroForte | O Futuro Sustentável do Agronegócio</title>
+    
+    <!-- Fontes Premium -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=Clash+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="theme-dark">
+    <!-- ==================== CURSOR ULTRA PREMIUM ==================== -->
+    <div class="cursor-master" id="cursorMaster">
+        <div class="cursor-core"></div>
+        <div class="cursor-aura"></div>
+        <div class="cursor-ring"></div>
+        <div class="cursor-energy"></div>
+    </div>
+    <div class="cursor-particles-container" id="cursorParticlesContainer"></div>
+
+    <!-- ==================== PRELOADER CINEMATOGRÁFICO ==================== -->
+    <div class="preloader-ultra" id="preloaderUltra">
+        <div class="preloader-background">
+            <div class="preloader-gradient-layer"></div>
+            <div class="preloader-noise"></div>
+            <canvas id="preloaderCanvas"></canvas>
+        </div>
+        <div class="preloader-content-ultra">
+            <div class="preloader-logo-ultra">
+                <div class="logo-3d-ultra">
+                    <div class="logo-sphere">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <div class="logo-rings">
+                        <div class="ring r1"></div>
+                        <div class="ring r2"></div>
+                        <div class="ring r3"></div>
+                    </div>
+                </div>
+                <div class="preloader-text-ultra">
+                    <span class="char">A</span>
+                    <span class="char">G</span>
+                    <span class="char">R</span>
+                    <span class="char">O</span>
+                    <span class="char">F</span>
+                    <span class="char">O</span>
+                    <span class="char">R</span>
+                    <span class="char">T</span>
+                    <span class="char">E</span>
+                </div>
+            </div>
+            <div class="preloader-progress-ultra">
+                <div class="progress-track-ultra">
+                    <div class="progress-fill-ultra" id="progressFillUltra">
+                        <div class="progress-glow-ultra"></div>
+                    </div>
+                </div>
+                <div class="progress-info-ultra">
+                    <span class="progress-label-ultra" id="progressLabel">Iniciando experiência</span>
+                    <span class="progress-percent-ultra" id="progressPercentUltra">0%</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== BOTÃO DO JOGO DA MEMÓRIA ==================== -->
+    <button class="game-fab" id="gameFab" aria-label="Jogo da Memória Agro">
+        <i class="fas fa-gamepad"></i>
+        <span class="fab-tooltip">Jogo da Memória</span>
+        <div class="fab-pulse"></div>
+    </button>
+
+    <!-- ==================== MODAL DO JOGO DA MEMÓRIA ==================== -->
+    <div class="game-modal" id="gameModal">
+        <div class="game-modal-overlay"></div>
+        <div class="game-modal-content">
+            <button class="game-modal-close" id="closeGameModal">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="game-container">
+                <div class="game-header">
+                    <h2><i class="fas fa-leaf"></i> Memória AgroForte</h2>
+                    <div class="game-stats">
+                        <div class="game-stat">
+                            <i class="fas fa-star"></i>
+                            <span id="gameScore">0</span>
+                        </div>
+                        <div class="game-stat">
+                            <i class="fas fa-clock"></i>
+                            <span id="gameTimer">00:00</span>
+                        </div>
+                        <div class="game-stat">
+                            <i class="fas fa-rotate"></i>
+                            <span id="gameMoves">0</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="game-board" id="gameBoard"></div>
+                <div class="game-controls">
+                    <button class="game-btn" id="restartGame">
+                        <i class="fas fa-arrow-rotate-left"></i> Reiniciar
+                    </button>
+                    <button class="game-btn primary" id="newGameBtn">
+                        <i class="fas fa-play"></i> Novo Jogo
+                    </button>
+                    <select id="difficultySelect" class="game-select">
+                        <option value="4">Fácil (4x4)</option>
+                        <option value="6" selected>Médio (6x6)</option>
+                        <option value="8">Difícil (8x8)</option>
+                    </select>
+                </div>
+                <div class="game-message" id="gameMessage"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== HEADER FLUTUANTE PREMIUM ==================== -->
+    <header class="header-ultra" id="headerUltra">
+        <div class="header-backdrop-ultra"></div>
+        
+        <!-- Anúncio Superior -->
+        <div class="announcement-bar">
+            <div class="announcement-content">
+                <i class="fas fa-leaf"></i>
+                <span>🌱 Nova atualização: Agricultura de Precisão 6.0 com IA Generativa já disponível!</span>
+                <i class="fas fa-leaf"></i>
+            </div>
+            <button class="announcement-close-btn" id="closeAnnouncementBtn">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <nav class="navbar-ultra">
+            <div class="nav-container-ultra">
+                <!-- Logo Ultra -->
+                <a href="#home" class="nav-logo-ultra">
+                    <div class="logo-icon-ultra">
+                        <i class="fas fa-seedling"></i>
+                        <div class="logo-glow"></div>
+                    </div>
+                    <div class="logo-text-ultra">
+                        <span class="logo-agro">Agro</span>
+                        <span class="logo-forte">Forte</span>
+                        <span class="logo-sub">Futuro Sustentável</span>
+                    </div>
+                </a>
+                
+                <!-- Menu Principal -->
+                <ul class="nav-menu-ultra" id="navMenuUltra">
+                    <li class="nav-item-ultra">
+                        <a href="#home" class="nav-link-ultra active">
+                            <span class="link-icon"><i class="fas fa-home"></i></span>
+                            <span class="link-text">Início</span>
+                            <span class="link-indicator"></span>
+                        </a>
+                    </li>
+                    <li class="nav-item-ultra dropdown-ultra">
+                        <a href="#about" class="nav-link-ultra">
+                            <span class="link-icon"><i class="fas fa-info-circle"></i></span>
+                            <span class="link-text">Sobre</span>
+                            <span class="link-indicator"></span>
+                            <i class="fas fa-chevron-down dropdown-arrow"></i>
+                        </a>
+                        <div class="dropdown-menu-ultra">
+                            <div class="dropdown-grid">
+                                <a href="#" class="dropdown-item"><i class="fas fa-flag"></i> Nossa História</a>
+                                <a href="#" class="dropdown-item"><i class="fas fa-bullseye"></i> Missão e Visão</a>
+                                <a href="#" class="dropdown-item"><i class="fas fa-heart"></i> Valores</a>
+                                <a href="#" class="dropdown-item"><i class="fas fa-users"></i> Equipe</a>
+                                <a href="#" class="dropdown-item"><i class="fas fa-trophy"></i> Premiações</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item-ultra megamenu-ultra">
+                        <a href="#solutions" class="nav-link-ultra">
+                            <span class="link-icon"><i class="fas fa-cube"></i></span>
+                            <span class="link-text">Soluções</span>
+                            <span class="link-indicator"></span>
+                            <i class="fas fa-chevron-down dropdown-arrow"></i>
+                        </a>
+                        <div class="megamenu-container-ultra">
+                            <div class="megamenu-grid-ultra">
+                                <div class="megamenu-section">
+                                    <h4><i class="fas fa-satellite"></i> Agricultura de Precisão</h4>
+                                    <ul>
+                                        <li><a href="#">Drones Autônomos</a></li>
+                                        <li><a href="#">Sensores IoT</a></li>
+                                        <li><a href="#">IA Preditiva</a></li>
+                                        <li><a href="#">Mapeamento NDVI</a></li>
+                                    </ul>
+                                </div>
+                                <div class="megamenu-section">
+                                    <h4><i class="fas fa-solar-panel"></i> Energia Renovável</h4>
+                                    <ul>
+                                        <li><a href="#">Fazendas Solares</a></li>
+                                        <li><a href="#">Biodigestores</a></li>
+                                        <li><a href="#">Energia Eólica</a></li>
+                                        <li><a href="#">Armazenamento</a></li>
+                                    </ul>
+                                </div>
+                                <div class="megamenu-section">
+                                    <h4><i class="fas fa-link"></i> Blockchain ESG</h4>
+                                    <ul>
+                                        <li><a href="#">Rastreabilidade</a></li>
+                                        <li><a href="#">Certificação Digital</a></li>
+                                        <li><a href="#">Créditos de Carbono</a></li>
+                                        <li><a href="#">Compliance</a></li>
+                                    </ul>
+                                </div>
+                                <div class="megamenu-section">
+                                    <h4><i class="fas fa-tint"></i> Gestão Hídrica</h4>
+                                    <ul>
+                                        <li><a href="#">Irrigação Inteligente</a></li>
+                                        <li><a href="#">Monitoramento</a></li>
+                                        <li><a href="#">Reuso de Água</a></li>
+                                        <li><a href="#">Análise de Consumo</a></li>
+                                    </ul>
+                                </div>
+                                <div class="megamenu-featured-ultra">
+                                    <img src="https://images.unsplash.com/photo-1586771107445-d3ca888129ff?w=400" alt="Destaque">
+                                    <div class="featured-info">
+                                        <span class="featured-badge">Novidade</span>
+                                        <h4>IA Generativa no Campo</h4>
+                                        <p>Conheça nossa nova solução com inteligência artificial generativa.</p>
+                                        <a href="#" class="featured-link">Saiba mais <i class="fas fa-arrow-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item-ultra">
+                        <a href="#impact" class="nav-link-ultra">
+                            <span class="link-icon"><i class="fas fa-chart-line"></i></span>
+                            <span class="link-text">Impacto</span>
+                            <span class="link-indicator"></span>
+                        </a>
+                    </li>
+                    <li class="nav-item-ultra">
+                        <a href="#cases" class="nav-link-ultra">
+                            <span class="link-icon"><i class="fas fa-star"></i></span>
+                            <span class="link-text">Cases</span>
+                            <span class="link-indicator"></span>
+                        </a>
+                    </li>
+                    <li class="nav-item-ultra">
+                        <a href="#contact" class="nav-link-ultra">
+                            <span class="link-icon"><i class="fas fa-envelope"></i></span>
+                            <span class="link-text">Contato</span>
+                            <span class="link-indicator"></span>
+                        </a>
+                    </li>
+                </ul>
+                
+                <!-- Ações da Navbar -->
+                <div class="nav-actions-ultra">
+                    <button class="nav-icon-btn-ultra" id="searchTriggerUltra" aria-label="Buscar">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    <button class="nav-icon-btn-ultra theme-toggle-ultra" id="themeToggleUltra" aria-label="Alternar tema">
+                        <i class="fas fa-moon"></i>
+                        <i class="fas fa-sun"></i>
+                    </button>
+                    <a href="#" class="nav-btn-outline-ultra">
+                        <span>Portal</span>
+                        <i class="fas fa-user"></i>
+                    </a>
+                    <a href="#contact" class="nav-btn-primary-ultra">
+                        <span>Começar</span>
+                        <i class="fas fa-arrow-right"></i>
+                        <div class="btn-shine-ultra"></div>
+                    </a>
+                    <button class="mobile-toggle-ultra" id="mobileToggleUltra" aria-label="Menu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Barra de Progresso -->
+            <div class="reading-progress-ultra">
+                <div class="progress-bar-ultra" id="readingProgressUltra"></div>
+            </div>
+        </nav>
+        
+        <!-- Search Overlay -->
+        <div class="search-overlay-ultra" id="searchOverlayUltra">
+            <div class="search-container-ultra">
+                <div class="search-header-ultra">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="O que você procura?" id="searchInputUltra" autofocus>
+                    <button class="search-close-ultra" id="searchCloseUltra">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="search-results-ultra" id="searchResultsUltra"></div>
+                <div class="search-suggestions-ultra">
+                    <span>Sugestões:</span>
+                    <a href="#">Agricultura de precisão</a>
+                    <a href="#">Sustentabilidade</a>
+                    <a href="#">Energia solar</a>
+                    <a href="#">ESG</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ==================== MAIN CONTENT ==================== -->
+    <main>
+        <!-- ==================== HERO SECTION ULTRA ==================== -->
+        <section id="home" class="hero-ultra">
+            <!-- Canvas 3D Background -->
+            <canvas id="heroCanvasUltra" class="hero-canvas-ultra"></canvas>
+            
+            <!-- Overlay Gradiente -->
+            <div class="hero-overlay-ultra"></div>
+            
+            <!-- Partículas Flutuantes -->
+            <div class="hero-particles-ultra"></div>
+            
+            <!-- Conteúdo Principal -->
+            <div class="hero-content-ultra">
+                <div class="container">
+                    <!-- Badge Animada -->
+                    <div class="hero-badge-ultra" data-aos="fade-down" data-aos-duration="1000">
+                        <div class="badge-pulse-ultra"></div>
+                        <i class="fas fa-leaf"></i>
+                        <span>Inovação Sustentável • Reconhecida Globalmente</span>
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    
+                    <!-- Título Cinematográfico -->
+                    <h1 class="hero-title-ultra" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="200">
+                        <div class="title-line-ultra">
+                            <span class="word">Cultivando</span>
+                            <span class="word">o</span>
+                        </div>
+                        <div class="title-line-ultra">
+                            <span class="word gradient-text-ultra">Equilíbrio</span>
+                            <span class="word gradient-text-ultra">Perfeito</span>
+                        </div>
+                        <div class="title-line-ultra">
+                            <span class="word">Entre</span>
+                            <span class="word">Produção</span>
+                            <span class="word">e</span>
+                            <span class="word">Natureza</span>
+                        </div>
+                    </h1>
+                    
+                    <!-- Descrição -->
+                    <p class="hero-description-ultra" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="400">
+                        <span class="highlight-ultra">Tecnologia de ponta</span> e 
+                        <span class="highlight-ultra">inteligência artificial</span> transformando o agronegócio.
+                        Aumente sua produtividade em até <strong>45%</strong> enquanto preserva o meio ambiente.
+                    </p>
+                    
+                    <!-- CTA Buttons -->
+                    <div class="hero-cta-ultra" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="600">
+                        <a href="#solutions" class="cta-primary-ultra">
+                            <span>Explorar Soluções</span>
+                            <i class="fas fa-arrow-right"></i>
+                            <div class="cta-hover-ultra"></div>
+                        </a>
+                        <button class="cta-secondary-ultra" id="watchDemoUltra">
+                            <span class="play-icon-ultra">
+                                <i class="fas fa-play"></i>
+                            </span>
+                            <span>Ver Demonstração</span>
+                            <div class="cta-ripple-ultra"></div>
+                        </button>
+                    </div>
+                    
+                    <!-- Stats Cards Ultra -->
+                    <div class="hero-stats-ultra" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="800">
+                        <div class="stat-card-ultra">
+                            <div class="stat-icon-ultra">
+                                <i class="fas fa-map-marked-alt"></i>
+                                <div class="icon-glow-ultra"></div>
+                            </div>
+                            <div class="stat-content-ultra">
+                                <div class="stat-value-ultra">
+                                    <span class="stat-number-ultra" data-target="15780">0</span>
+                                    <span class="stat-unit-ultra">ha</span>
+                                </div>
+                                <div class="stat-label-ultra">Monitorados</div>
+                                <div class="stat-trend-ultra positive">
+                                    <i class="fas fa-arrow-up"></i> +23% este ano
+                                </div>
+                            </div>
+                        </div>
+                        <div class="stat-card-ultra">
+                            <div class="stat-icon-ultra">
+                                <i class="fas fa-users"></i>
+                                <div class="icon-glow-ultra"></div>
+                            </div>
+                            <div class="stat-content-ultra">
+                                <div class="stat-value-ultra">
+                                    <span class="stat-number-ultra" data-target="3250">0</span>
+                                    <span class="stat-unit-ultra">+</span>
+                                </div>
+                                <div class="stat-label-ultra">Produtores Ativos</div>
+                                <div class="stat-trend-ultra positive">
+                                    <i class="fas fa-arrow-up"></i> +45% este ano
+                                </div>
+                            </div>
+                        </div>
+                        <div class="stat-card-ultra">
+                            <div class="stat-icon-ultra">
+                                <i class="fas fa-tint"></i>
+                                <div class="icon-glow-ultra"></div>
+                            </div>
+                            <div class="stat-content-ultra">
+                                <div class="stat-value-ultra">
+                                    <span class="stat-number-ultra" data-target="42">0</span>
+                                    <span class="stat-unit-ultra">%</span>
+                                </div>
+                                <div class="stat-label-ultra">Redução de Água</div>
+                                <div class="stat-trend-ultra positive">
+                                    <i class="fas fa-arrow-down"></i> Economia recorde
+                                </div>
+                            </div>
+                        </div>
+                        <div class="stat-card-ultra">
+                            <div class="stat-icon-ultra">
+                                <i class="fas fa-cloud"></i>
+                                <div class="icon-glow-ultra"></div>
+                            </div>
+                            <div class="stat-content-ultra">
+                                <div class="stat-value-ultra">
+                                    <span class="stat-number-ultra" data-target="28500">0</span>
+                                    <span class="stat-unit-ultra">ton</span>
+                                </div>
+                                <div class="stat-label-ultra">CO² Evitado</div>
+                                <div class="stat-trend-ultra positive">
+                                    <i class="fas fa-arrow-up"></i> +67% este ano
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Scroll Indicator Ultra -->
+            <div class="scroll-indicator-ultra">
+                <div class="scroll-text-ultra">Role para explorar</div>
+                <div class="scroll-line-ultra"></div>
+                <div class="scroll-mouse-ultra">
+                    <div class="scroll-wheel-ultra"></div>
+                </div>
+            </div>
+            
+            <!-- Ondas SVG Ultra -->
+            <div class="hero-waves-ultra">
+                <svg viewBox="0 0 1440 320" preserveAspectRatio="none">
+                    <path class="wave-ultra wave1-ultra" d="M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,181.3C960,181,1056,235,1152,234.7C1248,235,1344,181,1392,154.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+                    <path class="wave-ultra wave2-ultra" d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,224C672,245,768,267,864,261.3C960,256,1056,224,1152,208C1248,192,1344,192,1392,192L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+                    <path class="wave-ultra wave3-ultra" d="M0,256L48,245.3C96,235,192,213,288,208C384,203,480,213,576,229.3C672,245,768,267,864,256C960,245,1056,203,1152,186.7C1248,171,1344,181,1392,186.7L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+                </svg>
+            </div>
+        </section>
+
+        <!-- ==================== MARQUEE CLIENTES ==================== -->
+        <section class="marquee-ultra">
+            <div class="marquee-container">
+                <div class="marquee-track">
+                    <div class="marquee-item-ultra"><i class="fab fa-microsoft"></i> Microsoft</div>
+                    <div class="marquee-item-ultra"><i class="fab fa-google"></i> Google</div>
+                    <div class="marquee-item-ultra"><i class="fab fa-amazon"></i> AWS</div>
+                    <div class="marquee-item-ultra"><i class="fas fa-tractor"></i> John Deere</div>
+                    <div class="marquee-item-ultra"><i class="fas fa-leaf"></i> Bayer</div>
+                    <div class="marquee-item-ultra"><i class="fas fa-flask"></i> BASF</div>
+                    <div class="marquee-item-ultra"><i class="fas fa-seedling"></i> Syngenta</div>
+                    <div class="marquee-item-ultra"><i class="fas fa-industry"></i> Corteva</div>
+                </div>
+                <div class="marquee-track" aria-hidden="true">
+                    <div class="marquee-item-ultra"><i class="fab fa-microsoft"></i> Microsoft</div>
+                    <div class="marquee-item-ultra"><i class="fab fa-google"></i> Google</div>
+                    <div class="marquee-item-ultra"><i class="fab fa-amazon"></i> AWS</div>
+                    <div class="marquee-item-ultra"><i class="fas fa-tractor"></i> John Deere</div>
+                    <div class="marquee-item-ultra"><i class="fas fa-leaf"></i> Bayer</div>
+                    <div class="marquee-item-ultra"><i class="fas fa-flask"></i> BASF</div>
+                    <div class="marquee-item-ultra"><i class="fas fa-seedling"></i> Syngenta</div>
+                    <div class="marquee-item-ultra"><i class="fas fa-industry"></i> Corteva</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== SOBRE NÓS COM CARDS 3D ==================== -->
+        <section id="about" class="about-ultra">
+            <div class="about-background-ultra">
+                <div class="about-grid-pattern-ultra"></div>
+                <div class="about-orb about-orb-1"></div>
+                <div class="about-orb about-orb-2"></div>
+                <div class="about-orb about-orb-3"></div>
+            </div>
+            
+            <div class="container">
+                <div class="section-header-ultra" data-aos="fade-up">
+                    <span class="section-tag-ultra">
+                        <i class="fas fa-seedling"></i>
+                        <span>Nossa Essência</span>
+                        <i class="fas fa-seedling"></i>
+                    </span>
+                    <h2 class="section-title-ultra">
+                        <span class="title-gradient-ultra">Revolucionando</span>
+                        <span>o Agronegócio Sustentável</span>
+                    </h2>
+                    <p class="section-description-ultra">
+                        Unimos <span class="highlight-ultra">tecnologia de ponta</span>, 
+                        <span class="highlight-ultra">inteligência artificial</span> e 
+                        <span class="highlight-ultra">práticas regenerativas</span> para criar um 
+                        ecossistema agrícola que prospera em harmonia com a natureza.
+                    </p>
+                </div>
+
+                <!-- Cards 3D Interativos -->
+                <div class="about-cards-ultra">
+                    <div class="about-card-ultra" data-aos="flip-left" data-aos-duration="1000">
+                        <div class="card-3d-ultra">
+                            <div class="card-front-ultra">
+                                <div class="card-icon-ultra">
+                                    <i class="fas fa-satellite-dish"></i>
+                                    <div class="icon-particles-ultra"></div>
+                                </div>
+                                <h3>Monitoramento Inteligente 6.0</h3>
+                                <p>Satélites, drones autônomos e sensores IoT com IA generativa que analisam cada centímetro da sua lavoura.</p>
+                                <div class="card-stats-ultra">
+                                    <div class="stat-item-ultra">
+                                        <span class="stat-value-ultra">99.9%</span>
+                                        <span class="stat-name-ultra">Precisão</span>
+                                    </div>
+                                    <div class="stat-item-ultra">
+                                        <span class="stat-value-ultra">24/7</span>
+                                        <span class="stat-name-ultra">Monitoramento</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-back-ultra">
+                                <h4>Tecnologias Avançadas</h4>
+                                <ul>
+                                    <li><i class="fas fa-check-circle"></i> Imagens Multiespectrais</li>
+                                    <li><i class="fas fa-check-circle"></i> IA Generativa Preditiva</li>
+                                    <li><i class="fas fa-check-circle"></i> Drones com Visão Computacional</li>
+                                    <li><i class="fas fa-check-circle"></i> Sensores de Solo em Tempo Real</li>
+                                    <li><i class="fas fa-check-circle"></i> Alertas Automatizados</li>
+                                </ul>
+                                <a href="#" class="card-link-ultra">Saiba mais <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="about-card-ultra" data-aos="flip-left" data-aos-duration="1000" data-aos-delay="200">
+                        <div class="card-3d-ultra">
+                            <div class="card-front-ultra">
+                                <div class="card-icon-ultra">
+                                    <i class="fas fa-water"></i>
+                                    <div class="icon-particles-ultra"></div>
+                                </div>
+                                <h3>Gestão Hídrica Inteligente</h3>
+                                <p>Sistemas de irrigação que aprendem com o clima e reduzem o consumo de água em até 42%.</p>
+                                <div class="card-stats-ultra">
+                                    <div class="stat-item-ultra">
+                                        <span class="stat-value-ultra">42%</span>
+                                        <span class="stat-name-ultra">Economia</span>
+                                    </div>
+                                    <div class="stat-item-ultra">
+                                        <span class="stat-value-ultra">+28%</span>
+                                        <span class="stat-name-ultra">Produtividade</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-back-ultra">
+                                <h4>Funcionalidades</h4>
+                                <ul>
+                                    <li><i class="fas fa-check-circle"></i> Irrigação por Gotejamento Automatizado</li>
+                                    <li><i class="fas fa-check-circle"></i> Sensores de Umidade do Solo</li>
+                                    <li><i class="fas fa-check-circle"></i> Previsão Meteorológica Integrada</li>
+                                    <li><i class="fas fa-check-circle"></i> Pivot Central Inteligente</li>
+                                    <li><i class="fas fa-check-circle"></i> Relatórios de Consumo</li>
+                                </ul>
+                                <a href="#" class="card-link-ultra">Saiba mais <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="about-card-ultra" data-aos="flip-left" data-aos-duration="1000" data-aos-delay="400">
+                        <div class="card-3d-ultra">
+                            <div class="card-front-ultra">
+                                <div class="card-icon-ultra">
+                                    <i class="fas fa-recycle"></i>
+                                    <div class="icon-particles-ultra"></div>
+                                </div>
+                                <h3>Economia Circular Regenerativa</h3>
+                                <p>Transformamos resíduos em recursos valiosos: biofertilizantes, biogás e créditos de carbono.</p>
+                                <div class="card-stats-ultra">
+                                    <div class="stat-item-ultra">
+                                        <span class="stat-value-ultra">100%</span>
+                                        <span class="stat-name-ultra">Aproveitamento</span>
+                                    </div>
+                                    <div class="stat-item-ultra">
+                                        <span class="stat-value-ultra">R$ 3.2M</span>
+                                        <span class="stat-name-ultra">Gerados</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-back-ultra">
+                                <h4>Ciclo Sustentável</h4>
+                                <ul>
+                                    <li><i class="fas fa-check-circle"></i> Biodigestores de Alta Eficiência</li>
+                                    <li><i class="fas fa-check-circle"></i> Compostagem Acelerada</li>
+                                    <li><i class="fas fa-check-circle"></i> Geração de Créditos de Carbono</li>
+                                    <li><i class="fas fa-check-circle"></i> Bioenergia para Autoconsumo</li>
+                                    <li><i class="fas fa-check-circle"></i> Fertilizantes Orgânicos Premium</li>
+                                </ul>
+                                <a href="#" class="card-link-ultra">Saiba mais <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== SOLUÇÕES COM TIMELINE INTERATIVA ==================== -->
+        <section id="solutions" class="solutions-ultra">
+            <div class="solutions-background-ultra">
+                <canvas id="solutionsCanvas"></canvas>
+            </div>
+            
+            <div class="container">
+                <div class="section-header-ultra" data-aos="fade-up">
+                    <span class="section-tag-ultra">
+                        <i class="fas fa-microchip"></i>
+                        <span>Tecnologia de Ponta</span>
+                        <i class="fas fa-microchip"></i>
+                    </span>
+                    <h2 class="section-title-ultra">
+                        <span class="title-gradient-ultra">Soluções</span>
+                        <span>que Transformam</span>
+                    </h2>
+                </div>
+
+                <!-- Timeline Interativa -->
+                <div class="timeline-ultra" data-aos="fade-up">
+                    <div class="timeline-nav-ultra">
+                        <button class="timeline-btn-ultra active" data-tab="precision">
+                            <i class="fas fa-satellite"></i>
+                            <span>Agricultura de Precisão</span>
+                        </button>
+                        <button class="timeline-btn-ultra" data-tab="energy">
+                            <i class="fas fa-solar-panel"></i>
+                            <span>Energia Renovável</span>
+                        </button>
+                        <button class="timeline-btn-ultra" data-tab="blockchain">
+                            <i class="fas fa-link"></i>
+                            <span>Blockchain ESG</span>
+                        </button>
+                        <button class="timeline-btn-ultra" data-tab="water">
+                            <i class="fas fa-tint"></i>
+                            <span>Gestão Hídrica</span>
+                        </button>
+                        <div class="timeline-indicator-ultra"></div>
+                    </div>
+                    
+                    <div class="timeline-content-ultra">
+                        <div class="timeline-panel-ultra active" id="panel-precision">
+                            <div class="panel-grid-ultra">
+                                <div class="panel-media-ultra">
+                                    <img src="https://images.unsplash.com/photo-1586771107445-d3ca888129ff?w=800" alt="Agricultura de Precisão">
+                                    <div class="media-overlay-ultra"></div>
+                                </div>
+                                <div class="panel-info-ultra">
+                                    <h3>Agricultura de Precisão 6.0</h3>
+                                    <p>Inteligência artificial generativa e IoT para decisões baseadas em dados em tempo real.</p>
+                                    <div class="feature-grid-ultra">
+                                        <div class="feature-item-ultra"><i class="fas fa-drone"></i> Drones com IA</div>
+                                        <div class="feature-item-ultra"><i class="fas fa-microchip"></i> Sensores IoT</div>
+                                        <div class="feature-item-ultra"><i class="fas fa-brain"></i> IA Preditiva</div>
+                                        <div class="feature-item-ultra"><i class="fas fa-mobile-alt"></i> Dashboard Mobile</div>
+                                    </div>
+                                    <a href="#" class="panel-link-ultra">Solicitar Demonstração <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-panel-ultra" id="panel-energy">
+                            <div class="panel-grid-ultra">
+                                <div class="panel-media-ultra">
+                                    <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=800" alt="Energia Renovável">
+                                    <div class="media-overlay-ultra"></div>
+                                </div>
+                                <div class="panel-info-ultra">
+                                    <h3>Energia Limpa para o Campo</h3>
+                                    <p>Independência energética com soluções personalizadas de energia solar e biogás.</p>
+                                    <div class="feature-grid-ultra">
+                                        <div class="feature-item-ultra"><i class="fas fa-sun"></i> Fazendas Solares</div>
+                                        <div class="feature-item-ultra"><i class="fas fa-fire"></i> Biodigestores</div>
+                                        <div class="feature-item-ultra"><i class="fas fa-wind"></i> Energia Eólica</div>
+                                        <div class="feature-item-ultra"><i class="fas fa-battery-full"></i> Armazenamento</div>
+                                    </div>
+                                    <a href="#" class="panel-link-ultra">Simular Economia <i class="fas fa-calculator"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-panel-ultra" id="panel-blockchain">
+                            <div class="panel-grid-ultra">
+                                <div class="panel-media-ultra">
+                                    <img src="https://images.unsplash.com/photo-1639762681485-46b9e33a20a7?w=800" alt="Blockchain">
+                                    <div class="media-overlay-ultra"></div>
+                                </div>
+                                <div class="panel-info-ultra">
+                                    <h3>Rastreabilidade Blockchain</h3>
+                                    <p>Transparência total da origem ao consumidor final com certificação digital imutável.</p>
+                                    <div class="feature-grid-ultra">
+                                        <div class="feature-item-ultra"><i class="fas fa-qrcode"></i> QR Code Único</div>
+                                        <div class="feature-item-ultra"><i class="fas fa-history"></i> Histórico Completo</div>
+                                        <div class="feature-item-ultra"><i class="fas fa-certificate"></i> Certificação Digital</div>
+                                        <div class="feature-item-ultra"><i class="fas fa-globe"></i> Mercados Premium</div>
+                                    </div>
+                                    <a href="#" class="panel-link-ultra">Ver Demonstração <i class="fas fa-play-circle"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-panel-ultra" id="panel-water">
+                            <div class="panel-grid-ultra">
+                                <div class="panel-media-ultra">
+                                    <img src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=800" alt="Gestão Hídrica">
+                                    <div class="media-overlay-ultra"></div>
+                                </div>
+                                <div class="panel-info-ultra">
+                                    <h3>Gestão Hídrica Inteligente</h3>
+                                    <p>Cada gota conta. Otimize o uso da água com tecnologia de ponta.</p>
+                                    <div class="feature-grid-ultra">
+                                        <div class="feature-item-ultra"><i class="fas fa-cloud-rain"></i> Previsão Climática</div>
+                                        <div class="feature-item-ultra"><i class="fas fa-tachometer-alt"></i> Sensores de Umidade</div>
+                                        <div class="feature-item-ultra"><i class="fas fa-water"></i> Irrigação Localizada</div>
+                                        <div class="feature-item-ultra"><i class="fas fa-chart-pie"></i> Relatórios Detalhados</div>
+                                    </div>
+                                    <a href="#" class="panel-link-ultra">Calcular Economia <i class="fas fa-calculator"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== IMPACTO COM DASHBOARD ==================== -->
+        <section id="impact" class="impact-ultra">
+            <div class="container">
+                <div class="impact-grid-ultra">
+                    <div class="impact-content-ultra" data-aos="fade-right">
+                        <span class="section-tag-ultra">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Resultados Comprovados</span>
+                        </span>
+                        <h2 class="section-title-ultra">
+                            <span class="title-gradient-ultra">Impacto</span>
+                            <span>Real e Mensurável</span>
+                        </h2>
+                        <p class="impact-description-ultra">
+                            Em mais de <strong>5 anos</strong>, transformamos a realidade de milhares de produtores.
+                        </p>
+                        
+                        <div class="impact-metrics-ultra">
+                            <div class="impact-metric-ultra">
+                                <i class="fas fa-tint"></i>
+                                <div>
+                                    <span class="metric-number-ultra">3.2B</span>
+                                    <span class="metric-label-ultra">Litros de água economizados</span>
+                                </div>
+                            </div>
+                            <div class="impact-metric-ultra">
+                                <i class="fas fa-tree"></i>
+                                <div>
+                                    <span class="metric-number-ultra">125K</span>
+                                    <span class="metric-label-ultra">Árvores preservadas</span>
+                                </div>
+                            </div>
+                            <div class="impact-metric-ultra">
+                                <i class="fas fa-cloud"></i>
+                                <div>
+                                    <span class="metric-number-ultra">28.5K</span>
+                                    <span class="metric-label-ultra">Toneladas de CO² evitadas</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="impact-certifications-ultra">
+                            <span class="cert-badge-ultra"><i class="fab fa-pagelines"></i> Rainforest Alliance</span>
+                            <span class="cert-badge-ultra"><i class="fas fa-certificate"></i> ISO 14001:2024</span>
+                            <span class="cert-badge-ultra"><i class="fas fa-leaf"></i> Carbon Trust</span>
+                        </div>
+                    </div>
+                    
+                    <div class="impact-chart-ultra" data-aos="fade-left">
+                        <div class="chart-card-ultra">
+                            <h3>Dashboard ESG</h3>
+                            <canvas id="impactChartUltra"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== CASES DE SUCESSO ==================== -->
+        <section id="cases" class="cases-ultra">
+            <div class="container">
+                <div class="section-header-ultra" data-aos="fade-up">
+                    <span class="section-tag-ultra">
+                        <i class="fas fa-star"></i>
+                        <span>Histórias de Sucesso</span>
+                        <i class="fas fa-star"></i>
+                    </span>
+                    <h2 class="section-title-ultra">
+                        <span class="title-gradient-ultra">Cases</span>
+                        <span>que Inspiram</span>
+                    </h2>
+                </div>
+
+                <div class="cases-slider-ultra swiper" data-aos="fade-up">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <div class="case-card-ultra">
+                                <img src="https://images.unsplash.com/photo-1592982537447-7440770cbf39?w=600" alt="Case 1">
+                                <div class="case-content-ultra">
+                                    <h4>Fazenda Boa Esperança</h4>
+                                    <p>"Aumentamos a produtividade em 52% e reduzimos o consumo de água em 38%."</p>
+                                    <div class="case-author-ultra">
+                                        <img src="https://ui-avatars.com/api/?name=Joao+Mendes&background=10b981&color=fff" alt="João Mendes">
+                                        <span>João Mendes • Mato Grosso</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="case-card-ultra">
+                                <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=600" alt="Case 2">
+                                <div class="case-content-ultra">
+                                    <h4>Café Sul de Minas</h4>
+                                    <p>"Com blockchain, exportamos com 35% de valor agregado para a Europa."</p>
+                                    <div class="case-author-ultra">
+                                        <img src="https://ui-avatars.com/api/?name=Maria+Silva&background=059669&color=fff" alt="Maria Silva">
+                                        <span>Maria Silva • Minas Gerais</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="case-card-ultra">
+                                <img src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=600" alt="Case 3">
+                                <div class="case-content-ultra">
+                                    <h4>Pecuária Sustentável</h4>
+                                    <p>"Energia solar e biodigestores nos tornaram autossuficientes."</p>
+                                    <div class="case-author-ultra">
+                                        <img src="https://ui-avatars.com/api/?name=Roberto+Alves&background=047857&color=fff" alt="Roberto Alves">
+                                        <span>Roberto Alves • Goiás</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== CONTATO ==================== -->
+        <section id="contact" class="contact-ultra">
+            <div class="container">
+                <div class="contact-grid-ultra">
+                    <div class="contact-info-ultra" data-aos="fade-right">
+                        <span class="section-tag-ultra">
+                            <i class="fas fa-envelope"></i>
+                            <span>Fale Conosco</span>
+                        </span>
+                        <h2 class="section-title-ultra">
+                            <span>Vamos Cultivar o</span>
+                            <span class="title-gradient-ultra">Futuro Juntos</span>
+                        </h2>
+                        <p>Nossa equipe está pronta para entender suas necessidades.</p>
+                        
+                        <div class="contact-methods-ultra">
+                            <div class="contact-method-ultra">
+                                <i class="fas fa-phone-alt"></i>
+                                <div>
+                                    <h4>Telefone</h4>
+                                    <p>0800 123 4567</p>
+                                </div>
+                            </div>
+                            <div class="contact-method-ultra">
+                                <i class="fab fa-whatsapp"></i>
+                                <div>
+                                    <h4>WhatsApp</h4>
+                                    <p>(11) 98765-4321</p>
+                                </div>
+                            </div>
+                            <div class="contact-method-ultra">
+                                <i class="fas fa-envelope"></i>
+                                <div>
+                                    <h4>Email</h4>
+                                    <p>contato@agroforte.com.br</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="social-links-ultra">
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                            <a href="#"><i class="fab fa-youtube"></i></a>
+                            <a href="#"><i class="fab fa-facebook"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-form-ultra" data-aos="fade-left">
+                        <form id="contactFormUltra">
+                            <div class="form-group-ultra">
+                                <input type="text" id="nameUltra" required>
+                                <label for="nameUltra">Nome Completo</label>
+                                <div class="form-line-ultra"></div>
+                            </div>
+                            <div class="form-group-ultra">
+                                <input type="email" id="emailUltra" required>
+                                <label for="emailUltra">Email</label>
+                                <div class="form-line-ultra"></div>
+                            </div>
+                            <div class="form-group-ultra">
+                                <textarea id="messageUltra" rows="4" required></textarea>
+                                <label for="messageUltra">Mensagem</label>
+                                <div class="form-line-ultra"></div>
+                            </div>
+                            <button type="submit" class="form-submit-ultra">
+                                <span>Enviar Mensagem</span>
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ==================== FOOTER ULTRA ==================== -->
+    <footer class="footer-ultra">
+        <div class="container">
+            <div class="footer-grid-ultra">
+                <div class="footer-brand-ultra">
+                    <a href="#" class="footer-logo-ultra">
+                        <i class="fas fa-seedling"></i>
+                        <span>Agro<span>Forte</span></span>
+                    </a>
+                    <p>Tecnologia e sustentabilidade para o agronegócio do futuro.</p>
+                </div>
+                <div class="footer-links-ultra">
+                    <h4>Soluções</h4>
+                    <ul>
+                        <li><a href="#">Agricultura de Precisão</a></li>
+                        <li><a href="#">Energia Renovável</a></li>
+                        <li><a href="#">Blockchain</a></li>
+                        <li><a href="#">Gestão Hídrica</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links-ultra">
+                    <h4>Empresa</h4>
+                    <ul>
+                        <li><a href="#">Sobre</a></li>
+                        <li><a href="#">Carreiras</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Contato</a></li>
+                    </ul>
+                </div>
+                <div class="footer-newsletter-ultra">
+                    <h4>Newsletter</h4>
+                    <form>
+                        <input type="email" placeholder="Seu email">
+                        <button type="submit"><i class="fas fa-arrow-right"></i></button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom-ultra">
+                <p>&copy; 2024 AgroForte. Todos os direitos reservados.</p>
+                <div class="footer-legal-ultra">
+                    <a href="#">Privacidade</a>
+                    <a href="#">Termos</a>
+                    <a href="#">LGPD</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <button class="back-to-top-ultra" id="backToTopUltra">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
