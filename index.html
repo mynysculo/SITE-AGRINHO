@@ -1,1 +1,848 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgroForte | Futuro Sustentável</title>
+    
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Libraries -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- ==================== CURSOR PERSONALIZADO ==================== -->
+    <div class="cursor-dot" id="cursorDot"></div>
+    <div class="cursor-outline" id="cursorOutline"></div>
+    <div class="cursor-trail" id="cursorTrail"></div>
+    
+    <!-- ==================== PRELOADER ==================== -->
+    <div class="preloader" id="preloader">
+        <div class="preloader-bg"></div>
+        <div class="preloader-content">
+            <div class="preloader-logo">
+                <div class="logo-animation">
+                    <i class="fas fa-seedling"></i>
+                </div>
+                <div class="preloader-title">
+                    <span>A</span><span>g</span><span>r</span><span>o</span><span>F</span><span>o</span><span>r</span><span>t</span><span>e</span>
+                </div>
+            </div>
+            <div class="preloader-progress">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <span class="progress-text" id="progressText">0%</span>
+            </div>
+        </div>
+    </div>
 
+    <!-- ==================== HEADER / NAVBAR ==================== -->
+    <header class="header" id="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <a href="#home" class="nav-logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <span class="logo-text">Agro<span>Forte</span></span>
+                </a>
+
+                <ul class="nav-menu" id="navMenu">
+                    <li class="nav-item"><a href="#home" class="nav-link active">Início</a></li>
+                    <li class="nav-item"><a href="#about" class="nav-link">Sobre</a></li>
+                    <li class="nav-item"><a href="#solutions" class="nav-link">Soluções</a></li>
+                    <li class="nav-item"><a href="#impact" class="nav-link">Impacto</a></li>
+                    <li class="nav-item"><a href="#testimonials" class="nav-link">Depoimentos</a></li>
+                    <li class="nav-item"><a href="#contact" class="nav-link">Contato</a></li>
+                </ul>
+
+                <div class="nav-actions">
+                    <button class="nav-btn portal-btn">
+                        <i class="fas fa-user"></i>
+                        <span>Portal</span>
+                    </button>
+                    <button class="nav-btn primary-btn">
+                        <span>Começar</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                    <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- ==================== MAIN CONTENT ==================== -->
+    <main>
+        <!-- ==================== HERO SECTION ==================== -->
+        <section id="home" class="hero-section">
+            <!-- Video Background -->
+            <div class="hero-video-wrapper">
+                <video autoplay muted loop playsinline id="heroVideo">
+                    <source src="https://player.vimeo.com/external/434112252.hd.mp4?s=1a8e2e1d0c1f1e1e1e1e1e1e1e1e1e1e&profile_id=175" type="video/mp4">
+                </video>
+                <!-- Fallback image se vídeo não carregar -->
+                <img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1920" alt="Agricultura Sustentável" class="hero-fallback">
+            </div>
+            <div class="hero-overlay"></div>
+            
+            <!-- Waves SVG -->
+            <div class="hero-waves">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+                    <path class="wave wave1" fill="#ffffff" fill-opacity="1" d="M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,181.3C960,181,1056,235,1152,234.7C1248,235,1344,181,1392,154.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+                    <path class="wave wave2" fill="#f0fdf4" fill-opacity="1" d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,224C672,245,768,267,864,261.3C960,256,1056,224,1152,208C1248,192,1344,192,1392,192L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+                </svg>
+            </div>
+
+            <div class="hero-content">
+                <div class="container">
+                    <div class="hero-badge" data-aos="fade-down" data-aos-duration="800">
+                        <i class="fas fa-globe-americas"></i>
+                        <span>Inovação Sustentável • Desde 2020</span>
+                    </div>
+                    
+                    <h1 class="hero-title" data-aos="fade-up" data-aos-duration="800" data-aos-delay="100">
+                        <span class="title-line">Cultivando o</span>
+                        <span class="title-line gradient-text">EQUILÍBRIO</span>
+                        <span class="title-line">entre Produção e Natureza</span>
+                    </h1>
+                    
+                    <p class="hero-description" data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">
+                        Tecnologia de ponta e práticas regenerativas que aumentam sua produtividade 
+                        em até <strong>45%</strong> enquanto reduzem o impacto ambiental.
+                    </p>
+                    
+                    <div class="hero-buttons" data-aos="fade-up" data-aos-duration="800" data-aos-delay="300">
+                        <a href="#solutions" class="btn btn-primary">
+                            <span>Explorar Soluções</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                        <button class="btn btn-outline" id="watchVideoBtn">
+                            <i class="fas fa-play"></i>
+                            <span>Ver Vídeo</span>
+                        </button>
+                    </div>
+                    
+                    <div class="hero-stats" data-aos="fade-up" data-aos-duration="800" data-aos-delay="400">
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-map-marked-alt"></i>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-number" data-target="15780">0</div>
+                                <div class="stat-label">Hectares Monitorados</div>
+                                <div class="stat-trend positive">
+                                    <i class="fas fa-arrow-up"></i> +23% este ano
+                                </div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-number" data-target="3250">0</div>
+                                <div class="stat-label">Produtores Ativos</div>
+                                <div class="stat-trend positive">
+                                    <i class="fas fa-arrow-up"></i> +45% este ano
+                                </div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-tint"></i>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-number" data-target="42">0</div>
+                                <div class="stat-label">% Redução de Água</div>
+                                <div class="stat-trend positive">
+                                    <i class="fas fa-arrow-down"></i> Economia recorde
+                                </div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-number" data-target="28500">0</div>
+                                <div class="stat-label">Ton CO² Evitadas</div>
+                                <div class="stat-trend positive">
+                                    <i class="fas fa-arrow-up"></i> +67% este ano
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="scroll-indicator">
+                <span class="scroll-text">Role para explorar</span>
+                <div class="scroll-mouse">
+                    <div class="scroll-wheel"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== ABOUT SECTION ==================== -->
+        <section id="about" class="about-section">
+            <div class="container">
+                <div class="section-header" data-aos="fade-up">
+                    <span class="section-tag">
+                        <i class="fas fa-seedling"></i>
+                        Nossa Missão
+                    </span>
+                    <h2 class="section-title">
+                        Revolucionando o
+                        <span class="gradient-text">Agronegócio Sustentável</span>
+                    </h2>
+                    <p class="section-description">
+                        Unimos tecnologia de ponta, inteligência artificial e práticas regenerativas 
+                        para criar um ecossistema agrícola que prospera em harmonia com a natureza.
+                    </p>
+                </div>
+
+                <div class="about-cards">
+                    <div class="about-card" data-aos="fade-right" data-aos-duration="800">
+                        <div class="card-inner">
+                            <div class="card-front">
+                                <div class="card-icon">
+                                    <i class="fas fa-satellite-dish"></i>
+                                </div>
+                                <h3>Monitoramento Inteligente</h3>
+                                <p>Satélites, drones e sensores IoT que analisam cada centímetro da sua lavoura em tempo real.</p>
+                                <div class="card-stats">
+                                    <div class="stat">
+                                        <span class="value">99.9%</span>
+                                        <span class="name">Precisão</span>
+                                    </div>
+                                    <div class="stat">
+                                        <span class="value">24/7</span>
+                                        <span class="name">Monitoramento</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-back">
+                                <h4>Tecnologias</h4>
+                                <ul>
+                                    <li><i class="fas fa-check-circle"></i> Imagens Multiespectrais</li>
+                                    <li><i class="fas fa-check-circle"></i> NDVI e Machine Learning</li>
+                                    <li><i class="fas fa-check-circle"></i> Alertas em Tempo Real</li>
+                                    <li><i class="fas fa-check-circle"></i> Aplicação Localizada</li>
+                                </ul>
+                                <a href="#" class="card-link">Saiba mais <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="about-card" data-aos="fade-up" data-aos-duration="800" data-aos-delay="150">
+                        <div class="card-inner">
+                            <div class="card-front">
+                                <div class="card-icon">
+                                    <i class="fas fa-water"></i>
+                                </div>
+                                <h3>Gestão Hídrica Eficiente</h3>
+                                <p>Sistemas de irrigação que aprendem com o clima e reduzem o consumo sem perder produtividade.</p>
+                                <div class="card-stats">
+                                    <div class="stat">
+                                        <span class="value">42%</span>
+                                        <span class="name">Economia</span>
+                                    </div>
+                                    <div class="stat">
+                                        <span class="value">+28%</span>
+                                        <span class="name">Produtividade</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-back">
+                                <h4>Funcionalidades</h4>
+                                <ul>
+                                    <li><i class="fas fa-check-circle"></i> Irrigação por Gotejamento</li>
+                                    <li><i class="fas fa-check-circle"></i> Sensores de Umidade</li>
+                                    <li><i class="fas fa-check-circle"></i> Previsão Meteorológica</li>
+                                    <li><i class="fas fa-check-circle"></i> Automação Completa</li>
+                                </ul>
+                                <a href="#" class="card-link">Saiba mais <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="about-card" data-aos="fade-left" data-aos-duration="800" data-aos-delay="300">
+                        <div class="card-inner">
+                            <div class="card-front">
+                                <div class="card-icon">
+                                    <i class="fas fa-recycle"></i>
+                                </div>
+                                <h3>Economia Circular</h3>
+                                <p>Transformamos resíduos em recursos valiosos: biofertilizantes, biogás e créditos de carbono.</p>
+                                <div class="card-stats">
+                                    <div class="stat">
+                                        <span class="value">100%</span>
+                                        <span class="name">Aproveitamento</span>
+                                    </div>
+                                    <div class="stat">
+                                        <span class="value">R$ 2.8M</span>
+                                        <span class="name">Gerados</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-back">
+                                <h4>Ciclo Sustentável</h4>
+                                <ul>
+                                    <li><i class="fas fa-check-circle"></i> Biodigestores</li>
+                                    <li><i class="fas fa-check-circle"></i> Compostagem Acelerada</li>
+                                    <li><i class="fas fa-check-circle"></i> Créditos de Carbono</li>
+                                    <li><i class="fas fa-check-circle"></i> Bioenergia</li>
+                                </ul>
+                                <a href="#" class="card-link">Saiba mais <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== SOLUTIONS SECTION ==================== -->
+        <section id="solutions" class="solutions-section">
+            <div class="container">
+                <div class="section-header" data-aos="fade-up">
+                    <span class="section-tag">
+                        <i class="fas fa-cube"></i>
+                        Nossas Soluções
+                    </span>
+                    <h2 class="section-title">
+                        <span class="gradient-text">Tecnologia</span> que Transforma
+                    </h2>
+                    <p class="section-description">
+                        Soluções integradas que combinam hardware de ponta, software inteligente 
+                        e consultoria especializada para maximizar seus resultados.
+                    </p>
+                </div>
+
+                <div class="solutions-tabs" data-aos="fade-up">
+                    <div class="tabs-header">
+                        <button class="tab-btn active" data-tab="precision">
+                            <i class="fas fa-satellite"></i>
+                            <span>Agricultura de Precisão</span>
+                        </button>
+                        <button class="tab-btn" data-tab="energy">
+                            <i class="fas fa-solar-panel"></i>
+                            <span>Energia Renovável</span>
+                        </button>
+                        <button class="tab-btn" data-tab="blockchain">
+                            <i class="fas fa-link"></i>
+                            <span>Blockchain ESG</span>
+                        </button>
+                        <button class="tab-btn" data-tab="water">
+                            <i class="fas fa-tint"></i>
+                            <span>Gestão Hídrica</span>
+                        </button>
+                    </div>
+
+                    <div class="tabs-content">
+                        <div class="tab-pane active" id="precision">
+                            <div class="solution-content">
+                                <div class="solution-image">
+                                    <img src="https://images.unsplash.com/photo-1586771107445-d3ca888129ff?w=800" alt="Agricultura de Precisão">
+                                </div>
+                                <div class="solution-info">
+                                    <h3>Agricultura de Precisão 5.0</h3>
+                                    <p>Tome decisões baseadas em dados precisos e em tempo real.</p>
+                                    <div class="features-grid">
+                                        <div class="feature">
+                                            <i class="fas fa-drone"></i>
+                                            <div><h4>Drones Autônomos</h4><p>Mapeamento aéreo de alta resolução</p></div>
+                                        </div>
+                                        <div class="feature">
+                                            <i class="fas fa-microchip"></i>
+                                            <div><h4>Sensores IoT</h4><p>Monitoramento contínuo de solo e clima</p></div>
+                                        </div>
+                                        <div class="feature">
+                                            <i class="fas fa-brain"></i>
+                                            <div><h4>IA Preditiva</h4><p>Antecipação de pragas e doenças</p></div>
+                                        </div>
+                                        <div class="feature">
+                                            <i class="fas fa-mobile-alt"></i>
+                                            <div><h4>Dashboard Mobile</h4><p>Acesso remoto a todos os dados</p></div>
+                                        </div>
+                                    </div>
+                                    <div class="solution-metrics">
+                                        <span class="metric">+45% Produtividade</span>
+                                        <span class="metric">-30% Custos</span>
+                                        <span class="metric">ROI 8x</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="energy">
+                            <div class="solution-content">
+                                <div class="solution-image">
+                                    <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=800" alt="Energia Renovável">
+                                </div>
+                                <div class="solution-info">
+                                    <h3>Energia Limpa para o Campo</h3>
+                                    <p>Independência energética com soluções personalizadas.</p>
+                                    <div class="features-grid">
+                                        <div class="feature">
+                                            <i class="fas fa-sun"></i>
+                                            <div><h4>Fazendas Solares</h4><p>Sistemas fotovoltaicos dimensionados</p></div>
+                                        </div>
+                                        <div class="feature">
+                                            <i class="fas fa-fire"></i>
+                                            <div><h4>Biodigestores</h4><p>Biogás a partir de dejetos animais</p></div>
+                                        </div>
+                                        <div class="feature">
+                                            <i class="fas fa-wind"></i>
+                                            <div><h4>Energia Eólica</h4><p>Aproveitamento dos ventos regionais</p></div>
+                                        </div>
+                                        <div class="feature">
+                                            <i class="fas fa-battery-full"></i>
+                                            <div><h4>Armazenamento</h4><p>Baterias para autonomia total</p></div>
+                                        </div>
+                                    </div>
+                                    <div class="solution-metrics">
+                                        <span class="metric">-70% Conta de Luz</span>
+                                        <span class="metric">100% Renovável</span>
+                                        <span class="metric">5 anos Payback</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="blockchain">
+                            <div class="solution-content">
+                                <div class="solution-image">
+                                    <img src="https://images.unsplash.com/photo-1639762681485-46b9e33a20a7?w=800" alt="Blockchain">
+                                </div>
+                                <div class="solution-info">
+                                    <h3>Rastreabilidade com Blockchain</h3>
+                                    <p>Transparência total da origem ao consumidor final.</p>
+                                    <div class="features-grid">
+                                        <div class="feature">
+                                            <i class="fas fa-qrcode"></i>
+                                            <div><h4>QR Code Único</h4><p>Identificação digital imutável</p></div>
+                                        </div>
+                                        <div class="feature">
+                                            <i class="fas fa-history"></i>
+                                            <div><h4>Histórico Completo</h4><p>Registro de todas as etapas</p></div>
+                                        </div>
+                                        <div class="feature">
+                                            <i class="fas fa-certificate"></i>
+                                            <div><h4>Certificação Digital</h4><p>Comprovação automática ESG</p></div>
+                                        </div>
+                                        <div class="feature">
+                                            <i class="fas fa-globe"></i>
+                                            <div><h4>Acesso Global</h4><p>Conquiste mercados internacionais</p></div>
+                                        </div>
+                                    </div>
+                                    <div class="solution-metrics">
+                                        <span class="metric">+40% Valor Agregado</span>
+                                        <span class="metric">15 Países</span>
+                                        <span class="metric">100% Rastreável</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="water">
+                            <div class="solution-content">
+                                <div class="solution-image">
+                                    <img src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=800" alt="Gestão Hídrica">
+                                </div>
+                                <div class="solution-info">
+                                    <h3>Gestão Hídrica Inteligente</h3>
+                                    <p>Cada gota conta. Otimize o uso da água com tecnologia.</p>
+                                    <div class="features-grid">
+                                        <div class="feature">
+                                            <i class="fas fa-cloud-rain"></i>
+                                            <div><h4>Previsão Climática</h4><p>Antecipe chuvas e ajuste irrigação</p></div>
+                                        </div>
+                                        <div class="feature">
+                                            <i class="fas fa-tachometer-alt"></i>
+                                            <div><h4>Sensores de Umidade</h4><p>Necessidade hídrica em tempo real</p></div>
+                                        </div>
+                                        <div class="feature">
+                                            <i class="fas fa-water"></i>
+                                            <div><h4>Irrigação Localizada</h4><p>Água exatamente onde necessário</p></div>
+                                        </div>
+                                        <div class="feature">
+                                            <i class="fas fa-chart-pie"></i>
+                                            <div><h4>Relatórios Detalhados</h4><p>Acompanhe economia e eficiência</p></div>
+                                        </div>
+                                    </div>
+                                    <div class="solution-metrics">
+                                        <span class="metric">42% Economia</span>
+                                        <span class="metric">+28% Produtividade</span>
+                                        <span class="metric">24/7 Automação</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== IMPACT SECTION ==================== -->
+        <section id="impact" class="impact-section">
+            <div class="container">
+                <div class="impact-grid">
+                    <div class="impact-content" data-aos="fade-right">
+                        <span class="section-tag">
+                            <i class="fas fa-chart-line"></i>
+                            Resultados Comprovados
+                        </span>
+                        <h2 class="section-title">Impacto Real e Mensurável</h2>
+                        <p class="impact-description">
+                            Nossos números falam por si. Em mais de <strong>5 anos</strong> de atuação, 
+                            transformamos a realidade de milhares de produtores em todo o Brasil.
+                        </p>
+                        
+                        <div class="impact-metrics">
+                            <div class="impact-metric">
+                                <div class="metric-icon">
+                                    <i class="fas fa-tint"></i>
+                                </div>
+                                <div class="metric-info">
+                                    <div class="metric-number">3.2B</div>
+                                    <div class="metric-label">Litros de Água Economizados</div>
+                                    <div class="metric-desc">Equivalente a 1.280 piscinas olímpicas</div>
+                                </div>
+                            </div>
+                            <div class="impact-metric">
+                                <div class="metric-icon">
+                                    <i class="fas fa-tree"></i>
+                                </div>
+                                <div class="metric-info">
+                                    <div class="metric-number">125K</div>
+                                    <div class="metric-label">Árvores Preservadas</div>
+                                    <div class="metric-desc">Floresta de 180 campos de futebol</div>
+                                </div>
+                            </div>
+                            <div class="impact-metric">
+                                <div class="metric-icon">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                </div>
+                                <div class="metric-info">
+                                    <div class="metric-number">28.5K</div>
+                                    <div class="metric-label">Toneladas de CO² Evitadas</div>
+                                    <div class="metric-desc">6.200 carros fora das ruas</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="impact-chart" data-aos="fade-left">
+                        <div class="chart-card">
+                            <h3>Evolução dos Indicadores ESG</h3>
+                            <canvas id="esgChart"></canvas>
+                        </div>
+                        <div class="cert-badges">
+                            <div class="badge">
+                                <i class="fas fa-medal"></i>
+                                <span>Selo Ouro Sustentabilidade 2024</span>
+                            </div>
+                            <div class="badge">
+                                <i class="fas fa-trophy"></i>
+                                <span>Top 10 AgTechs do Brasil</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== TESTIMONIALS SECTION ==================== -->
+        <section id="testimonials" class="testimonials-section">
+            <div class="container">
+                <div class="section-header" data-aos="fade-up">
+                    <span class="section-tag">
+                        <i class="fas fa-star"></i>
+                        Cases de Sucesso
+                    </span>
+                    <h2 class="section-title">
+                        <span class="gradient-text">Histórias</span> que Inspiram
+                    </h2>
+                </div>
+
+                <div class="testimonials-slider swiper" data-aos="fade-up">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <div class="testimonial-card">
+                                <div class="testimonial-quote">
+                                    <i class="fas fa-quote-right"></i>
+                                </div>
+                                <p class="testimonial-text">
+                                    "A AgroForte revolucionou nossa produção. Aumentamos a produtividade em 52% 
+                                    e reduzimos o consumo de água em 38%. A tecnologia realmente faz a diferença."
+                                </p>
+                                <div class="testimonial-author">
+                                    <img src="https://ui-avatars.com/api/?name=Joao+Mendes&background=10b981&color=fff&size=60" alt="João Mendes">
+                                    <div class="author-info">
+                                        <h4>João Carlos Mendes</h4>
+                                        <p>Produtor Rural • Fazenda Boa Esperança</p>
+                                        <div class="rating">
+                                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="testimonial-card">
+                                <div class="testimonial-quote">
+                                    <i class="fas fa-quote-right"></i>
+                                </div>
+                                <p class="testimonial-text">
+                                    "Com a rastreabilidade blockchain, exportamos para a Europa com 35% de valor agregado. 
+                                    Nossos clientes adoram escanear o QR Code e ver a história do café."
+                                </p>
+                                <div class="testimonial-author">
+                                    <img src="https://ui-avatars.com/api/?name=Maria+Silva&background=059669&color=fff&size=60" alt="Maria Silva">
+                                    <div class="author-info">
+                                        <h4>Maria Silva</h4>
+                                        <p>Cafeicultora • Sul de Minas</p>
+                                        <div class="rating">
+                                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="testimonial-card">
+                                <div class="testimonial-quote">
+                                    <i class="fas fa-quote-right"></i>
+                                </div>
+                                <p class="testimonial-text">
+                                    "Instalamos painéis solares e biodigestores. Hoje somos autossuficientes em energia 
+                                    e a economia já pagou 60% do investimento."
+                                </p>
+                                <div class="testimonial-author">
+                                    <img src="https://ui-avatars.com/api/?name=Roberto+Alves&background=047857&color=fff&size=60" alt="Roberto Alves">
+                                    <div class="author-info">
+                                        <h4>Roberto Alves</h4>
+                                        <p>Pecuarista • Goiás</p>
+                                        <div class="rating">
+                                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="testimonial-card">
+                                <div class="testimonial-quote">
+                                    <i class="fas fa-quote-right"></i>
+                                </div>
+                                <p class="testimonial-text">
+                                    "A agricultura de precisão mudou completamente nossa forma de trabalhar. 
+                                    Economizamos insumos e aumentamos a produtividade em 40%."
+                                </p>
+                                <div class="testimonial-author">
+                                    <img src="https://ui-avatars.com/api/?name=Ana+Paula&background=10b981&color=fff&size=60" alt="Ana Paula">
+                                    <div class="author-info">
+                                        <h4>Ana Paula Santos</h4>
+                                        <p>Produtora de Soja • Bahia</p>
+                                        <div class="rating">
+                                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== CONTACT SECTION ==================== -->
+        <section id="contact" class="contact-section">
+            <div class="container">
+                <div class="contact-grid">
+                    <div class="contact-info" data-aos="fade-right">
+                        <span class="section-tag">
+                            <i class="fas fa-envelope"></i>
+                            Fale Conosco
+                        </span>
+                        <h2 class="section-title">Vamos Cultivar o Futuro Juntos</h2>
+                        <p class="contact-description">
+                            Nossa equipe de especialistas está pronta para entender suas necessidades 
+                            e desenvolver a solução ideal para sua propriedade.
+                        </p>
+                        
+                        <div class="contact-methods">
+                            <div class="contact-method">
+                                <div class="method-icon"><i class="fas fa-phone-alt"></i></div>
+                                <div><h4>Central de Atendimento</h4><p>0800 123 4567</p><span>24h por dia, 7 dias</span></div>
+                            </div>
+                            <div class="contact-method">
+                                <div class="method-icon"><i class="fab fa-whatsapp"></i></div>
+                                <div><h4>WhatsApp</h4><p>(11) 98765-4321</p><span>Resposta em até 5 min</span></div>
+                            </div>
+                            <div class="contact-method">
+                                <div class="method-icon"><i class="fas fa-envelope-open-text"></i></div>
+                                <div><h4>Email</h4><p>contato@agroforte.com.br</p><span>Resposta em até 2h</span></div>
+                            </div>
+                            <div class="contact-method">
+                                <div class="method-icon"><i class="fas fa-map-marker-alt"></i></div>
+                                <div><h4>Escritório</h4><p>Av. Paulista, 1000 - 15º andar</p><span>São Paulo, SP</span></div>
+                            </div>
+                        </div>
+                        
+                        <div class="social-links">
+                            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-form-wrapper" data-aos="fade-left">
+                        <form class="contact-form" id="contactForm">
+                            <h3>Solicite um Contato</h3>
+                            <p>Preencha o formulário e um especialista entrará em contato.</p>
+                            
+                            <div class="form-group float-label">
+                                <input type="text" id="name" required>
+                                <label for="name">Nome Completo</label>
+                                <div class="form-border"></div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group float-label">
+                                    <input type="email" id="email" required>
+                                    <label for="email">Email</label>
+                                    <div class="form-border"></div>
+                                </div>
+                                <div class="form-group float-label">
+                                    <input type="tel" id="phone">
+                                    <label for="phone">Telefone</label>
+                                    <div class="form-border"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group float-label">
+                                <select id="subject" required>
+                                    <option value="" disabled selected></option>
+                                    <option value="precision">Agricultura de Precisão</option>
+                                    <option value="energy">Energia Renovável</option>
+                                    <option value="blockchain">Rastreabilidade</option>
+                                    <option value="water">Gestão Hídrica</option>
+                                    <option value="other">Outro</option>
+                                </select>
+                                <label for="subject">Assunto de Interesse</label>
+                                <div class="form-border"></div>
+                            </div>
+                            
+                            <div class="form-group float-label">
+                                <textarea id="message" rows="3" required></textarea>
+                                <label for="message">Como podemos ajudar?</label>
+                                <div class="form-border"></div>
+                            </div>
+                            
+                            <div class="form-checkbox">
+                                <input type="checkbox" id="privacy" required>
+                                <label for="privacy">Concordo com a <a href="#">Política de Privacidade</a></label>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary btn-submit">
+                                <span>Enviar Mensagem</span>
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#" class="footer-logo">
+                        <i class="fas fa-seedling"></i>
+                        <span>Agro<span>Forte</span></span>
+                    </a>
+                    <p>Tecnologia e sustentabilidade para o agronegócio do futuro.</p>
+                    <div class="newsletter">
+                        <h4>Newsletter</h4>
+                        <form class="newsletter-form">
+                            <input type="email" placeholder="Seu email">
+                            <button type="submit"><i class="fas fa-arrow-right"></i></button>
+                        </form>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Soluções</h4>
+                    <ul>
+                        <li><a href="#">Agricultura de Precisão</a></li>
+                        <li><a href="#">Energia Renovável</a></li>
+                        <li><a href="#">Rastreabilidade</a></li>
+                        <li><a href="#">Gestão Hídrica</a></li>
+                        <li><a href="#">Consultoria ESG</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Empresa</h4>
+                    <ul>
+                        <li><a href="#">Sobre Nós</a></li>
+                        <li><a href="#">Carreiras</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Cases</a></li>
+                        <li><a href="#">Imprensa</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Recursos</h4>
+                    <ul>
+                        <li><a href="#">Central de Ajuda</a></li>
+                        <li><a href="#">Documentação</a></li>
+                        <li><a href="#">E-books</a></li>
+                        <li><a href="#">Webinars</a></li>
+                        <li><a href="#">Comunidade</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 AgroForte. Todos os direitos reservados.</p>
+                <div class="footer-legal">
+                    <a href="#">Privacidade</a>
+                    <a href="#">Termos</a>
+                    <a href="#">LGPD</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <button class="back-to-top" id="backToTop" aria-label="Voltar ao topo">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
