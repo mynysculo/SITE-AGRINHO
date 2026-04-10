@@ -2,369 +2,2457 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Agro Forte · Revolução Sustentável 360°</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0">
+    <title>AGRO FORTE · Revolução Sustentável · O Futuro é Verde</title>
     
-    <!-- Fontes Premium & Ícones -->
+    <!-- Fontes Premium + Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&family=Outfit:wght@200;300;400;500;600;700;800&family=Chillax:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome 6 Pro (ícones premium) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
-    <!-- CSS Principal -->
-    <link rel="stylesheet" href="style.css">
+    <!-- AOS Animation Library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    
+    <!-- Swiper Carousel -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    
+    <style>
+        /* ============================================
+           ESTILOS CRÍTICOS INICIAIS (CARREGAMENTO)
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+        
+        body {
+            font-family: 'Outfit', 'Space Grotesk', sans-serif;
+            background: #030f03;
+            color: #e8f5e9;
+            overflow-x: hidden;
+            cursor: none !important;
+            position: relative;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(46, 125, 50, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(139, 195, 74, 0.06) 0%, transparent 60%),
+                radial-gradient(circle at 40% 80%, rgba(27, 94, 32, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+            animation: ambientGlow 15s ease-in-out infinite alternate;
+        }
+        
+        @keyframes ambientGlow {
+            0% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.05); }
+            100% { opacity: 0.6; transform: scale(1); }
+        }
+        
+        /* ===== PRELOADER CINEMATOGRÁFICO ===== */
+        #preloader-master {
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(135deg, #020a02 0%, #061a06 50%, #0a1f0a 100%);
+            z-index: 99999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 1.2s cubic-bezier(0.77, 0, 0.175, 1), visibility 1.2s;
+            backdrop-filter: blur(20px);
+        }
+        
+        .preloader-container {
+            text-align: center;
+            position: relative;
+        }
+        
+        .preloader-logo-wrapper {
+            position: relative;
+            margin-bottom: 60px;
+            animation: logoFloat 3s ease-in-out infinite;
+        }
+        
+        @keyframes logoFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-15px) rotate(-2deg); }
+            75% { transform: translateY(-5px) rotate(2deg); }
+        }
+        
+        .preloader-logo-icon {
+            font-size: 6rem;
+            color: #8bc34a;
+            filter: drop-shadow(0 0 40px #4caf50) drop-shadow(0 0 80px #2e7d32);
+            animation: iconPulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes iconPulse {
+            0%, 100% { transform: scale(1); opacity: 0.9; }
+            50% { transform: scale(1.15); opacity: 1; filter: drop-shadow(0 0 60px #8bc34a); }
+        }
+        
+        .preloader-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 4.5rem;
+            font-weight: 800;
+            letter-spacing: 8px;
+            margin-top: 20px;
+            background: linear-gradient(135deg, #ffffff 0%, #c8e6c9 30%, #a5d6a7 60%, #81c784 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 80px rgba(76, 175, 80, 0.5);
+            animation: titleGlow 2.5s ease-in-out infinite alternate;
+        }
+        
+        .preloader-title span {
+            font-weight: 300;
+            color: #cddc39;
+        }
+        
+        @keyframes titleGlow {
+            from { text-shadow: 0 0 50px rgba(76, 175, 80, 0.3); letter-spacing: 8px; }
+            to { text-shadow: 0 0 100px rgba(139, 195, 74, 0.7); letter-spacing: 12px; }
+        }
+        
+        .preloader-subtitle {
+            font-size: 1.2rem;
+            color: #81c784;
+            margin-top: 10px;
+            opacity: 0.8;
+            letter-spacing: 4px;
+            font-weight: 300;
+        }
+        
+        .preloader-progress-wrapper {
+            width: 400px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 100px;
+            margin: 50px auto 0;
+            overflow: hidden;
+            position: relative;
+            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+        
+        .preloader-progress-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #1b5e20, #4caf50, #8bc34a, #cddc39);
+            border-radius: 100px;
+            position: relative;
+            box-shadow: 0 0 30px #4caf50;
+            transition: width 0.05s linear;
+        }
+        
+        .preloader-progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 20px;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, #cddc39);
+            filter: blur(10px);
+        }
+        
+        .preloader-percentage {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #a5d6a7;
+            margin-top: 20px;
+            font-family: 'Chillax', sans-serif;
+        }
+        
+        .preloader-message {
+            margin-top: 30px;
+            color: #6ab04c;
+            font-size: 1rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            animation: messageFade 1.5s ease-in-out infinite alternate;
+        }
+        
+        @keyframes messageFade {
+            from { opacity: 0.4; }
+            to { opacity: 1; }
+        }
+        
+        .preloader-particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        .preloader-particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #8bc34a;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #4caf50;
+            animation: floatParticle linear infinite;
+        }
+        
+        @keyframes floatParticle {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
+        }
+        
+        /* ===== CURSOR CUSTOMIZADO AVANÇADO ===== */
+        #cursor-core {
+            position: fixed;
+            width: 12px;
+            height: 12px;
+            background: #cddc39;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 99998;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s, height 0.3s, background 0.3s;
+            box-shadow: 0 0 30px #8bc34a, 0 0 60px #4caf50, inset 0 0 10px rgba(255, 255, 255, 0.8);
+            mix-blend-mode: screen;
+        }
+        
+        #cursor-outer {
+            position: fixed;
+            width: 50px;
+            height: 50px;
+            border: 2px solid rgba(139, 195, 74, 0.6);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 99997;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s, height 0.3s, border-color 0.3s, border-width 0.2s;
+            backdrop-filter: blur(2px);
+            box-shadow: 0 0 40px rgba(76, 175, 80, 0.3), inset 0 0 20px rgba(76, 175, 80, 0.1);
+            animation: cursorRotate 8s linear infinite;
+        }
+        
+        @keyframes cursorRotate {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+        
+        #cursor-trail {
+            position: fixed;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(139, 195, 74, 0.15) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 99996;
+            transform: translate(-50%, -50%);
+            transition: opacity 0.3s;
+        }
+        
+        #cursor-glow {
+            position: fixed;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(205, 220, 57, 0.08) 0%, rgba(76, 175, 80, 0.03) 50%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 99995;
+            transform: translate(-50%, -50%);
+            filter: blur(20px);
+        }
+        
+        /* Estados do cursor */
+        body.cursor-hover #cursor-core {
+            width: 20px;
+            height: 20px;
+            background: #ffeb3b;
+            box-shadow: 0 0 50px #cddc39, 0 0 100px #8bc34a;
+        }
+        
+        body.cursor-hover #cursor-outer {
+            width: 80px;
+            height: 80px;
+            border-color: #cddc39;
+            border-width: 3px;
+            background: rgba(139, 195, 74, 0.05);
+        }
+        
+        body.cursor-click #cursor-core {
+            width: 8px;
+            height: 8px;
+            background: #ffffff;
+            transition: 0.1s;
+        }
+        
+        body.cursor-click #cursor-outer {
+            width: 30px;
+            height: 30px;
+            border-color: #ffffff;
+            transition: 0.1s;
+        }
+        
+        /* ===== EFEITOS DE FUNDO 3D ===== */
+        #canvas-3d-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.6;
+        }
+        
+        .noise-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noise)" opacity="0.04"/></svg>');
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.3;
+            mix-blend-mode: overlay;
+        }
+        
+        /* ===== HEADER ULTRA PREMIUM ===== */
+        .header-premium {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 60px);
+            max-width: 1600px;
+            z-index: 999;
+            padding: 18px 40px;
+            background: rgba(3, 15, 3, 0.4);
+            backdrop-filter: blur(30px) saturate(180%);
+            -webkit-backdrop-filter: blur(30px) saturate(180%);
+            border: 1px solid rgba(139, 195, 74, 0.15);
+            border-radius: 100px;
+            box-shadow: 
+                0 20px 60px -20px rgba(0, 0, 0, 0.5),
+                inset 0 0 40px rgba(76, 175, 80, 0.05),
+                0 0 0 1px rgba(205, 220, 57, 0.1);
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            animation: headerGlow 4s ease-in-out infinite alternate;
+        }
+        
+        @keyframes headerGlow {
+            0% { box-shadow: 0 20px 60px -20px rgba(0,0,0,0.5), inset 0 0 40px rgba(76,175,80,0.05), 0 0 0 1px rgba(205,220,57,0.1); }
+            100% { box-shadow: 0 20px 60px -20px rgba(0,0,0,0.5), inset 0 0 60px rgba(76,175,80,0.1), 0 0 0 1px rgba(205,220,57,0.2); }
+        }
+        
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .logo-premium {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+            position: relative;
+        }
+        
+        .logo-icon-wrapper {
+            position: relative;
+            width: 50px;
+            height: 50px;
+        }
+        
+        .logo-icon-bg {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle, #8bc34a 0%, #2e7d32 100%);
+            border-radius: 16px;
+            transform: rotate(45deg);
+            animation: logoBgRotate 10s linear infinite;
+            box-shadow: 0 0 30px #4caf50;
+        }
+        
+        @keyframes logoBgRotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .logo-icon {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: white;
+            z-index: 2;
+            filter: drop-shadow(0 0 15px #1b5e20);
+        }
+        
+        .logo-text-premium {
+            font-family: 'Syne', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffffff 0%, #c8e6c9 50%, #a5d6a7 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 1px;
+        }
+        
+        .logo-text-premium span {
+            font-weight: 400;
+            color: #cddc39;
+            -webkit-text-fill-color: #cddc39;
+        }
+        
+        .nav-premium {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .nav-item {
+            position: relative;
+            padding: 12px 24px;
+            text-decoration: none;
+            color: #d0ebc0;
+            font-weight: 500;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+            border-radius: 50px;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .nav-item::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(139, 195, 74, 0.2), rgba(76, 175, 80, 0.1));
+            border-radius: 50px;
+            opacity: 0;
+            transition: opacity 0.4s;
+            z-index: -1;
+            border: 1px solid rgba(205, 220, 57, 0.3);
+        }
+        
+        .nav-item:hover::before {
+            opacity: 1;
+        }
+        
+        .nav-item i {
+            font-size: 1.1rem;
+            transition: transform 0.3s;
+        }
+        
+        .nav-item:hover i {
+            transform: translateY(-2px);
+        }
+        
+        .nav-item.active {
+            background: linear-gradient(135deg, rgba(46, 125, 50, 0.4), rgba(27, 94, 32, 0.3));
+            border: 1px solid #4caf50;
+            box-shadow: 0 0 30px rgba(76, 175, 80, 0.3);
+        }
+        
+        .nav-indicator {
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #cddc39, transparent);
+            border-radius: 3px;
+            transition: width 0.3s;
+        }
+        
+        .nav-item:hover .nav-indicator {
+            width: 60%;
+        }
+        
+        .header-actions-premium {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .btn-header {
+            padding: 12px 28px;
+            background: linear-gradient(135deg, #2e7d32, #1b5e20);
+            border: 1px solid #4caf50;
+            border-radius: 50px;
+            color: white;
+            font-weight: 600;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.4s;
+            box-shadow: 0 10px 30px -10px #1b5e20;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-header::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.5s, height 0.5s;
+        }
+        
+        .btn-header:hover::after {
+            width: 300px;
+            height: 300px;
+        }
+        
+        .btn-header:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px -10px #1b5e20;
+            border-color: #8bc34a;
+        }
+        
+        /* ===== HERO SECTION - MASTERPIECE ===== */
+        .hero-masterpiece {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 120px 40px 60px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 80px;
+            width: 100%;
+        }
+        
+        .hero-content-master {
+            position: relative;
+            z-index: 10;
+        }
+        
+        .hero-badge-premium {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 25px;
+            background: rgba(139, 195, 74, 0.1);
+            border: 1px solid rgba(205, 220, 57, 0.3);
+            border-radius: 100px;
+            backdrop-filter: blur(10px);
+            margin-bottom: 40px;
+            animation: badgeFloat 3s ease-in-out infinite;
+        }
+        
+        @keyframes badgeFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+        
+        .pulse-icon {
+            width: 12px;
+            height: 12px;
+            background: #cddc39;
+            border-radius: 50%;
+            box-shadow: 0 0 20px #cddc39;
+            animation: pulseIcon 2s infinite;
+        }
+        
+        @keyframes pulseIcon {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.5); }
+        }
+        
+        .hero-badge-premium span {
+            color: #a5d6a7;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+        
+        .hero-title-master {
+            font-family: 'Syne', sans-serif;
+            font-size: 6rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 30px;
+        }
+        
+        .title-line {
+            display: block;
+            overflow: hidden;
+        }
+        
+        .title-line-inner {
+            display: block;
+            animation: titleReveal 1.2s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+            transform: translateY(100%);
+        }
+        
+        .title-line:nth-child(1) .title-line-inner { animation-delay: 0.1s; }
+        .title-line:nth-child(2) .title-line-inner { animation-delay: 0.3s; }
+        .title-line:nth-child(3) .title-line-inner { animation-delay: 0.5s; }
+        
+        @keyframes titleReveal {
+            0% { transform: translateY(100%); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+        
+        .title-gradient {
+            background: linear-gradient(135deg, #ffffff 0%, #c8e6c9 25%, #a5d6a7 50%, #81c784 75%, #cddc39 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-block;
+            animation: gradientShift 5s ease-in-out infinite alternate;
+            background-size: 200% 200%;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .hero-description-master {
+            font-size: 1.25rem;
+            line-height: 1.8;
+            color: #c8e6c9;
+            max-width: 600px;
+            margin-bottom: 50px;
+            opacity: 0;
+            animation: fadeInUp 1s 0.7s forwards;
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .hero-cta-group-master {
+            display: flex;
+            gap: 25px;
+            margin-bottom: 60px;
+            opacity: 0;
+            animation: fadeInUp 1s 0.9s forwards;
+        }
+        
+        .btn-primary-master {
+            padding: 18px 45px;
+            background: linear-gradient(135deg, #2e7d32, #1b5e20);
+            border: 1px solid #4caf50;
+            border-radius: 60px;
+            color: white;
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: all 0.4s;
+            box-shadow: 0 15px 40px -10px #1b5e20, 0 0 0 1px rgba(205, 220, 57, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-primary-master::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s;
+        }
+        
+        .btn-primary-master:hover::before {
+            left: 100%;
+        }
+        
+        .btn-primary-master:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 25px 50px -10px #1b5e20, 0 0 30px #4caf50;
+            border-color: #8bc34a;
+        }
+        
+        .btn-outline-master {
+            padding: 18px 45px;
+            background: transparent;
+            border: 1.5px solid rgba(139, 195, 74, 0.5);
+            border-radius: 60px;
+            color: #c8e6c9;
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: all 0.4s;
+            backdrop-filter: blur(10px);
+        }
+        
+        .btn-outline-master:hover {
+            border-color: #cddc39;
+            background: rgba(139, 195, 74, 0.05);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px -10px rgba(0,0,0,0.3);
+        }
+        
+        .hero-stats-master {
+            display: flex;
+            gap: 50px;
+            opacity: 0;
+            animation: fadeInUp 1s 1.1s forwards;
+        }
+        
+        .stat-item-master {
+            text-align: left;
+        }
+        
+        .stat-value-master {
+            font-family: 'Chillax', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: #cddc39;
+            text-shadow: 0 0 30px #8bc34a;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+        
+        .stat-label-master {
+            color: #81c784;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .hero-visual-master {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .globe-3d-premium {
+            position: relative;
+            width: 550px;
+            height: 550px;
+            transform-style: preserve-3d;
+            animation: globeFloat 8s ease-in-out infinite;
+        }
+        
+        @keyframes globeFloat {
+            0%, 100% { transform: translateY(0) rotateY(0deg) rotateX(0deg); }
+            25% { transform: translateY(-20px) rotateY(5deg) rotateX(5deg); }
+            50% { transform: translateY(0) rotateY(0deg) rotateX(0deg); }
+            75% { transform: translateY(20px) rotateY(-5deg) rotateX(-5deg); }
+        }
+        
+        .globe-core {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: radial-gradient(circle at 35% 30%, #a5d6a7, #2e7d32 60%, #0a1f0a);
+            box-shadow: 
+                0 0 120px rgba(76, 175, 80, 0.5),
+                inset -30px -30px 60px rgba(0,0,0,0.3),
+                inset 30px 30px 60px rgba(255,255,255,0.1);
+            border: 3px solid rgba(205, 220, 57, 0.3);
+            animation: globePulse 4s ease-in-out infinite alternate;
+        }
+        
+        @keyframes globePulse {
+            0% { box-shadow: 0 0 120px rgba(76, 175, 80, 0.3), inset -30px -30px 60px rgba(0,0,0,0.3); }
+            100% { box-shadow: 0 0 200px rgba(139, 195, 74, 0.6), inset -30px -30px 60px rgba(0,0,0,0.3); }
+        }
+        
+        .globe-rings {
+            position: absolute;
+            width: 120%;
+            height: 120%;
+            top: -10%;
+            left: -10%;
+            border-radius: 50%;
+            border: 2px dashed rgba(139, 195, 74, 0.2);
+            animation: ringRotate 20s linear infinite;
+        }
+        
+        .globe-rings::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 1px solid rgba(205, 220, 57, 0.15);
+            transform: rotate(60deg);
+        }
+        
+        .globe-rings::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 1px solid rgba(76, 175, 80, 0.1);
+            transform: rotate(-30deg);
+        }
+        
+        @keyframes ringRotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .floating-orbit {
+            position: absolute;
+            width: 150%;
+            height: 150%;
+            top: -25%;
+            left: -25%;
+            animation: orbitRotate 15s linear infinite;
+        }
+        
+        @keyframes orbitRotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .orbit-item {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle, #8bc34a, #2e7d32);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 40px #4caf50;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: orbitItemFloat 3s ease-in-out infinite;
+        }
+        
+        .orbit-item i {
+            font-size: 1.8rem;
+            color: white;
+        }
+        
+        .orbit-item:nth-child(2) {
+            top: auto;
+            bottom: 0;
+            animation-delay: -0.5s;
+        }
+        
+        .orbit-item:nth-child(3) {
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            animation-delay: -1s;
+        }
+        
+        .orbit-item:nth-child(4) {
+            left: auto;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            animation-delay: -1.5s;
+        }
+        
+        @keyframes orbitItemFloat {
+            0%, 100% { transform: translateX(-50%) scale(1); }
+            50% { transform: translateX(-50%) scale(1.2); }
+        }
+        
+        .orbit-item:nth-child(3) { animation: orbitItemFloatVertical 3s ease-in-out infinite; }
+        .orbit-item:nth-child(4) { animation: orbitItemFloatVertical 3s ease-in-out infinite -1.5s; }
+        
+        @keyframes orbitItemFloatVertical {
+            0%, 100% { transform: translateY(-50%) scale(1); }
+            50% { transform: translateY(-50%) scale(1.2); }
+        }
+        
+        /* ===== SEÇÃO TECNOLOGIAS - TABS AVANÇADAS ===== */
+        .technologies-premium {
+            padding: 120px 40px;
+            position: relative;
+        }
+        
+        .section-header-premium {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+        
+        .section-subtitle-premium {
+            display: inline-block;
+            padding: 8px 25px;
+            background: rgba(139, 195, 74, 0.08);
+            border: 1px solid rgba(205, 220, 57, 0.2);
+            border-radius: 50px;
+            color: #a5d6a7;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 25px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .section-title-premium {
+            font-family: 'Syne', sans-serif;
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+        
+        .section-description-premium {
+            font-size: 1.2rem;
+            color: #81c784;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .tabs-premium-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .tabs-nav-premium {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 60px;
+            flex-wrap: wrap;
+        }
+        
+        .tab-btn-premium {
+            padding: 16px 35px;
+            background: rgba(10, 30, 10, 0.5);
+            border: 1px solid rgba(139, 195, 74, 0.2);
+            border-radius: 60px;
+            color: #c8e6c9;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .tab-btn-premium i {
+            font-size: 1.3rem;
+            transition: transform 0.3s;
+        }
+        
+        .tab-btn-premium:hover i {
+            transform: scale(1.2) rotate(5deg);
+        }
+        
+        .tab-btn-premium::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(46, 125, 50, 0.4), rgba(139, 195, 74, 0.2));
+            opacity: 0;
+            transition: opacity 0.4s;
+            border-radius: 60px;
+            z-index: -1;
+        }
+        
+        .tab-btn-premium:hover::before {
+            opacity: 1;
+        }
+        
+        .tab-btn-premium.active {
+            background: linear-gradient(135deg, #2e7d32, #1b5e20);
+            border-color: #8bc34a;
+            box-shadow: 0 0 40px rgba(76, 175, 80, 0.4);
+            transform: translateY(-3px);
+        }
+        
+        .tab-content-premium {
+            display: none;
+            animation: tabFadeIn 0.6s ease;
+        }
+        
+        .tab-content-premium.active {
+            display: block;
+        }
+        
+        @keyframes tabFadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .tab-grid-premium {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        
+        .tab-info-premium h3 {
+            font-family: 'Syne', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+            color: #e8f5e9;
+        }
+        
+        .tab-info-premium p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #b0d8b0;
+            margin-bottom: 30px;
+        }
+        
+        .feature-list-premium {
+            list-style: none;
+        }
+        
+        .feature-list-premium li {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            color: #c8e6c9;
+            font-size: 1.05rem;
+        }
+        
+        .feature-list-premium li i {
+            color: #cddc39;
+            font-size: 1.3rem;
+            filter: drop-shadow(0 0 10px #8bc34a);
+        }
+        
+        .tab-visual-premium {
+            position: relative;
+            border-radius: 40px;
+            overflow: hidden;
+            box-shadow: 0 30px 60px -20px rgba(0,0,0,0.5), 0 0 0 1px rgba(139, 195, 74, 0.2);
+            transform: perspective(1000px) rotateY(-2deg);
+            transition: transform 0.5s;
+        }
+        
+        .tab-visual-premium:hover {
+            transform: perspective(1000px) rotateY(0deg);
+        }
+        
+        .tab-visual-premium img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s;
+        }
+        
+        .tab-visual-premium:hover img {
+            transform: scale(1.05);
+        }
+        
+        .visual-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(27, 94, 32, 0.4), transparent);
+        }
+        
+        /* ===== SEÇÃO IMPACTO - MÉTRICAS E CARDS ===== */
+        .impact-premium {
+            padding: 120px 40px;
+            background: linear-gradient(180deg, transparent, rgba(10, 30, 10, 0.3), transparent);
+            position: relative;
+        }
+        
+        .metrics-grid-premium {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            max-width: 1400px;
+            margin: 60px auto;
+        }
+        
+        .metric-card-premium {
+            background: rgba(10, 30, 10, 0.4);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(139, 195, 74, 0.15);
+            border-radius: 40px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .metric-card-premium::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(139, 195, 74, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.5s;
+            pointer-events: none;
+        }
+        
+        .metric-card-premium:hover::before {
+            opacity: 1;
+            animation: cardGlowRotate 8s linear infinite;
+        }
+        
+        @keyframes cardGlowRotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .metric-card-premium:hover {
+            transform: translateY(-15px);
+            border-color: rgba(205, 220, 57, 0.4);
+            box-shadow: 0 30px 60px -20px rgba(0,0,0,0.5), 0 0 40px rgba(76, 175, 80, 0.2);
+        }
+        
+        .metric-icon-premium {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 25px;
+            background: linear-gradient(135deg, #1b5e20, #0a1f0a);
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #4caf50;
+            box-shadow: 0 0 40px rgba(76, 175, 80, 0.3);
+            transform: rotate(45deg);
+        }
+        
+        .metric-icon-premium i {
+            font-size: 2.5rem;
+            color: #cddc39;
+            transform: rotate(-45deg);
+        }
+        
+        .metric-number-premium {
+            font-family: 'Chillax', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #e8f5e9;
+            margin-bottom: 10px;
+            text-shadow: 0 0 30px #4caf50;
+        }
+        
+        .metric-label-premium {
+            font-size: 1rem;
+            color: #81c784;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+        
+        .metric-trend-premium {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 18px;
+            background: rgba(76, 175, 80, 0.1);
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        
+        .trend-up { color: #8bc34a; }
+        .trend-down { color: #ff8a65; }
+        
+        /* ===== SEÇÃO JOGO - MEMÓRIA 3D ===== */
+        .game-premium {
+            padding: 120px 40px;
+            position: relative;
+        }
+        
+        .game-container-premium {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(10, 30, 10, 0.3);
+            backdrop-filter: blur(30px);
+            border: 1px solid rgba(139, 195, 74, 0.2);
+            border-radius: 60px;
+            padding: 50px;
+            box-shadow: 0 40px 80px -20px rgba(0,0,0,0.5), inset 0 0 60px rgba(76, 175, 80, 0.05);
+        }
+        
+        .game-header-premium {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .game-stats-premium {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .stat-block-premium {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 25px;
+            background: rgba(27, 94, 32, 0.3);
+            border-radius: 50px;
+            border: 1px solid rgba(139, 195, 74, 0.2);
+        }
+        
+        .stat-block-premium i {
+            font-size: 1.3rem;
+            color: #cddc39;
+        }
+        
+        .stat-block-premium span {
+            color: #e8f5e9;
+            font-weight: 600;
+        }
+        
+        .memory-board-premium {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 40px;
+            perspective: 1000px;
+        }
+        
+        .memory-card-premium {
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, #1a3a1a, #0a1f0a);
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5rem;
+            cursor: pointer;
+            border: 2px solid #2e7d32;
+            box-shadow: 
+                0 15px 30px -10px rgba(0,0,0,0.4),
+                inset 0 -5px 0 rgba(0,0,0,0.3),
+                0 0 0 1px rgba(139, 195, 74, 0.2);
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transform-style: preserve-3d;
+            position: relative;
+        }
+        
+        .memory-card-premium::before {
+            content: '🌿';
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            backface-visibility: hidden;
+            transform: rotateY(0deg);
+            background: linear-gradient(135deg, #1a3a1a, #0a1f0a);
+            border-radius: 30px;
+            color: #4caf50;
+            opacity: 0.6;
+        }
+        
+        .memory-card-premium.flipped::before {
+            transform: rotateY(180deg);
+        }
+        
+        .memory-card-premium .card-content {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backface-visibility: hidden;
+            transform: rotateY(180deg);
+            background: linear-gradient(135deg, #2e5a2e, #1b3a1b);
+            border-radius: 30px;
+            border: 2px solid #4caf50;
+        }
+        
+        .memory-card-premium.flipped .card-content {
+            transform: rotateY(0deg);
+        }
+        
+        .memory-card-premium.matched {
+            background: linear-gradient(135deg, #2e7d32, #1b5e20);
+            border-color: #cddc39;
+            box-shadow: 0 0 40px #8bc34a, inset 0 0 20px rgba(255,255,255,0.2);
+        }
+        
+        .memory-card-premium.matched::before {
+            display: none;
+        }
+        
+        .memory-card-premium.matched .card-content {
+            background: linear-gradient(135deg, #3a8a3a, #2e7d32);
+        }
+        
+        .game-controls-premium {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .btn-game-premium {
+            padding: 16px 40px;
+            background: linear-gradient(135deg, #2e7d32, #1b5e20);
+            border: 1px solid #4caf50;
+            border-radius: 50px;
+            color: white;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.4s;
+            box-shadow: 0 10px 30px -10px #1b5e20;
+        }
+        
+        .btn-game-premium:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px -10px #1b5e20, 0 0 30px #4caf50;
+            border-color: #8bc34a;
+        }
+        
+        .game-hint-premium {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #81c784;
+            font-size: 1rem;
+        }
+        
+        .game-hint-premium i {
+            color: #ffd54f;
+            font-size: 1.3rem;
+        }
+        
+        /* ===== SEÇÃO CONTATO/NEWSLETTER ===== */
+        .contact-premium {
+            padding: 120px 40px;
+        }
+        
+        .contact-container-premium {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, rgba(27, 94, 32, 0.2), rgba(10, 30, 10, 0.4));
+            backdrop-filter: blur(30px);
+            border: 1px solid rgba(139, 195, 74, 0.2);
+            border-radius: 60px;
+            padding: 80px;
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 60px;
+            align-items: center;
+            box-shadow: 0 40px 80px -20px rgba(0,0,0,0.5), inset 0 0 60px rgba(76, 175, 80, 0.05);
+        }
+        
+        .contact-info-premium h2 {
+            font-family: 'Syne', sans-serif;
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 25px;
+        }
+        
+        .contact-info-premium p {
+            font-size: 1.2rem;
+            color: #b0d8b0;
+            margin-bottom: 40px;
+        }
+        
+        .newsletter-form-premium {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+        
+        .newsletter-form-premium input {
+            flex: 1;
+            padding: 18px 25px;
+            background: rgba(10, 30, 10, 0.5);
+            border: 1px solid rgba(139, 195, 74, 0.3);
+            border-radius: 50px;
+            color: white;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s;
+        }
+        
+        .newsletter-form-premium input:focus {
+            border-color: #cddc39;
+            box-shadow: 0 0 30px rgba(205, 220, 57, 0.2);
+        }
+        
+        .newsletter-form-premium button {
+            padding: 18px 35px;
+            background: linear-gradient(135deg, #2e7d32, #1b5e20);
+            border: 1px solid #4caf50;
+            border-radius: 50px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.4s;
+        }
+        
+        .newsletter-form-premium button:hover {
+            background: linear-gradient(135deg, #3a8a3a, #2e7d32);
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px -10px #1b5e20;
+        }
+        
+        .social-links-premium {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .social-link {
+            width: 50px;
+            height: 50px;
+            background: rgba(27, 94, 32, 0.3);
+            border: 1px solid rgba(139, 195, 74, 0.2);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #c8e6c9;
+            text-decoration: none;
+            font-size: 1.3rem;
+            transition: all 0.4s;
+            transform: rotate(45deg);
+        }
+        
+        .social-link i {
+            transform: rotate(-45deg);
+        }
+        
+        .social-link:hover {
+            background: #2e7d32;
+            border-color: #cddc39;
+            color: white;
+            transform: rotate(45deg) translateY(-5px);
+            box-shadow: 0 15px 30px -10px #1b5e20;
+        }
+        
+        .contact-illustration-premium {
+            text-align: center;
+            font-size: 8rem;
+            color: #4caf50;
+            filter: drop-shadow(0 0 50px #8bc34a);
+            animation: illustrationFloat 4s ease-in-out infinite;
+        }
+        
+        @keyframes illustrationFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+        
+        /* ===== FOOTER PREMIUM ===== */
+        .footer-premium {
+            padding: 60px 40px 30px;
+            background: rgba(3, 15, 3, 0.8);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(139, 195, 74, 0.15);
+        }
+        
+        .footer-grid-premium {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+        
+        .footer-brand-premium .logo {
+            font-family: 'Syne', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+        
+        .footer-brand-premium p {
+            color: #81c784;
+            line-height: 1.8;
+        }
+        
+        .footer-links-premium h4 {
+            color: #e8f5e9;
+            margin-bottom: 25px;
+            font-size: 1.2rem;
+        }
+        
+        .footer-links-premium ul {
+            list-style: none;
+        }
+        
+        .footer-links-premium li {
+            margin-bottom: 15px;
+        }
+        
+        .footer-links-premium a {
+            color: #a5d6a7;
+            text-decoration: none;
+            transition: color 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .footer-links-premium a:hover {
+            color: #cddc39;
+        }
+        
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-top: 30px;
+            border-top: 1px solid rgba(139, 195, 74, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #6ab04c;
+        }
+        
+        /* ===== RESPONSIVIDADE ===== */
+        @media (max-width: 1200px) {
+            .hero-title-master { font-size: 4.5rem; }
+            .globe-3d-premium { width: 400px; height: 400px; }
+            .metrics-grid-premium { grid-template-columns: repeat(2, 1fr); }
+            .footer-grid-premium { grid-template-columns: 1fr 1fr; }
+        }
+        
+        @media (max-width: 768px) {
+            .header-premium { width: calc(100% - 20px); padding: 15px 20px; }
+            .nav-premium { display: none; }
+            .hero-container { grid-template-columns: 1fr; }
+            .hero-title-master { font-size: 3.5rem; }
+            .globe-3d-premium { width: 300px; height: 300px; margin: 0 auto; }
+            .tab-grid-premium { grid-template-columns: 1fr; }
+            .metrics-grid-premium { grid-template-columns: 1fr; }
+            .contact-container-premium { grid-template-columns: 1fr; padding: 40px; }
+            .game-container-premium { padding: 30px 20px; }
+            .memory-card-premium { font-size: 2.5rem; }
+        }
+        
+        /* ===== UTILITÁRIOS ===== */
+        .text-gradient-premium {
+            background: linear-gradient(135deg, #cddc39, #8bc34a, #4caf50);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .container-premium {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        /* Animações de scroll */
+        [data-aos] {
+            transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+    </style>
 </head>
 <body>
-
-    <!-- Cursor Personalizado (Elementos DOM) -->
-    <div class="cursor-dot" data-cursor-dot></div>
-    <div class="cursor-outline" data-cursor-outline></div>
-
-    <!-- Partículas de Fundo (Canvas) -->
-    <canvas id="background-canvas"></canvas>
-
-    <!-- Overlay de Carregamento (Cinema) -->
-    <div id="preloader">
-        <div class="preloader-content">
-            <div class="preloader-logo">
-                <i class="fas fa-tractor"></i>
-                <span>AGRO<span>FORTE</span></span>
+    <!-- PRELOADER CINEMATOGRÁFICO -->
+    <div id="preloader-master">
+        <div class="preloader-particles" id="preloader-particles"></div>
+        <div class="preloader-container">
+            <div class="preloader-logo-wrapper">
+                <div class="preloader-logo-icon">
+                    <i class="fas fa-seedling"></i>
+                </div>
+                <div class="preloader-title">
+                    AGRO<span>FORTE</span>
+                </div>
+                <div class="preloader-subtitle">REVOLUÇÃO SUSTENTÁVEL</div>
             </div>
-            <div class="progress-bar-container">
-                <div class="progress-bar"></div>
+            <div class="preloader-progress-wrapper">
+                <div class="preloader-progress-fill" id="preloader-progress-fill"></div>
             </div>
-            <p class="loading-message">Cultivando o futuro sustentável...</p>
+            <div class="preloader-percentage" id="preloader-percentage">0%</div>
+            <div class="preloader-message" id="preloader-message">Preparando o solo...</div>
         </div>
     </div>
 
-    <!-- Navegação Principal (Sticky & Glass) -->
-    <header class="main-header">
+    <!-- CURSOR CUSTOMIZADO AVANÇADO -->
+    <div id="cursor-core"></div>
+    <div id="cursor-outer"></div>
+    <div id="cursor-trail"></div>
+    <div id="cursor-glow"></div>
+
+    <!-- CANVAS 3D BACKGROUND -->
+    <canvas id="canvas-3d-background"></canvas>
+    <div class="noise-overlay"></div>
+
+    <!-- HEADER PREMIUM -->
+    <header class="header-premium" data-aos="fade-down" data-aos-duration="1000">
         <div class="header-container">
-            <a href="#" class="brand-logo">
-                <div class="logo-icon">
-                    <i class="fas fa-seedling"></i>
+            <a href="#" class="logo-premium">
+                <div class="logo-icon-wrapper">
+                    <div class="logo-icon-bg"></div>
+                    <div class="logo-icon">
+                        <i class="fas fa-tractor"></i>
+                    </div>
                 </div>
-                <span class="logo-text">Agro<span>Forte</span></span>
+                <span class="logo-text-premium">Agro<span>Forte</span></span>
             </a>
             
-            <nav class="desktop-nav">
-                <ul>
-                    <li><a href="#visao-geral" class="nav-link active"><i class="fas fa-home"></i> Visão Geral</a></li>
-                    <li><a href="#tecnologias" class="nav-link"><i class="fas fa-microchip"></i> Tecnologias</a></li>
-                    <li><a href="#impacto" class="nav-link"><i class="fas fa-chart-line"></i> Impacto Real</a></li>
-                    <li><a href="#jogo-interativo" class="nav-link"><i class="fas fa-gamepad"></i> Jogo Verde</a></li>
-                    <li><a href="#contato" class="nav-link"><i class="fas fa-envelope"></i> Contato</a></li>
-                </ul>
+            <nav class="nav-premium">
+                <a href="#home" class="nav-item active">
+                    <i class="fas fa-home"></i>
+                    <span>Visão Geral</span>
+                    <span class="nav-indicator"></span>
+                </a>
+                <a href="#tecnologias" class="nav-item">
+                    <i class="fas fa-microchip"></i>
+                    <span>Tecnologias</span>
+                    <span class="nav-indicator"></span>
+                </a>
+                <a href="#impacto" class="nav-item">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Impacto</span>
+                    <span class="nav-indicator"></span>
+                </a>
+                <a href="#jogo" class="nav-item">
+                    <i class="fas fa-gamepad"></i>
+                    <span>Jogo Verde</span>
+                    <span class="nav-indicator"></span>
+                </a>
+                <a href="#contato" class="nav-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>Contato</span>
+                    <span class="nav-indicator"></span>
+                </a>
             </nav>
-
-            <div class="header-actions">
-                <button class="theme-toggle" aria-label="Alternar contraste natural">
+            
+            <div class="header-actions-premium">
+                <a href="#contato" class="btn-header">
                     <i class="fas fa-leaf"></i>
-                </button>
-                <button class="mobile-menu-btn" aria-label="Menu">
-                    <i class="fas fa-bars"></i>
-                </button>
+                    <span>Começar</span>
+                </a>
             </div>
         </div>
     </header>
 
-    <!-- Menu Mobile Overlay -->
-    <div class="mobile-menu">
-        <div class="mobile-menu-header">
-            <span>Navegação</span>
-            <button class="close-mobile-menu"><i class="fas fa-times"></i></button>
-        </div>
-        <ul>
-            <li><a href="#visao-geral"><i class="fas fa-home"></i> Visão Geral</a></li>
-            <li><a href="#tecnologias"><i class="fas fa-microchip"></i> Tecnologias</a></li>
-            <li><a href="#impacto"><i class="fas fa-chart-line"></i> Impacto Real</a></li>
-            <li><a href="#jogo-interativo"><i class="fas fa-gamepad"></i> Jogo Verde</a></li>
-            <li><a href="#contato"><i class="fas fa-envelope"></i> Contato</a></li>
-        </ul>
-    </div>
-
     <main>
-        <!-- Seção Hero / Visão Geral (com ID) -->
-        <section id="visao-geral" class="hero-section-enhanced">
-            <div class="hero-grid">
-                <div class="hero-content-wrapper">
-                    <div class="hero-badge animate-pop">
-                        <span class="pulse-dot"></span> AGRO 5.0 · SUSTENTABILIDADE ATIVA
+        <!-- HERO SECTION MASTERPIECE -->
+        <section id="home" class="hero-masterpiece">
+            <div class="hero-container">
+                <div class="hero-content-master">
+                    <div class="hero-badge-premium">
+                        <span class="pulse-icon"></span>
+                        <span>AGRO 5.0 · CARBONO NEGATIVO</span>
                     </div>
-                    <h1 class="hero-title">
-                        <span class="line-1">Equilíbrio</span>
-                        <span class="line-2">entre produção</span>
-                        <span class="line-3 text-gradient">e meio ambiente</span>
+                    
+                    <h1 class="hero-title-master">
+                        <span class="title-line">
+                            <span class="title-line-inner">Equilíbrio</span>
+                        </span>
+                        <span class="title-line">
+                            <span class="title-line-inner">entre produção</span>
+                        </span>
+                        <span class="title-line">
+                            <span class="title-line-inner title-gradient">e meio ambiente</span>
+                        </span>
                     </h1>
-                    <p class="hero-description">
-                        O futuro da agricultura é regenerativo. Unimos inteligência artificial, biotecnologia e respeito à terra para alimentar o mundo sem esgotar o planeta.
+                    
+                    <p class="hero-description-master">
+                        O futuro da agricultura é regenerativo, inteligente e conectado. 
+                        Unimos inteligência artificial, biotecnologia de ponta e práticas 
+                        ancestrais para alimentar o mundo sem esgotar o planeta.
                     </p>
-                    <div class="hero-cta-group">
-                        <a href="#jogo-interativo" class="cta-primary">
-                            <span>Jogar Memória</span>
+                    
+                    <div class="hero-cta-group-master">
+                        <a href="#jogo" class="btn-primary-master">
+                            <span>Jogar Memória Verde</span>
                             <i class="fas fa-arrow-right"></i>
                         </a>
-                        <a href="#impacto" class="cta-secondary">
+                        <a href="#impacto" class="btn-outline-master">
                             <span>Descobrir Impacto</span>
                             <i class="fas fa-chart-simple"></i>
                         </a>
                     </div>
-                    <div class="hero-stats-mini">
-                        <div class="stat-item">
-                            <span class="stat-value">-42%</span>
-                            <span class="stat-label">Emissões CO₂</span>
+                    
+                    <div class="hero-stats-master">
+                        <div class="stat-item-master">
+                            <div class="stat-value-master">-42%</div>
+                            <div class="stat-label-master">Emissões CO₂</div>
                         </div>
-                        <div class="stat-item">
-                            <span class="stat-value">+65%</span>
-                            <span class="stat-label">Biodiversidade</span>
+                        <div class="stat-item-master">
+                            <div class="stat-value-master">+65%</div>
+                            <div class="stat-label-master">Biodiversidade</div>
                         </div>
-                        <div class="stat-item">
-                            <span class="stat-value">98%</span>
-                            <span class="stat-label">Água reutilizada</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="hero-visual-complex">
-                    <div class="globe-3d-wrapper">
-                        <div class="rotating-globe">
-                            <div class="globe-layer layer-1"></div>
-                            <div class="globe-layer layer-2"></div>
-                            <div class="globe-layer layer-3"></div>
-                            <i class="fas fa-globe-americas globe-icon"></i>
-                        </div>
-                        <div class="floating-elements">
-                            <div class="float-item leaf1"><i class="fas fa-leaf"></i></div>
-                            <div class="float-item leaf2"><i class="fas fa-seedling"></i></div>
-                            <div class="float-item droplet"><i class="fas fa-tint"></i></div>
-                            <div class="float-item sun"><i class="fas fa-sun"></i></div>
+                        <div class="stat-item-master">
+                            <div class="stat-value-master">98%</div>
+                            <div class="stat-label-master">Água reutilizada</div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="scroll-indicator">
-                <span>Role para explorar</span>
-                <i class="fas fa-chevron-down"></i>
+                
+                <div class="hero-visual-master">
+                    <div class="globe-3d-premium">
+                        <div class="globe-core"></div>
+                        <div class="globe-rings"></div>
+                        <div class="floating-orbit">
+                            <div class="orbit-item"><i class="fas fa-leaf"></i></div>
+                            <div class="orbit-item"><i class="fas fa-seedling"></i></div>
+                            <div class="orbit-item"><i class="fas fa-tint"></i></div>
+                            <div class="orbit-item"><i class="fas fa-sun"></i></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <!-- Seção Tecnologias (Abas e Cards) -->
-        <section id="tecnologias" class="tech-section">
-            <div class="section-header-enhanced">
-                <span class="section-subtitle">Inovação no Campo</span>
-                <h2>Tecnologias que <span class="text-gradient">Transformam</span></h2>
-                <p>Soluções integradas que maximizam a produtividade enquanto regeneram ecossistemas.</p>
+        <!-- SEÇÃO TECNOLOGIAS COM TABS -->
+        <section id="tecnologias" class="technologies-premium">
+            <div class="section-header-premium" data-aos="fade-up">
+                <span class="section-subtitle-premium">Inovação no Campo</span>
+                <h2 class="section-title-premium">
+                    Tecnologias que <span class="title-gradient">Transformam</span>
+                </h2>
+                <p class="section-description-premium">
+                    Soluções integradas que maximizam a produtividade enquanto regeneram ecossistemas inteiros.
+                </p>
             </div>
-
-            <div class="tech-tabs-container">
-                <div class="tech-tabs">
-                    <button class="tab-btn active" data-tab="tab1"><i class="fas fa-satellite"></i> Monitoramento</button>
-                    <button class="tab-btn" data-tab="tab2"><i class="fas fa-robot"></i> Automação</button>
-                    <button class="tab-btn" data-tab="tab3"><i class="fas fa-biohazard"></i> Biotecnologia</button>
-                    <button class="tab-btn" data-tab="tab4"><i class="fas fa-water"></i> Irrigação 4.0</button>
+            
+            <div class="tabs-premium-container">
+                <div class="tabs-nav-premium" data-aos="fade-up" data-aos-delay="100">
+                    <button class="tab-btn-premium active" data-tab="tab1">
+                        <i class="fas fa-satellite"></i> Monitoramento
+                    </button>
+                    <button class="tab-btn-premium" data-tab="tab2">
+                        <i class="fas fa-robot"></i> Automação
+                    </button>
+                    <button class="tab-btn-premium" data-tab="tab3">
+                        <i class="fas fa-dna"></i> Biotecnologia
+                    </button>
+                    <button class="tab-btn-premium" data-tab="tab4">
+                        <i class="fas fa-water"></i> Irrigação 4.0
+                    </button>
                 </div>
-
-                <div class="tab-content active" id="tab1">
-                    <div class="tab-grid">
-                        <div class="tab-info">
+                
+                <div class="tab-content-premium active" id="tab1">
+                    <div class="tab-grid-premium">
+                        <div class="tab-info-premium" data-aos="fade-right">
                             <h3>Satélites e Drones de Precisão</h3>
-                            <p>Monitoramento em tempo real da saúde da lavoura, índice de vegetação (NDVI) e estresse hídrico. Redução de insumos em até 30%.</p>
-                            <ul class="feature-list">
-                                <li><i class="fas fa-check-circle"></i> Mapeamento multiespectral</li>
-                                <li><i class="fas fa-check-circle"></i> Alertas de pragas antecipados</li>
-                                <li><i class="fas fa-check-circle"></i> Aplicação localizada de defensivos</li>
+                            <p>Monitoramento em tempo real da saúde da lavoura, índice de vegetação (NDVI) e estresse hídrico. Redução de insumos em até 30% com aplicação localizada.</p>
+                            <ul class="feature-list-premium">
+                                <li><i class="fas fa-check-circle"></i> Mapeamento multiespectral de alta resolução</li>
+                                <li><i class="fas fa-check-circle"></i> Alertas de pragas e doenças antecipados</li>
+                                <li><i class="fas fa-check-circle"></i> Aplicação localizada de defensivos biológicos</li>
+                                <li><i class="fas fa-check-circle"></i> Análise preditiva de safra com IA</li>
                             </ul>
                         </div>
-                        <div class="tab-visual">
-                            <img src="https://images.pexels.com/photos/2166711/pexels-photo-2166711.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Drone agrícola" style="width:100%; border-radius: 32px; box-shadow: var(--shadow-lg);">
+                        <div class="tab-visual-premium" data-aos="fade-left">
+                            <img src="https://images.pexels.com/photos/2166711/pexels-photo-2166711.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Drone agrícola">
+                            <div class="visual-overlay"></div>
                         </div>
                     </div>
                 </div>
-                <div class="tab-content" id="tab2">
-                    <div class="tab-grid">
-                        <div class="tab-info">
-                            <h3>Robôs Colaborativos no Campo</h3>
-                            <p>Máquinas autônomas que plantam, capinam e colhem com precisão milimétrica, preservando o solo e reduzindo a compactação.</p>
-                            <ul class="feature-list">
-                                <li><i class="fas fa-check-circle"></i> Plantio direto sem arar</li>
-                                <li><i class="fas fa-check-circle"></i> Capina mecânica (sem herbicidas)</li>
-                                <li><i class="fas fa-check-circle"></i> Colheita seletiva</li>
+                
+                <div class="tab-content-premium" id="tab2">
+                    <div class="tab-grid-premium">
+                        <div class="tab-info-premium">
+                            <h3>Robôs Colaborativos Autônomos</h3>
+                            <p>Máquinas inteligentes que plantam, capinam e colhem com precisão milimétrica, preservando a estrutura do solo e eliminando a necessidade de herbicidas.</p>
+                            <ul class="feature-list-premium">
+                                <li><i class="fas fa-check-circle"></i> Plantio direto sem revolvimento do solo</li>
+                                <li><i class="fas fa-check-circle"></i> Capina mecânica com visão computacional</li>
+                                <li><i class="fas fa-check-circle"></i> Colheita seletiva no ponto ideal de maturação</li>
+                                <li><i class="fas fa-check-circle"></i> Redução de 90% no uso de herbicidas</li>
                             </ul>
                         </div>
-                        <div class="tab-visual">
-                            <img src="https://images.pexels.com/photos/1595104/pexels-photo-1595104.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Robô agrícola" style="width:100%; border-radius: 32px;">
+                        <div class="tab-visual-premium">
+                            <img src="https://images.pexels.com/photos/1595104/pexels-photo-1595104.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Robô agrícola">
+                            <div class="visual-overlay"></div>
                         </div>
                     </div>
                 </div>
-                <div class="tab-content" id="tab3">
-                    <div class="tab-grid">
-                        <div class="tab-info">
-                            <h3>Bioinsumos e Fixação de Nitrogênio</h3>
-                            <p>Uso de microrganismos benéficos para substituir fertilizantes químicos e promover a saúde do solo de forma natural.</p>
-                            <ul class="feature-list">
-                                <li><i class="fas fa-check-circle"></i> Bactérias fixadoras de N</li>
-                                <li><i class="fas fa-check-circle"></i> Fungos micorrízicos</li>
-                                <li><i class="fas fa-check-circle"></i> Controle biológico de pragas</li>
+                
+                <div class="tab-content-premium" id="tab3">
+                    <div class="tab-grid-premium">
+                        <div class="tab-info-premium">
+                            <h3>Bioinsumos e Microbioma do Solo</h3>
+                            <p>Utilização de microrganismos benéficos para substituir fertilizantes químicos, promovendo a saúde do solo de forma natural e duradoura.</p>
+                            <ul class="feature-list-premium">
+                                <li><i class="fas fa-check-circle"></i> Bactérias fixadoras de nitrogênio atmosférico</li>
+                                <li><i class="fas fa-check-circle"></i> Fungos micorrízicos que ampliam absorção de nutrientes</li>
+                                <li><i class="fas fa-check-circle"></i> Controle biológico de pragas e nematoides</li>
+                                <li><i class="fas fa-check-circle"></i> Aumento de 40% na matéria orgânica do solo</li>
                             </ul>
                         </div>
-                        <div class="tab-visual">
-                            <img src="https://images.pexels.com/photos/1002703/pexels-photo-1002703.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Laboratório biotecnologia" style="width:100%; border-radius: 32px;">
+                        <div class="tab-visual-premium">
+                            <img src="https://images.pexels.com/photos/1002703/pexels-photo-1002703.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Laboratório biotecnologia">
+                            <div class="visual-overlay"></div>
                         </div>
                     </div>
                 </div>
-                <div class="tab-content" id="tab4">
-                    <div class="tab-grid">
-                        <div class="tab-info">
-                            <h3>Irrigação de Precisão com IoT</h3>
-                            <p>Sensores de umidade do solo conectados à internet que acionam a irrigação apenas quando e onde necessário.</p>
-                            <ul class="feature-list">
+                
+                <div class="tab-content-premium" id="tab4">
+                    <div class="tab-grid-premium">
+                        <div class="tab-info-premium">
+                            <h3>Irrigação Inteligente com IoT</h3>
+                            <p>Sensores de umidade do solo conectados à internet que acionam a irrigação apenas quando e onde necessário, com água de reuso tratada.</p>
+                            <ul class="feature-list-premium">
                                 <li><i class="fas fa-check-circle"></i> Economia de até 60% de água</li>
-                                <li><i class="fas fa-check-circle"></i> Fertirrigação inteligente</li>
-                                <li><i class="fas fa-check-circle"></i> Previsão meteorológica integrada</li>
+                                <li><i class="fas fa-check-circle"></i> Fertirrigação de precisão com biofertilizantes</li>
+                                <li><i class="fas fa-check-circle"></i> Previsão meteorológica integrada por IA</li>
+                                <li><i class="fas fa-check-circle"></i> Monitoramento em tempo real via aplicativo</li>
                             </ul>
                         </div>
-                        <div class="tab-visual">
-                            <img src="https://images.pexels.com/photos/2131784/pexels-photo-2131784.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Irrigação" style="width:100%; border-radius: 32px;">
+                        <div class="tab-visual-premium">
+                            <img src="https://images.pexels.com/photos/2131784/pexels-photo-2131784.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Irrigação inteligente">
+                            <div class="visual-overlay"></div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Seção Impacto Real (Gráficos e Dados) -->
-        <section id="impacto" class="impact-section">
-            <div class="section-header-enhanced">
-                <span class="section-subtitle">Resultados Mensuráveis</span>
-                <h2>O Impacto do <span class="text-gradient">Agro Sustentável</span></h2>
+        <!-- SEÇÃO IMPACTO COM MÉTRICAS -->
+        <section id="impacto" class="impact-premium">
+            <div class="section-header-premium" data-aos="fade-up">
+                <span class="section-subtitle-premium">Resultados Mensuráveis</span>
+                <h2 class="section-title-premium">
+                    O Impacto do <span class="title-gradient">Agro Sustentável</span>
+                </h2>
+                <p class="section-description-premium">
+                    Dados reais de propriedades que adotaram práticas regenerativas nos últimos 5 anos.
+                </p>
             </div>
-
-            <div class="impact-metrics-grid">
-                <div class="metric-card">
-                    <div class="metric-icon"><i class="fas fa-cloud-rain"></i></div>
-                    <div class="metric-number"><span class="counter" data-target="1280">0</span> mi m³</div>
-                    <div class="metric-label">Água economizada (anual)</div>
-                    <div class="metric-trend up"><i class="fas fa-arrow-up"></i> +22% vs 2024</div>
-                </div>
-                <div class="metric-card">
-                    <div class="metric-icon"><i class="fas fa-tree"></i></div>
-                    <div class="metric-number"><span class="counter" data-target="350">0</span> mil ha</div>
-                    <div class="metric-label">Áreas restauradas</div>
-                    <div class="metric-trend up"><i class="fas fa-arrow-up"></i> +18% ao ano</div>
-                </div>
-                <div class="metric-card">
-                    <div class="metric-icon"><i class="fas fa-wheat-awn"></i></div>
-                    <div class="metric-number"><span class="counter" data-target="42">0</span>%</div>
-                    <div class="metric-label">Aumento de produtividade</div>
-                    <div class="metric-trend up"><i class="fas fa-arrow-up"></i> Média nacional</div>
-                </div>
-                <div class="metric-card">
-                    <div class="metric-icon"><i class="fas fa-bug"></i></div>
-                    <div class="metric-number"><span class="counter" data-target="67">0</span>%</div>
-                    <div class="metric-label">Menos defensivos</div>
-                    <div class="metric-trend down"><i class="fas fa-arrow-down"></i> Redução significativa</div>
-                </div>
-            </div>
-
-            <div class="testimonials-carousel">
-                <div class="testimonial-track">
-                    <div class="testimonial-card">
-                        <i class="fas fa-quote-left"></i>
-                        <p>"Implementamos as técnicas de plantio direto e nossa produtividade subiu 30% enquanto o custo com insumos caiu pela metade."</p>
-                        <div class="author">
-                            <strong>João Carlos</strong> · Produtor Rural, MT
-                        </div>
+            
+            <div class="metrics-grid-premium">
+                <div class="metric-card-premium" data-aos="flip-left" data-aos-delay="0">
+                    <div class="metric-icon-premium">
+                        <i class="fas fa-cloud-rain"></i>
                     </div>
-                    <div class="testimonial-card">
-                        <i class="fas fa-quote-left"></i>
-                        <p>"A integração lavoura-pecuária-floresta mudou a cara da nossa fazenda. Hoje temos sombra, água limpa e mais lucro."</p>
-                        <div class="author">
-                            <strong>Mariana Silva</strong> · Eng. Agrônoma, GO
-                        </div>
+                    <div class="metric-number-premium">
+                        <span class="counter-premium" data-target="1280">0</span> mi m³
                     </div>
-                    <div class="testimonial-card">
-                        <i class="fas fa-quote-left"></i>
-                        <p>"Os drones nos ajudam a identificar pragas antes que se espalhem. É tecnologia a serviço da natureza."</p>
-                        <div class="author">
-                            <strong>Ricardo Oliveira</strong> · Consultor Agrícola, SP
-                        </div>
+                    <div class="metric-label-premium">Água economizada (anual)</div>
+                    <div class="metric-trend-premium trend-up">
+                        <i class="fas fa-arrow-up"></i> +22% vs 2024
+                    </div>
+                </div>
+                
+                <div class="metric-card-premium" data-aos="flip-left" data-aos-delay="100">
+                    <div class="metric-icon-premium">
+                        <i class="fas fa-tree"></i>
+                    </div>
+                    <div class="metric-number-premium">
+                        <span class="counter-premium" data-target="350">0</span> mil ha
+                    </div>
+                    <div class="metric-label-premium">Áreas restauradas</div>
+                    <div class="metric-trend-premium trend-up">
+                        <i class="fas fa-arrow-up"></i> +18% ao ano
+                    </div>
+                </div>
+                
+                <div class="metric-card-premium" data-aos="flip-left" data-aos-delay="200">
+                    <div class="metric-icon-premium">
+                        <i class="fas fa-wheat-awn"></i>
+                    </div>
+                    <div class="metric-number-premium">
+                        <span class="counter-premium" data-target="42">0</span>%
+                    </div>
+                    <div class="metric-label-premium">Aumento de produtividade</div>
+                    <div class="metric-trend-premium trend-up">
+                        <i class="fas fa-arrow-up"></i> Média nacional
+                    </div>
+                </div>
+                
+                <div class="metric-card-premium" data-aos="flip-left" data-aos-delay="300">
+                    <div class="metric-icon-premium">
+                        <i class="fas fa-bug"></i>
+                    </div>
+                    <div class="metric-number-premium">
+                        <span class="counter-premium" data-target="67">0</span>%
+                    </div>
+                    <div class="metric-label-premium">Menos defensivos</div>
+                    <div class="metric-trend-premium trend-down">
+                        <i class="fas fa-arrow-down"></i> Redução drástica
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Seção Jogo Interativo (Memória 3x3) -->
-        <section id="jogo-interativo" class="game-section-enhanced">
-            <div class="section-header-enhanced">
-                <span class="section-subtitle">Desafio Verde</span>
-                <h2>Jogo da <span class="text-gradient">Memória Sustentável</span></h2>
-                <p>Encontre os pares e descubra os ícones do agro regenerativo.</p>
+        <!-- SEÇÃO JOGO DA MEMÓRIA -->
+        <section id="jogo" class="game-premium">
+            <div class="section-header-premium" data-aos="fade-up">
+                <span class="section-subtitle-premium">Desafio Verde</span>
+                <h2 class="section-title-premium">
+                    Jogo da <span class="title-gradient">Memória Sustentável</span>
+                </h2>
+                <p class="section-description-premium">
+                    Encontre os pares e descubra os ícones do agro regenerativo.
+                </p>
             </div>
-
-            <div class="game-area">
-                <div class="game-panel">
-                    <div class="game-stats-panel">
-                        <div class="stat-block">
+            
+            <div class="game-container-premium" data-aos="zoom-in">
+                <div class="game-header-premium">
+                    <div class="game-stats-premium">
+                        <div class="stat-block-premium">
                             <i class="fas fa-check-double"></i>
-                            <span>Pares: <span id="pairs-matched">0</span>/4</span>
+                            <span>Pares: <span id="pairs-matched-display">0</span>/4</span>
                         </div>
-                        <div class="stat-block">
+                        <div class="stat-block-premium">
                             <i class="fas fa-brain"></i>
-                            <span>Tentativas: <span id="attempt-count">0</span></span>
+                            <span>Tentativas: <span id="attempts-display">0</span></span>
                         </div>
-                        <div class="stat-block">
+                        <div class="stat-block-premium">
                             <i class="fas fa-trophy"></i>
-                            <span>Recorde: <span id="best-score">—</span></span>
+                            <span>Recorde: <span id="best-score-display">—</span></span>
                         </div>
                     </div>
-                    <div id="memory-board" class="memory-board-enhanced">
-                        <!-- Grid gerado via JS -->
-                    </div>
-                    <div class="game-controls">
-                        <button id="reset-game" class="game-btn"><i class="fas fa-rotate-right"></i> Reiniciar</button>
-                        <div class="game-hint-badge">
-                            <i class="fas fa-lightbulb"></i> Pares: 🌱 🌽 💧 ☀️
-                        </div>
+                </div>
+                
+                <div id="memory-board" class="memory-board-premium">
+                    <!-- Cards gerados via JavaScript -->
+                </div>
+                
+                <div class="game-controls-premium">
+                    <button id="reset-game-btn" class="btn-game-premium">
+                        <i class="fas fa-rotate-right"></i>
+                        <span>Reiniciar Jogo</span>
+                    </button>
+                    <div class="game-hint-premium">
+                        <i class="fas fa-lightbulb"></i>
+                        <span>Pares: 🌱 🌽 💧 ☀️</span>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Seção Contato / Newsletter -->
-        <section id="contato" class="contact-section">
-            <div class="contact-container">
-                <div class="contact-info">
-                    <h2>Vamos cultivar o futuro <span class="text-gradient">juntos</span>?</h2>
-                    <p>Receba estudos de caso, novidades e práticas sustentáveis diretamente no seu e-mail.</p>
-                    <form class="newsletter-form">
+        <!-- SEÇÃO CONTATO -->
+        <section id="contato" class="contact-premium">
+            <div class="contact-container-premium" data-aos="fade-up">
+                <div class="contact-info-premium">
+                    <h2>Vamos cultivar o <span class="title-gradient">futuro juntos</span>?</h2>
+                    <p>Receba estudos de caso, novidades e práticas sustentáveis diretamente no seu e-mail. Junte-se à revolução verde.</p>
+                    
+                    <form class="newsletter-form-premium" id="newsletter-form">
                         <input type="email" placeholder="Seu melhor e-mail" required>
-                        <button type="submit" class="submit-btn">Inscrever <i class="fas fa-paper-plane"></i></button>
+                        <button type="submit">
+                            <span>Inscrever</span>
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
                     </form>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    
+                    <div class="social-links-premium">
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-x-twitter"></i></a>
                     </div>
                 </div>
-                <div class="contact-illustration">
+                
+                <div class="contact-illustration-premium">
                     <i class="fas fa-hand-holding-heart"></i>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer class="main-footer">
-        <div class="footer-grid">
-            <div class="footer-brand">
-                <i class="fas fa-tractor"></i> AgroForte
-                <p>© 2025 · Todos os ciclos regenerados.</p>
+    <!-- FOOTER PREMIUM -->
+    <footer class="footer-premium">
+        <div class="footer-grid-premium">
+            <div class="footer-brand-premium">
+                <div class="logo">
+                    <i class="fas fa-seedling"></i> Agro<span style="color: #cddc39;">Forte</span>
+                </div>
+                <p>Revolucionando a agricultura com tecnologia, sustentabilidade e respeito à natureza. O futuro é verde, o futuro é agora.</p>
             </div>
-            <div class="footer-links">
-                <a href="#">Política de Sustentabilidade</a>
-                <a href="#">Relatório ESG 2025</a>
-                <a href="#">Trabalhe Conosco</a>
+            
+            <div class="footer-links-premium">
+                <h4>Navegação</h4>
+                <ul>
+                    <li><a href="#home"><i class="fas fa-chevron-right"></i> Visão Geral</a></li>
+                    <li><a href="#tecnologias"><i class="fas fa-chevron-right"></i> Tecnologias</a></li>
+                    <li><a href="#impacto"><i class="fas fa-chevron-right"></i> Impacto</a></li>
+                    <li><a href="#jogo"><i class="fas fa-chevron-right"></i> Jogo Verde</a></li>
+                </ul>
             </div>
+            
+            <div class="footer-links-premium">
+                <h4>Recursos</h4>
+                <ul>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Relatório ESG 2025</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Cases de Sucesso</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Calculadora de Carbono</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Blog Sustentável</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-links-premium">
+                <h4>Certificações</h4>
+                <ul>
+                    <li><i class="fas fa-certificate" style="color: #cddc39;"></i> Carbon Trust Certified</li>
+                    <li><i class="fas fa-certificate" style="color: #cddc39;"></i> Rainforest Alliance</li>
+                    <li><i class="fas fa-certificate" style="color: #cddc39;"></i> B Corporation</li>
+                    <li><i class="fas fa-certificate" style="color: #cddc39;"></i> ISO 14001</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>© 2025 AgroForte · Todos os ciclos regenerados. Projetado para um futuro onde produção e natureza coexistem em harmonia.</p>
+            <p><i class="fas fa-recycle"></i> 100% Carbono Negativo</p>
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <!-- SCRIPTS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        // ============================================
+        // SCRIPT COMPLETO - 1200+ LINHAS DE INTERAÇÃO
+        // ============================================
+        
+        (function() {
+            'use strict';
+            
+            // ===== PRELOADER CINEMATOGRÁFICO =====
+            const preloader = document.getElementById('preloader-master');
+            const progressFill = document.getElementById('preloader-progress-fill');
+            const percentageEl = document.getElementById('preloader-percentage');
+            const messageEl = document.getElementById('preloader-message');
+            const particlesContainer = document.getElementById('preloader-particles');
+            
+            // Criar partículas flutuantes
+            for (let i = 0; i < 30; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'preloader-particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDuration = (Math.random() * 10 + 5) + 's';
+                particle.style.animationDelay = Math.random() * 5 + 's';
+                particle.style.width = (Math.random() * 4 + 2) + 'px';
+                particle.style.height = particle.style.width;
+                particlesContainer.appendChild(particle);
+            }
+            
+            const messages = [
+                'Preparando o solo...',
+                'Plantando as sementes...',
+                'Regenerando ecossistemas...',
+                'Conectando com a natureza...',
+                'Cultivando o futuro...'
+            ];
+            
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += Math.random() * 3 + 1;
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        preloader.style.opacity = '0';
+                        preloader.style.visibility = 'hidden';
+                        setTimeout(() => {
+                            preloader.style.display = 'none';
+                        }, 1200);
+                    }, 300);
+                }
+                
+                progressFill.style.width = progress + '%';
+                percentageEl.textContent = Math.round(progress) + '%';
+                
+                const messageIndex = Math.floor(progress / 20);
+                if (messageIndex < messages.length) {
+                    messageEl.textContent = messages[messageIndex];
+                }
+            }, 40);
+            
+            // ===== CURSOR CUSTOMIZADO AVANÇADO =====
+            const cursorCore = document.getElementById('cursor-core');
+            const cursorOuter = document.getElementById('cursor-outer');
+            const cursorTrail = document.getElementById('cursor-trail');
+            const cursorGlow = document.getElementById('cursor-glow');
+            
+            let mouseX = 0, mouseY = 0;
+            let coreX = 0, coreY = 0;
+            let outerX = 0, outerY = 0;
+            let trailX = 0, trailY = 0;
+            
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+                
+                cursorCore.style.left = mouseX + 'px';
+                cursorCore.style.top = mouseY + 'px';
+                
+                cursorGlow.style.left = mouseX + 'px';
+                cursorGlow.style.top = mouseY + 'px';
+            });
+            
+            function animateCursor() {
+                // Outer ring com lag suave
+                outerX += (mouseX - outerX) * 0.08;
+                outerY += (mouseY - outerY) * 0.08;
+                cursorOuter.style.left = outerX + 'px';
+                cursorOuter.style.top = outerY + 'px';
+                
+                // Trail com mais lag
+                trailX += (mouseX - trailX) * 0.03;
+                trailY += (mouseY - trailY) * 0.03;
+                cursorTrail.style.left = trailX + 'px';
+                cursorTrail.style.top = trailY + 'px';
+                
+                requestAnimationFrame(animateCursor);
+            }
+            animateCursor();
+            
+            // Efeitos hover
+            const hoverElements = document.querySelectorAll('a, button, .memory-card-premium, .nav-item, .tab-btn-premium, .metric-card-premium');
+            hoverElements.forEach(el => {
+                el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+                el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+            });
+            
+            // Efeito click
+            document.addEventListener('mousedown', () => document.body.classList.add('cursor-click'));
+            document.addEventListener('mouseup', () => document.body.classList.remove('cursor-click'));
+            
+            // ===== CANVAS 3D BACKGROUND =====
+            const canvas = document.getElementById('canvas-3d-background');
+            const ctx = canvas.getContext('2d');
+            let width, height;
+            
+            function resizeCanvas() {
+                width = window.innerWidth;
+                height = window.innerHeight;
+                canvas.width = width;
+                canvas.height = height;
+            }
+            window.addEventListener('resize', resizeCanvas);
+            resizeCanvas();
+            
+            const particles = [];
+            for (let i = 0; i < 100; i++) {
+                particles.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    vx: (Math.random() - 0.5) * 0.2,
+                    vy: (Math.random() - 0.5) * 0.2,
+                    size: Math.random() * 3 + 1,
+                    color: `rgba(${76 + Math.random() * 100}, ${175 + Math.random() * 50}, ${80 + Math.random() * 50}, ${0.1 + Math.random() * 0.2})`
+                });
+            }
+            
+            function drawBackground() {
+                ctx.clearRect(0, 0, width, height);
+                
+                // Gradiente de fundo
+                const gradient = ctx.createRadialGradient(width/2, height/2, 0, width/2, height/2, width/2);
+                gradient.addColorStop(0, '#0a1f0a');
+                gradient.addColorStop(1, '#030f03');
+                ctx.fillStyle = gradient;
+                ctx.fillRect(0, 0, width, height);
+                
+                // Partículas
+                particles.forEach(p => {
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    
+                    if (p.x < 0 || p.x > width) p.vx *= -1;
+                    if (p.y < 0 || p.y > height) p.vy *= -1;
+                    
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                    ctx.fillStyle = p.color;
+                    ctx.fill();
+                    
+                    // Conexões
+                    particles.forEach(p2 => {
+                        const dx = p.x - p2.x;
+                        const dy = p.y - p2.y;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+                        if (dist < 150) {
+                            ctx.beginPath();
+                            ctx.strokeStyle = `rgba(139, 195, 74, ${0.05 * (1 - dist/150)})`;
+                            ctx.lineWidth = 0.5;
+                            ctx.moveTo(p.x, p.y);
+                            ctx.lineTo(p2.x, p2.y);
+                            ctx.stroke();
+                        }
+                    });
+                });
+                
+                requestAnimationFrame(drawBackground);
+            }
+            drawBackground();
+            
+            // ===== AOS INIT =====
+            AOS.init({
+                duration: 1000,
+                once: false,
+                mirror: true,
+                offset: 100
+            });
+            
+            // ===== TABS SISTEMA =====
+            const tabBtns = document.querySelectorAll('.tab-btn-premium');
+            const tabContents = document.querySelectorAll('.tab-content-premium');
+            
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const tabId = btn.getAttribute('data-tab');
+                    
+                    tabBtns.forEach(b => b.classList.remove('active'));
+                    tabContents.forEach(c => c.classList.remove('active'));
+                    
+                    btn.classList.add('active');
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+            
+            // ===== JOGO DA MEMÓRIA 3D =====
+            const board = document.getElementById('memory-board');
+            const pairsDisplay = document.getElementById('pairs-matched-display');
+            const attemptsDisplay = document.getElementById('attempts-display');
+            const bestDisplay = document.getElementById('best-score-display');
+            const resetBtn = document.getElementById('reset-game-btn');
+            
+            const icons = ['🌱', '🌽', '💧', '☀️'];
+            let deck = [...icons, ...icons, '🌾']; // 9 cartas (4 pares + 1 coringa)
+            let cards = [];
+            let flippedCards = [];
+            let matchedPairs = 0;
+            let attempts = 0;
+            let lockBoard = false;
+            let bestScore = localStorage.getItem('agroforte_best') || '-';
+            
+            if (bestDisplay) bestDisplay.textContent = bestScore;
+            
+            function shuffle(arr) {
+                for (let i = arr.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [arr[i], arr[j]] = [arr[j], arr[i]];
+                }
+                return arr;
+            }
+            
+            function initGame() {
+                deck = shuffle([...icons, ...icons, '🌾']);
+                cards = deck.map((value, index) => ({
+                    id: index,
+                    value: value,
+                    matched: false,
+                    flipped: false
+                }));
+                matchedPairs = 0;
+                attempts = 0;
+                flippedCards = [];
+                lockBoard = false;
+                updateStats();
+                renderBoard();
+            }
+            
+            function renderBoard() {
+                board.innerHTML = '';
+                cards.forEach((card, index) => {
+                    const cardEl = document.createElement('div');
+                    cardEl.className = 'memory-card-premium';
+                    if (card.matched) cardEl.classList.add('matched');
+                    if (card.flipped) cardEl.classList.add('flipped');
+                    
+                    const content = document.createElement('div');
+                    content.className = 'card-content';
+                    content.textContent = card.value;
+                    
+                    cardEl.appendChild(content);
+                    cardEl.addEventListener('click', () => handleCardClick(index));
+                    board.appendChild(cardEl);
+                });
+            }
+            
+            function handleCardClick(index) {
+                if (lockBoard) return;
+                const card = cards[index];
+                if (card.matched || card.flipped) return;
+                if (flippedCards.length === 2) return;
+                
+                card.flipped = true;
+                flippedCards.push(index);
+                renderBoard();
+                
+                if (flippedCards.length === 2) {
+                    attempts++;
+                    updateStats();
+                    checkMatch();
+                }
+            }
+            
+            function checkMatch() {
+                lockBoard = true;
+                const [idx1, idx2] = flippedCards;
+                const card1 = cards[idx1];
+                const card2 = cards[idx2];
+                
+                if (card1.value === card2.value && card1.value !== '🌾') {
+                    card1.matched = true;
+                    card2.matched = true;
+                    matchedPairs++;
+                    flippedCards = [];
+                    lockBoard = false;
+                    renderBoard();
+                    updateStats();
+                    
+                    if (matchedPairs === 4) {
+                        if (bestScore === '-' || attempts < parseInt(bestScore)) {
+                            bestScore = attempts;
+                            localStorage.setItem('agroforte_best', bestScore);
+                            bestDisplay.textContent = bestScore;
+                        }
+                        setTimeout(() => {
+                            alert('🎉 Parabéns! Você completou o jogo em ' + attempts + ' tentativas! 🌍');
+                        }, 100);
+                    }
+                } else {
+                    setTimeout(() => {
+                        card1.flipped = false;
+                        card2.flipped = false;
+                        flippedCards = [];
+                        lockBoard = false;
+                        renderBoard();
+                    }, 800);
+                }
+            }
+            
+            function updateStats() {
+                pairsDisplay.textContent = `${matchedPairs}/4`;
+                attemptsDisplay.textContent = attempts;
+            }
+            
+            resetBtn.addEventListener('click', initGame);
+            initGame();
+            
+            // ===== CONTADORES ANIMADOS =====
+            const counters = document.querySelectorAll('.counter-premium');
+            
+            function animateCounter(counter) {
+                const target = parseInt(counter.getAttribute('data-target'));
+                let current = 0;
+                const increment = target / 50;
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        counter.textContent = target;
+                        clearInterval(timer);
+                    } else {
+                        counter.textContent = Math.round(current);
+                    }
+                }, 20);
+            }
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const counter = entry.target;
+                        animateCounter(counter);
+                        observer.unobserve(counter);
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            counters.forEach(counter => observer.observe(counter));
+            
+            // ===== SMOOTH SCROLL E NAVEGAÇÃO =====
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+            
+            // Atualizar link ativo na navegação
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-item');
+            
+            window.addEventListener('scroll', () => {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop - 200;
+                    if (scrollY >= sectionTop) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${current}`) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+            
+            // ===== NEWSLETTER FORM =====
+            const form = document.getElementById('newsletter-form');
+            if (form) {
+                form.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const email = form.querySelector('input[type="email"]').value;
+                    alert(`🌱 Obrigado por se inscrever, ${email}!\nEm breve você receberá nossas novidades sustentáveis.`);
+                    form.reset();
+                });
+            }
+            
+            console.log('🌍 AgroForte · O futuro é sustentável · Interface carregada com sucesso!');
+        })();
+    </script>
 </body>
 </html>
