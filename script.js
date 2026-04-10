@@ -1,1147 +1,1087 @@
-/* ============================================ */
-/* AGRO FORTE · SCRIPT.JS · 2500+ LINHAS       */
-/* ANIMAÇÕES GSAP · JOGO 3D · CANVAS · CURSOR  */
-/* ============================================ */
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0">
+    <title>AGRO FORTE · Revolução Sustentável · O Futuro é Verde</title>
+    
+    <!-- Fontes Premium - 8 famílias diferentes para tipografia rica -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&family=Outfit:wght@200;300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&family=Clash+Display:wght@400;500;600;700&family=Chillax:wght@300;400;500;600;700&family=Inter+Tight:wght@300;400;500;600;700&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Ícones Premium -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css">
+    
+    <!-- Bibliotecas de Animação -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    
+    <!-- CSS Principal - 5000+ linhas -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- ============================================ -->
+    <!-- PRELOADER CINEMATOGRÁFICO ULTRA PREMIUM       -->
+    <!-- ============================================ -->
+    <div id="preloader-master">
+        <div class="preloader-particles" id="preloader-particles"></div>
+        <div class="preloader-container">
+            <div class="preloader-logo-wrapper">
+                <div class="preloader-logo-icon">
+                    <i class="fas fa-seedling"></i>
+                </div>
+                <div class="preloader-logo-ring"></div>
+                <div class="preloader-logo-ring-2"></div>
+                <div class="preloader-title">
+                    AGRO<span>FORTE</span>
+                </div>
+                <div class="preloader-subtitle">REVOLUÇÃO SUSTENTÁVEL</div>
+                <div class="preloader-tagline">Tecnologia · Natureza · Futuro</div>
+            </div>
+            
+            <div class="preloader-progress-wrapper">
+                <div class="preloader-progress-fill" id="preloader-progress-fill"></div>
+                <div class="preloader-progress-glow"></div>
+            </div>
+            
+            <div class="preloader-percentage" id="preloader-percentage">0%</div>
+            <div class="preloader-message" id="preloader-message">Preparando o solo...</div>
+            
+            <div class="preloader-stats">
+                <div class="preloader-stat">
+                    <span class="stat-label">Carbono</span>
+                    <span class="stat-value">-42%</span>
+                </div>
+                <div class="preloader-stat">
+                    <span class="stat-label">Água</span>
+                    <span class="stat-value">-60%</span>
+                </div>
+                <div class="preloader-stat">
+                    <span class="stat-label">Biodiv</span>
+                    <span class="stat-value">+65%</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Elementos decorativos do preloader -->
+        <div class="preloader-decoration">
+            <div class="decoration-line"></div>
+            <div class="decoration-line"></div>
+            <div class="decoration-line"></div>
+        </div>
+    </div>
 
-(function() {
-    'use strict';
+    <!-- ============================================ -->
+    <!-- CURSOR CUSTOMIZADO 5 CAMADAS                 -->
+    <!-- ============================================ -->
+    <div id="cursor-core"></div>
+    <div id="cursor-outer"></div>
+    <div id="cursor-trail"></div>
+    <div id="cursor-glow"></div>
+    <div id="cursor-particle"></div>
+
+    <!-- ============================================ -->
+    <!-- CANVAS 3D BACKGROUND PARTICLE SYSTEM          -->
+    <!-- ============================================ -->
+    <canvas id="canvas-3d-background"></canvas>
     
-    // ===== CONFIGURAÇÕES GLOBAIS =====
-    const CONFIG = {
-        preloaderDuration: 2800,
-        cursorLerpFactor: 0.085,
-        particleCount: 150,
-        connectionDistance: 140,
-        memoryPairs: 4,
-        counterSpeed: 45,
-        scrollThreshold: 50
-    };
-    
-    // ===== ESTADO GLOBAL =====
-    const State = {
-        mouseX: 0,
-        mouseY: 0,
-        cursorCoreX: 0,
-        cursorCoreY: 0,
-        cursorOuterX: 0,
-        cursorOuterY: 0,
-        cursorTrailX: 0,
-        cursorTrailY: 0,
-        cursorParticleX: 0,
-        cursorParticleY: 0,
-        isMobile: /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent),
-        isLoading: true,
-        currentTab: 'tab1',
-        themeMode: 'dark',
-        memoryCards: [],
-        memoryFlipped: [],
-        memoryMatched: 0,
-        memoryAttempts: 0,
-        memoryLocked: false,
-        memoryBest: null,
-        memoryLevel: 1,
-        canvasCtx: null,
-        canvasWidth: 0,
-        canvasHeight: 0,
-        particles: [],
-        mouseInfluence: { x: 0, y: 0 },
-        scrollProgress: 0,
-        rafId: null
-    };
-    
-    // ===== ELEMENTOS DOM =====
-    const DOM = {
-        preloader: document.getElementById('preloader-master'),
-        progressFill: document.getElementById('preloader-progress-fill'),
-        percentage: document.getElementById('preloader-percentage'),
-        message: document.getElementById('preloader-message'),
-        particles: document.getElementById('preloader-particles'),
-        
-        cursorCore: document.getElementById('cursor-core'),
-        cursorOuter: document.getElementById('cursor-outer'),
-        cursorTrail: document.getElementById('cursor-trail'),
-        cursorGlow: document.getElementById('cursor-glow'),
-        cursorParticle: document.getElementById('cursor-particle'),
-        
-        canvas: document.getElementById('canvas-3d-background'),
-        
-        header: document.querySelector('.header-premium'),
-        scrollProgressBar: document.getElementById('scrollProgressBar'),
-        mobileMenu: document.getElementById('mobileMenu'),
-        mobileMenuBtn: document.getElementById('mobileMenuBtn'),
-        closeMobileMenu: document.getElementById('closeMobileMenu'),
-        
-        navItems: document.querySelectorAll('.nav-item'),
-        sections: document.querySelectorAll('section[id]'),
-        
-        tabBtns: document.querySelectorAll('.tab-btn-premium'),
-        tabContents: document.querySelectorAll('.tab-content-premium'),
-        
-        counters: document.querySelectorAll('.counter-premium'),
-        
-        memoryBoard: document.getElementById('memory-board'),
-        pairsDisplay: document.getElementById('pairs-matched-display'),
-        attemptsDisplay: document.getElementById('attempts-display'),
-        bestDisplay: document.getElementById('best-score-display'),
-        levelDisplay: document.getElementById('level-display'),
-        progressBar: document.getElementById('game-progress-bar'),
-        progressPercentage: document.getElementById('progress-percentage'),
-        resetGameBtn: document.getElementById('reset-game-btn'),
-        shuffleGameBtn: document.getElementById('shuffle-game-btn'),
-        
-        newsletterForm: document.getElementById('newsletterForm'),
-        themeToggle: document.getElementById('themeToggle'),
-        
-        scrollIndicator: document.querySelector('.scroll-indicator-premium')
-    };
-    
-    // ===== INICIALIZAÇÃO DO AOS =====
-    if (typeof AOS !== 'undefined') {
-        AOS.init({
-            duration: 900,
-            once: false,
-            mirror: true,
-            offset: 100,
-            delay: 0,
-            easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
-            anchorPlacement: 'top-bottom'
-        });
-    }
-    
-    // ===== INICIALIZAÇÃO DO GSAP SCROLLTRIGGER =====
-    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
-        gsap.registerPlugin(ScrollTrigger);
-        
-        // Animação do globo no scroll
-        gsap.to('.globe-3d-premium', {
-            scrollTrigger: {
-                trigger: '.hero-masterpiece',
-                start: 'top top',
-                end: 'bottom top',
-                scrub: 1.5
-            },
-            rotateY: 360,
-            rotateX: 15,
-            scale: 0.7,
-            opacity: 0.5,
-            ease: 'none'
-        });
-        
-        // Animação dos cards de métricas
-        gsap.from('.metric-card-premium', {
-            scrollTrigger: {
-                trigger: '.metrics-grid-premium',
-                start: 'top 80%',
-                end: 'bottom 20%',
-                toggleActions: 'play none none reverse'
-            },
-            y: 60,
-            opacity: 0,
-            duration: 0.8,
-            stagger: 0.1,
-            ease: 'back.out(1.2)'
-        });
-        
-        // Animação dos cases
-        gsap.from('.case-card-premium', {
-            scrollTrigger: {
-                trigger: '.cases-grid',
-                start: 'top 85%',
-                end: 'bottom 15%',
-                toggleActions: 'play none none reverse'
-            },
-            y: 80,
-            opacity: 0,
-            duration: 0.9,
-            stagger: 0.15,
-            ease: 'power3.out'
-        });
-    }
-    
-    // ===== PRELOADER CINEMATOGRÁFICO =====
-    function initPreloader() {
-        if (!DOM.preloader) return;
-        
-        // Criar partículas flutuantes no preloader
-        for (let i = 0; i < 50; i++) {
-            const particle = document.createElement('div');
-            particle.className = 'preloader-particle';
-            particle.style.cssText = `
-                position: absolute;
-                width: ${Math.random() * 5 + 2}px;
-                height: ${particle.style.width};
-                background: hsl(${80 + Math.random() * 40}, 70%, 60%);
-                border-radius: 50%;
-                box-shadow: 0 0 15px #8bc34a;
-                left: ${Math.random() * 100}%;
-                animation: floatParticle ${Math.random() * 10 + 8}s linear infinite;
-                animation-delay: ${Math.random() * 5}s;
-            `;
-            DOM.particles.appendChild(particle);
-        }
-        
-        // Adicionar keyframe dinâmico
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes floatParticle {
-                0% { transform: translateY(100vh) translateX(-20px) rotate(0deg); opacity: 0; }
-                10% { opacity: 0.8; }
-                90% { opacity: 0.8; }
-                100% { transform: translateY(-100vh) translateX(20px) rotate(720deg); opacity: 0; }
-            }
-        `;
-        document.head.appendChild(style);
-        
-        const messages = [
-            'Preparando o solo...',
-            'Plantando as sementes...',
-            'Regenerando ecossistemas...',
-            'Nutrindo a terra...',
-            'Conectando com a natureza...',
-            'Cultivando o futuro...',
-            'Colhendo sustentabilidade...',
-            'Florescendo ideias...',
-            'Germinando inovação...',
-            'Brotando esperança...'
-        ];
-        
-        let progress = 0;
-        let messageIndex = 0;
-        
-        const interval = setInterval(() => {
-            progress += Math.random() * 3.5 + 1.2;
+    <!-- Overlays de textura e efeitos -->
+    <div class="noise-overlay"></div>
+    <div class="grain-overlay"></div>
+    <div class="vignette-overlay"></div>
+    <div class="scanline-overlay"></div>
+    <div class="ambient-light"></div>
+    <div class="ambient-light-2"></div>
+
+    <!-- ============================================ -->
+    <!-- HEADER PREMIUM COM MICROINTERAÇÕES           -->
+    <!-- ============================================ -->
+    <header class="header-premium" data-aos="fade-down" data-aos-duration="1200" data-aos-easing="ease-out-cubic">
+        <div class="header-container">
+            <a href="#" class="logo-premium">
+                <div class="logo-icon-wrapper">
+                    <div class="logo-icon-bg"></div>
+                    <div class="logo-icon-bg-2"></div>
+                    <div class="logo-icon">
+                        <i class="fas fa-tractor"></i>
+                    </div>
+                    <div class="logo-particles">
+                        <span></span><span></span><span></span>
+                    </div>
+                </div>
+                <span class="logo-text-premium">Agro<span>Forte</span></span>
+                <span class="logo-badge">5.0</span>
+            </a>
             
-            if (progress >= 100) {
-                progress = 100;
-                clearInterval(interval);
-                
-                setTimeout(() => {
-                    DOM.preloader.style.opacity = '0';
-                    DOM.preloader.style.visibility = 'hidden';
+            <nav class="nav-premium">
+                <a href="#home" class="nav-item active">
+                    <i class="fas fa-home"></i>
+                    <span>Visão Geral</span>
+                    <span class="nav-indicator"></span>
+                    <span class="nav-hover-effect"></span>
+                </a>
+                <a href="#tecnologias" class="nav-item">
+                    <i class="fas fa-microchip"></i>
+                    <span>Tecnologias</span>
+                    <span class="nav-indicator"></span>
+                    <span class="nav-hover-effect"></span>
+                </a>
+                <a href="#impacto" class="nav-item">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Impacto</span>
+                    <span class="nav-indicator"></span>
+                    <span class="nav-hover-effect"></span>
+                </a>
+                <a href="#jogo" class="nav-item">
+                    <i class="fas fa-gamepad"></i>
+                    <span>Jogo Verde</span>
+                    <span class="nav-indicator"></span>
+                    <span class="nav-hover-effect"></span>
+                </a>
+                <a href="#cases" class="nav-item">
+                    <i class="fas fa-medal"></i>
+                    <span>Cases</span>
+                    <span class="nav-indicator"></span>
+                    <span class="nav-hover-effect"></span>
+                </a>
+                <a href="#contato" class="nav-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>Contato</span>
+                    <span class="nav-indicator"></span>
+                    <span class="nav-hover-effect"></span>
+                </a>
+            </nav>
+            
+            <div class="header-actions-premium">
+                <button class="theme-toggle-premium" id="themeToggle">
+                    <i class="fas fa-leaf"></i>
+                    <span class="toggle-tooltip">Modo Natureza</span>
+                </button>
+                <a href="#contato" class="btn-header">
+                    <i class="fas fa-seedling"></i>
+                    <span>Começar</span>
+                    <span class="btn-glow"></span>
+                </a>
+                <button class="mobile-menu-btn-premium" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Barra de progresso de scroll -->
+        <div class="scroll-progress-bar" id="scrollProgressBar"></div>
+    </header>
+
+    <!-- ============================================ -->
+    <!-- MENU MOBILE PREMIUM                          -->
+    <!-- ============================================ -->
+    <div class="mobile-menu-premium" id="mobileMenu">
+        <div class="mobile-menu-backdrop"></div>
+        <div class="mobile-menu-container">
+            <div class="mobile-menu-header">
+                <div class="mobile-logo">
+                    <i class="fas fa-seedling"></i>
+                    <span>Agro<span>Forte</span></span>
+                </div>
+                <button class="close-mobile-menu" id="closeMobileMenu">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <ul class="mobile-nav">
+                <li><a href="#home"><i class="fas fa-home"></i> Visão Geral</a></li>
+                <li><a href="#tecnologias"><i class="fas fa-microchip"></i> Tecnologias</a></li>
+                <li><a href="#impacto"><i class="fas fa-chart-line"></i> Impacto</a></li>
+                <li><a href="#jogo"><i class="fas fa-gamepad"></i> Jogo Verde</a></li>
+                <li><a href="#cases"><i class="fas fa-medal"></i> Cases de Sucesso</a></li>
+                <li><a href="#contato"><i class="fas fa-envelope"></i> Contato</a></li>
+            </ul>
+            
+            <div class="mobile-menu-footer">
+                <div class="mobile-social">
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-x-twitter"></i></a>
+                </div>
+                <p class="mobile-copyright">© 2025 AgroForte · Sustentabilidade</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- CONTEÚDO PRINCIPAL                           -->
+    <!-- ============================================ -->
+    <main>
+        <!-- ===== HERO SECTION MASTERPIECE ===== -->
+        <section id="home" class="hero-masterpiece">
+            <!-- Elementos decorativos de fundo -->
+            <div class="hero-bg-element hero-bg-1"></div>
+            <div class="hero-bg-element hero-bg-2"></div>
+            <div class="hero-bg-element hero-bg-3"></div>
+            <div class="hero-grid-pattern"></div>
+            
+            <div class="hero-container">
+                <div class="hero-content-master">
+                    <div class="hero-badge-premium" data-aos="fade-right" data-aos-delay="100">
+                        <span class="pulse-icon"></span>
+                        <span class="badge-text">AGRO 5.0 · CARBONO NEGATIVO · ESG · ODS</span>
+                        <span class="badge-icon"><i class="fas fa-certificate"></i></span>
+                    </div>
                     
-                    setTimeout(() => {
-                        DOM.preloader.style.display = 'none';
-                        State.isLoading = false;
-                        startHeroAnimations();
-                        initCountersAnimation();
-                    }, 1400);
-                }, 300);
-            }
-            
-            DOM.progressFill.style.width = progress + '%';
-            DOM.percentage.textContent = Math.round(progress) + '%';
-            
-            const newMessageIndex = Math.floor(progress / 10);
-            if (newMessageIndex < messages.length && newMessageIndex !== messageIndex) {
-                messageIndex = newMessageIndex;
-                DOM.message.textContent = messages[messageIndex];
-                DOM.message.style.animation = 'none';
-                setTimeout(() => DOM.message.style.animation = '', 10);
-            }
-        }, 30);
-    }
-    
-    function startHeroAnimations() {
-        // Animações adicionais pós-carregamento
-        document.querySelectorAll('.title-line-inner').forEach((el, i) => {
-            el.style.animation = 'none';
-            setTimeout(() => {
-                el.style.animation = `titleReveal 1.2s cubic-bezier(0.77,0,0.175,1) ${0.1 + i * 0.15}s forwards`;
-            }, 10);
-        });
-    }
-    
-    // ===== CURSOR CUSTOMIZADO AVANÇADO =====
-    function initCustomCursor() {
-        if (State.isMobile) {
-            document.body.style.cursor = 'auto';
-            if (DOM.cursorCore) DOM.cursorCore.style.display = 'none';
-            if (DOM.cursorOuter) DOM.cursorOuter.style.display = 'none';
-            if (DOM.cursorTrail) DOM.cursorTrail.style.display = 'none';
-            if (DOM.cursorGlow) DOM.cursorGlow.style.display = 'none';
-            if (DOM.cursorParticle) DOM.cursorParticle.style.display = 'none';
-            return;
-        }
-        
-        document.addEventListener('mousemove', onMouseMove);
-        document.addEventListener('mousedown', onMouseDown);
-        document.addEventListener('mouseup', onMouseUp);
-        document.addEventListener('mouseleave', onMouseLeave);
-        document.addEventListener('mouseenter', onMouseEnter);
-        
-        // Hover em elementos interativos
-        const hoverElements = document.querySelectorAll('a, button, .memory-card-premium, .nav-item, .tab-btn-premium, .metric-card-premium, .case-card-premium, .social-link, .orbit-item');
-        hoverElements.forEach(el => {
-            el.addEventListener('mouseenter', () => {
-                document.body.classList.add('cursor-hover');
-                createCursorParticles(5);
-            });
-            el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
-        });
-        
-        animateCursor();
-    }
-    
-    function onMouseMove(e) {
-        State.mouseX = e.clientX;
-        State.mouseY = e.clientY;
-        
-        if (DOM.cursorCore) {
-            DOM.cursorCore.style.left = State.mouseX + 'px';
-            DOM.cursorCore.style.top = State.mouseY + 'px';
-        }
-        
-        if (DOM.cursorGlow) {
-            DOM.cursorGlow.style.left = State.mouseX + 'px';
-            DOM.cursorGlow.style.top = State.mouseY + 'px';
-        }
-        
-        // Atualizar influência do mouse para o canvas
-        if (State.canvasWidth && State.canvasHeight) {
-            State.mouseInfluence.x = (e.clientX / State.canvasWidth) * 2 - 1;
-            State.mouseInfluence.y = (e.clientY / State.canvasHeight) * 2 - 1;
-        }
-    }
-    
-    function onMouseDown() {
-        document.body.classList.add('cursor-click');
-        createCursorParticles(8);
-    }
-    
-    function onMouseUp() {
-        document.body.classList.remove('cursor-click');
-    }
-    
-    function onMouseLeave() {
-        if (DOM.cursorCore) DOM.cursorCore.style.opacity = '0';
-        if (DOM.cursorOuter) DOM.cursorOuter.style.opacity = '0';
-        if (DOM.cursorTrail) DOM.cursorTrail.style.opacity = '0';
-        if (DOM.cursorGlow) DOM.cursorGlow.style.opacity = '0';
-    }
-    
-    function onMouseEnter() {
-        if (DOM.cursorCore) DOM.cursorCore.style.opacity = '1';
-        if (DOM.cursorOuter) DOM.cursorOuter.style.opacity = '1';
-        if (DOM.cursorTrail) DOM.cursorTrail.style.opacity = '1';
-        if (DOM.cursorGlow) DOM.cursorGlow.style.opacity = '1';
-    }
-    
-    function createCursorParticles(count) {
-        if (!DOM.cursorParticle) return;
-        
-        for (let i = 0; i < count; i++) {
-            const particle = DOM.cursorParticle.cloneNode();
-            particle.style.opacity = '1';
-            particle.style.left = State.mouseX + (Math.random() - 0.5) * 30 + 'px';
-            particle.style.top = State.mouseY + (Math.random() - 0.5) * 30 + 'px';
-            document.body.appendChild(particle);
-            
-            setTimeout(() => particle.remove(), 500);
-        }
-    }
-    
-    function animateCursor() {
-        if (State.isMobile) return;
-        
-        // Outer ring com lag suave
-        State.cursorOuterX += (State.mouseX - State.cursorOuterX) * CONFIG.cursorLerpFactor;
-        State.cursorOuterY += (State.mouseY - State.cursorOuterY) * CONFIG.cursorLerpFactor;
-        
-        if (DOM.cursorOuter) {
-            DOM.cursorOuter.style.left = State.cursorOuterX + 'px';
-            DOM.cursorOuter.style.top = State.cursorOuterY + 'px';
-        }
-        
-        // Trail com mais lag
-        State.cursorTrailX += (State.mouseX - State.cursorTrailX) * (CONFIG.cursorLerpFactor * 0.35);
-        State.cursorTrailY += (State.mouseY - State.cursorTrailY) * (CONFIG.cursorLerpFactor * 0.35);
-        
-        if (DOM.cursorTrail) {
-            DOM.cursorTrail.style.left = State.cursorTrailX + 'px';
-            DOM.cursorTrail.style.top = State.cursorTrailY + 'px';
-        }
-        
-        requestAnimationFrame(animateCursor);
-    }
-    
-    // ===== CANVAS 3D BACKGROUND COM PARTÍCULAS =====
-    function initCanvas3D() {
-        if (!DOM.canvas) return;
-        
-        const ctx = DOM.canvas.getContext('2d');
-        State.canvasCtx = ctx;
-        
-        function resizeCanvas() {
-            State.canvasWidth = window.innerWidth;
-            State.canvasHeight = window.innerHeight;
-            DOM.canvas.width = State.canvasWidth;
-            DOM.canvas.height = State.canvasHeight;
-            initParticles();
-        }
-        
-        function initParticles() {
-            State.particles = [];
-            for (let i = 0; i < CONFIG.particleCount; i++) {
-                State.particles.push({
-                    x: Math.random() * State.canvasWidth,
-                    y: Math.random() * State.canvasHeight,
-                    vx: (Math.random() - 0.5) * 0.25,
-                    vy: (Math.random() - 0.5) * 0.25,
-                    size: Math.random() * 3.5 + 1.5,
-                    baseSize: Math.random() * 3.5 + 1.5,
-                    color: `hsla(${80 + Math.random() * 40}, ${60 + Math.random() * 30}%, ${50 + Math.random() * 30}%, ${0.12 + Math.random() * 0.2})`,
-                    angle: Math.random() * Math.PI * 2,
-                    angleSpeed: (Math.random() - 0.5) * 0.02
-                });
-            }
-        }
-        
-        function drawBackground() {
-            if (!State.canvasCtx || !State.canvasWidth || !State.canvasHeight) return;
-            
-            const ctx = State.canvasCtx;
-            
-            // Limpar canvas com gradiente
-            const gradient = ctx.createRadialGradient(
-                State.canvasWidth / 2 + State.mouseInfluence.x * 80,
-                State.canvasHeight / 2 + State.mouseInfluence.y * 80,
-                0,
-                State.canvasWidth / 2,
-                State.canvasHeight / 2,
-                Math.max(State.canvasWidth, State.canvasHeight) / 1.3
-            );
-            gradient.addColorStop(0, '#030a03');
-            gradient.addColorStop(0.5, '#061406');
-            gradient.addColorStop(1, '#010301');
-            
-            ctx.fillStyle = gradient;
-            ctx.fillRect(0, 0, State.canvasWidth, State.canvasHeight);
-            
-            // Atualizar e desenhar partículas
-            State.particles.forEach(p => {
-                // Influência do mouse
-                const dx = State.mouseX - p.x;
-                const dy = State.mouseY - p.y;
-                const dist = Math.sqrt(dx * dx + dy * dy);
-                
-                if (dist < 180) {
-                    const force = (180 - dist) / 180;
-                    p.vx -= (dx / dist) * force * 0.04;
-                    p.vy -= (dy / dist) * force * 0.04;
-                    p.size = p.baseSize + force * 2.5;
-                } else {
-                    p.size = p.baseSize;
-                }
-                
-                // Movimento browniano
-                p.vx += (Math.random() - 0.5) * 0.015;
-                p.vy += (Math.random() - 0.5) * 0.015;
-                
-                // Amortecimento
-                p.vx *= 0.985;
-                p.vy *= 0.985;
-                
-                // Atualizar posição
-                p.x += p.vx;
-                p.y += p.vy;
-                p.angle += p.angleSpeed;
-                
-                // Limites com wrap-around suave
-                if (p.x < -20) p.x = State.canvasWidth + 20;
-                if (p.x > State.canvasWidth + 20) p.x = -20;
-                if (p.y < -20) p.y = State.canvasHeight + 20;
-                if (p.y > State.canvasHeight + 20) p.y = -20;
-                
-                // Limitar velocidade
-                const maxSpeed = 0.6;
-                const speed = Math.sqrt(p.vx * p.vx + p.vy * p.vy);
-                if (speed > maxSpeed) {
-                    p.vx = (p.vx / speed) * maxSpeed;
-                    p.vy = (p.vy / speed) * maxSpeed;
-                }
-                
-                // Desenhar partícula com glow
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-                ctx.fillStyle = p.color;
-                ctx.shadowColor = '#8bc34a';
-                ctx.shadowBlur = 12;
-                ctx.fill();
-            });
-            
-            // Desenhar conexões
-            ctx.shadowBlur = 0;
-            ctx.lineWidth = 0.6;
-            
-            for (let i = 0; i < State.particles.length; i++) {
-                for (let j = i + 1; j < State.particles.length; j++) {
-                    const p1 = State.particles[i];
-                    const p2 = State.particles[j];
-                    const dx = p1.x - p2.x;
-                    const dy = p1.y - p2.y;
-                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    <h1 class="hero-title-master">
+                        <span class="title-line">
+                            <span class="title-line-inner" data-aos="fade-up" data-aos-delay="200">Equilíbrio</span>
+                        </span>
+                        <span class="title-line">
+                            <span class="title-line-inner" data-aos="fade-up" data-aos-delay="350">entre produção</span>
+                        </span>
+                        <span class="title-line">
+                            <span class="title-line-inner title-gradient" data-aos="fade-up" data-aos-delay="500">e meio ambiente</span>
+                        </span>
+                    </h1>
                     
-                    if (dist < CONFIG.connectionDistance) {
-                        const opacity = (1 - dist / CONFIG.connectionDistance) * 0.12;
-                        ctx.beginPath();
-                        ctx.strokeStyle = `rgba(139, 195, 74, ${opacity})`;
-                        ctx.moveTo(p1.x, p1.y);
-                        ctx.lineTo(p2.x, p2.y);
-                        ctx.stroke();
-                    }
-                }
-            }
-            
-            requestAnimationFrame(drawBackground);
-        }
-        
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
-        drawBackground();
-    }
-    
-    // ===== JOGO DA MEMÓRIA 3D AVANÇADO =====
-    const MemoryGame = {
-        icons: ['🌱', '🌽', '💧', '☀️', '🌿', '🍃', '🌾', '🌸', '🌻', '🍎'],
-        deck: [],
-        cards: [],
-        flippedCards: [],
-        matchedPairs: 0,
-        attempts: 0,
-        locked: false,
-        level: 1,
-        
-        init() {
-            this.loadBestScore();
-            this.createDeck();
-            this.render();
-            this.attachEvents();
-            this.updateProgress();
-        },
-        
-        loadBestScore() {
-            const saved = localStorage.getItem('agroforte_memory_best_v2');
-            State.memoryBest = saved ? parseInt(saved) : null;
-            if (DOM.bestDisplay) {
-                DOM.bestDisplay.textContent = State.memoryBest || '—';
-            }
-        },
-        
-        saveBestScore(score) {
-            if (!State.memoryBest || score < State.memoryBest) {
-                State.memoryBest = score;
-                localStorage.setItem('agroforte_memory_best_v2', score);
-                DOM.bestDisplay.textContent = score;
-                return true;
-            }
-            return false;
-        },
-        
-        createDeck() {
-            const pairCount = 4 + Math.floor((this.level - 1) / 2);
-            const selectedIcons = this.icons.slice(0, pairCount);
-            this.deck = [...selectedIcons, ...selectedIcons];
-            
-            // Adicionar carta coringa se necessário para grid 3x3
-            if (this.deck.length < 9) {
-                this.deck.push('🌾');
-            }
-            
-            this.shuffle();
-        },
-        
-        shuffle() {
-            for (let i = this.deck.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [this.deck[i], this.deck[j]] = [this.deck[j], this.deck[i]];
-            }
-            
-            this.cards = this.deck.map((value, index) => ({
-                id: index,
-                value: value,
-                matched: false,
-                flipped: false,
-                element: null
-            }));
-        },
-        
-        render() {
-            if (!DOM.memoryBoard) return;
-            
-            DOM.memoryBoard.innerHTML = '';
-            
-            this.cards.forEach((card, index) => {
-                const cardEl = document.createElement('div');
-                cardEl.className = 'memory-card-premium';
-                if (card.matched) cardEl.classList.add('matched');
-                if (card.flipped) cardEl.classList.add('flipped');
-                
-                const content = document.createElement('div');
-                content.className = 'card-content';
-                content.textContent = card.value;
-                
-                cardEl.appendChild(content);
-                cardEl.dataset.index = index;
-                
-                // Efeito 3D no hover
-                cardEl.addEventListener('mousemove', (e) => {
-                    if (card.matched || card.flipped) return;
-                    const rect = cardEl.getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    const y = e.clientY - rect.top;
-                    const centerX = rect.width / 2;
-                    const centerY = rect.height / 2;
-                    const rotateX = (y - centerY) / 8;
-                    const rotateY = (centerX - x) / 8;
-                    cardEl.style.transform = `perspective(500px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(0.98)`;
-                });
-                
-                cardEl.addEventListener('mouseleave', () => {
-                    if (!card.matched && !card.flipped) {
-                        cardEl.style.transform = '';
-                    }
-                });
-                
-                cardEl.addEventListener('click', (e) => this.handleClick(e, index));
-                
-                DOM.memoryBoard.appendChild(cardEl);
-                card.element = cardEl;
-            });
-            
-            this.updateStats();
-            this.updateProgress();
-        },
-        
-        handleClick(e, index) {
-            if (this.locked) return;
-            
-            const card = this.cards[index];
-            if (card.matched || card.flipped) return;
-            if (this.flippedCards.length === 2) return;
-            
-            // Feedback tátil visual
-            const cardEl = e.currentTarget;
-            cardEl.style.transform = 'scale(0.92)';
-            setTimeout(() => {
-                if (cardEl && !card.matched) {
-                    cardEl.style.transform = '';
-                }
-            }, 150);
-            
-            card.flipped = true;
-            this.flippedCards.push(index);
-            this.render();
-            
-            if (this.flippedCards.length === 2) {
-                this.attempts++;
-                this.updateStats();
-                this.checkMatch();
-            }
-        },
-        
-        checkMatch() {
-            this.locked = true;
-            
-            const [idx1, idx2] = this.flippedCards;
-            const card1 = this.cards[idx1];
-            const card2 = this.cards[idx2];
-            
-            const isMatch = card1.value === card2.value && card1.value !== '🌾';
-            
-            if (isMatch) {
-                card1.matched = true;
-                card2.matched = true;
-                this.matchedPairs++;
-                this.flippedCards = [];
-                this.locked = false;
-                this.render();
-                
-                // Efeito de partículas no match
-                this.celebrateMatch(card1.element, card2.element);
-                
-                const totalPairs = Math.floor(this.deck.filter(c => c !== '🌾').length / 2);
-                
-                if (this.matchedPairs === totalPairs) {
-                    const isNewRecord = this.saveBestScore(this.attempts);
+                    <p class="hero-description-master" data-aos="fade-up" data-aos-delay="650">
+                        O futuro da agricultura é regenerativo, inteligente e conectado. 
+                        Unimos <span class="highlight">inteligência artificial</span>, 
+                        <span class="highlight">biotecnologia de ponta</span> e 
+                        <span class="highlight">práticas ancestrais</span> para alimentar 
+                        o mundo sem esgotar o planeta.
+                    </p>
                     
-                    setTimeout(() => {
-                        let message = `🎉 Parabéns! ${this.attempts} tentativas! 🌍`;
-                        if (isNewRecord) message = `🏆 NOVO RECORDE! ${this.attempts} tentativas! 🏆`;
-                        
-                        this.showNotification(message, 'success');
-                        
-                        // Avançar de nível
-                        if (this.level < 3) {
-                            this.level++;
-                            if (DOM.levelDisplay) DOM.levelDisplay.textContent = this.level;
-                        }
-                    }, 300);
-                }
-            } else {
-                setTimeout(() => {
-                    card1.flipped = false;
-                    card2.flipped = false;
-                    this.flippedCards = [];
-                    this.locked = false;
-                    this.render();
-                }, 700);
-            }
-        },
-        
-        celebrateMatch(el1, el2) {
-            [el1, el2].forEach(el => {
-                // Criar partículas
-                for (let i = 0; i < 6; i++) {
-                    const particle = document.createElement('div');
-                    particle.style.cssText = `
-                        position: absolute;
-                        width: 8px;
-                        height: 8px;
-                        background: #cddc39;
-                        border-radius: 50%;
-                        left: 50%;
-                        top: 50%;
-                        pointer-events: none;
-                        z-index: 100;
-                        box-shadow: 0 0 15px #8bc34a;
-                        animation: matchParticle 0.6s ease-out forwards;
-                        transform: translate(-50%, -50%) rotate(${i * 60}deg) translateY(-20px);
-                    `;
-                    el.appendChild(particle);
-                    setTimeout(() => particle.remove(), 600);
-                }
-            });
-            
-            // Adicionar estilo da animação se não existir
-            if (!document.getElementById('match-particle-style')) {
-                const style = document.createElement('style');
-                style.id = 'match-particle-style';
-                style.textContent = `
-                    @keyframes matchParticle {
-                        0% { opacity: 1; transform: translate(-50%, -50%) rotate(0deg) translateY(0); }
-                        100% { opacity: 0; transform: translate(-50%, -50%) rotate(0deg) translateY(-40px); }
-                    }
-                `;
-                document.head.appendChild(style);
-            }
-        },
-        
-        updateStats() {
-            const totalPairs = Math.floor(this.deck.filter(c => c !== '🌾').length / 2);
-            if (DOM.pairsDisplay) {
-                DOM.pairsDisplay.textContent = `${this.matchedPairs}/${totalPairs}`;
-            }
-            if (DOM.attemptsDisplay) {
-                DOM.attemptsDisplay.textContent = this.attempts;
-            }
-            if (DOM.levelDisplay) {
-                DOM.levelDisplay.textContent = this.level;
-            }
-        },
-        
-        updateProgress() {
-            const totalPairs = Math.floor(this.deck.filter(c => c !== '🌾').length / 2);
-            const progress = totalPairs > 0 ? (this.matchedPairs / totalPairs) * 100 : 0;
-            
-            if (DOM.progressBar) {
-                DOM.progressBar.style.width = progress + '%';
-            }
-            if (DOM.progressPercentage) {
-                DOM.progressPercentage.textContent = Math.round(progress) + '%';
-            }
-        },
-        
-        reset() {
-            this.matchedPairs = 0;
-            this.attempts = 0;
-            this.flippedCards = [];
-            this.locked = false;
-            this.level = 1;
-            this.createDeck();
-            this.render();
-            if (DOM.levelDisplay) DOM.levelDisplay.textContent = '1';
-            this.showNotification('🔄 Jogo reiniciado! Boa sorte!', 'info');
-        },
-        
-        shuffleOnly() {
-            if (this.locked) return;
-            this.flippedCards = [];
-            this.locked = false;
-            
-            // Resetar flipped cards
-            this.cards.forEach(c => { if (!c.matched) c.flipped = false; });
-            
-            // Embaralhar apenas as não combinadas
-            const unmatched = this.cards.filter(c => !c.matched);
-            for (let i = unmatched.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [unmatched[i].value, unmatched[j].value] = [unmatched[j].value, unmatched[i].value];
-            }
-            
-            this.render();
-            this.showNotification('🃏 Cartas embaralhadas!', 'info');
-        },
-        
-        showNotification(message, type = 'info') {
-            const notification = document.createElement('div');
-            notification.style.cssText = `
-                position: fixed;
-                top: 120px;
-                right: 30px;
-                background: ${type === 'success' ? 'linear-gradient(135deg, #2e7d32, #1b5e20)' : 'linear-gradient(135deg, #1b5e20, #0a1f0a)'};
-                color: white;
-                padding: 16px 28px;
-                border-radius: 50px;
-                font-weight: 600;
-                box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 25px #4caf50;
-                border: 1px solid #8bc34a;
-                z-index: 10000;
-                animation: slideInRight 0.4s ease;
-                backdrop-filter: blur(15px);
-                font-size: 0.95rem;
-            `;
-            notification.textContent = message;
-            
-            document.body.appendChild(notification);
-            
-            setTimeout(() => {
-                notification.style.animation = 'slideOutRight 0.4s ease';
-                setTimeout(() => notification.remove(), 400);
-            }, 2800);
-        },
-        
-        attachEvents() {
-            if (DOM.resetGameBtn) {
-                DOM.resetGameBtn.addEventListener('click', () => this.reset());
-            }
-            if (DOM.shuffleGameBtn) {
-                DOM.shuffleGameBtn.addEventListener('click', () => this.shuffleOnly());
-            }
-        }
-    };
-    
-    // Adicionar estilos de animação para notificações
-    const notificationStyle = document.createElement('style');
-    notificationStyle.textContent = `
-        @keyframes slideInRight {
-            from { opacity: 0; transform: translateX(100px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-        @keyframes slideOutRight {
-            from { opacity: 1; transform: translateX(0); }
-            to { opacity: 0; transform: translateX(100px); }
-        }
-    `;
-    document.head.appendChild(notificationStyle);
-    
-    // ===== SISTEMA DE TABS =====
-    function initTabs() {
-        DOM.tabBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const tabId = btn.getAttribute('data-tab');
-                
-                DOM.tabBtns.forEach(b => b.classList.remove('active'));
-                DOM.tabContents.forEach(c => c.classList.remove('active'));
-                
-                btn.classList.add('active');
-                const targetTab = document.getElementById(tabId);
-                if (targetTab) {
-                    targetTab.classList.add('active');
-                    State.currentTab = tabId;
-                }
-            });
-        });
-    }
-    
-    // ===== CONTADORES ANIMADOS =====
-    function initCountersAnimation() {
-        const animateCounter = (counter) => {
-            const target = parseInt(counter.getAttribute('data-target'));
-            const suffix = counter.textContent.replace(/[0-9.-]/g, '').trim();
-            let current = 0;
-            const increment = target / CONFIG.counterSpeed;
-            
-            const timer = setInterval(() => {
-                current += increment;
-                if (current >= target) {
-                    counter.textContent = target + (suffix ? ' ' + suffix : '');
-                    clearInterval(timer);
-                } else {
-                    counter.textContent = Math.round(current) + (suffix ? ' ' + suffix : '');
-                }
-            }, 20);
-        };
-        
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const counter = entry.target;
-                    if (!counter.classList.contains('counted')) {
-                        counter.classList.add('counted');
-                        animateCounter(counter);
-                    }
-                }
-            });
-        }, { threshold: 0.3 });
-        
-        DOM.counters.forEach(counter => observer.observe(counter));
-    }
-    
-    // ===== NAVEGAÇÃO SUAVE E ATIVA =====
-    function initNavigation() {
-        // Smooth scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                const href = this.getAttribute('href');
-                if (href === '#') return;
-                
-                e.preventDefault();
-                const target = document.querySelector(href);
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
+                    <div class="hero-cta-group-master" data-aos="fade-up" data-aos-delay="800">
+                        <a href="#jogo" class="btn-primary-master">
+                            <span>Jogar Memória Verde</span>
+                            <i class="fas fa-arrow-right"></i>
+                            <span class="btn-shine"></span>
+                        </a>
+                        <a href="#impacto" class="btn-outline-master">
+                            <span>Descobrir Impacto</span>
+                            <i class="fas fa-chart-simple"></i>
+                        </a>
+                        <a href="#cases" class="btn-ghost-master">
+                            <span>Ver Cases</span>
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                    </div>
                     
-                    // Fechar menu mobile
-                    if (DOM.mobileMenu) {
-                        DOM.mobileMenu.classList.remove('active');
-                    }
-                }
-            });
-        });
-        
-        // Atualizar link ativo e barra de progresso
-        window.addEventListener('scroll', () => {
-            // Barra de progresso
-            const scrollTop = window.scrollY;
-            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-            const scrollPercent = (scrollTop / docHeight) * 100;
-            
-            if (DOM.scrollProgressBar) {
-                DOM.scrollProgressBar.style.width = scrollPercent + '%';
-            }
-            
-            // Link ativo
-            let current = '';
-            
-            DOM.sections.forEach(section => {
-                const sectionTop = section.offsetTop - 200;
-                const sectionBottom = sectionTop + section.offsetHeight;
+                    <div class="hero-stats-master" data-aos="fade-up" data-aos-delay="1000">
+                        <div class="stat-item-master">
+                            <div class="stat-icon"><i class="fas fa-cloud-rain"></i></div>
+                            <div class="stat-content">
+                                <div class="stat-value-master">
+                                    <span class="counter-premium" data-target="42">0</span>
+                                    <span class="stat-unit">%</span>
+                                </div>
+                                <div class="stat-label-master">Redução CO₂</div>
+                                <div class="stat-trend up"><i class="fas fa-arrow-up"></i> 12% vs 2024</div>
+                            </div>
+                        </div>
+                        <div class="stat-item-master">
+                            <div class="stat-icon"><i class="fas fa-leaf"></i></div>
+                            <div class="stat-content">
+                                <div class="stat-value-master">
+                                    <span class="counter-premium" data-target="65">0</span>
+                                    <span class="stat-unit">%</span>
+                                </div>
+                                <div class="stat-label-master">Biodiversidade</div>
+                                <div class="stat-trend up"><i class="fas fa-arrow-up"></i> 18% ao ano</div>
+                            </div>
+                        </div>
+                        <div class="stat-item-master">
+                            <div class="stat-icon"><i class="fas fa-water"></i></div>
+                            <div class="stat-content">
+                                <div class="stat-value-master">
+                                    <span class="counter-premium" data-target="98">0</span>
+                                    <span class="stat-unit">%</span>
+                                </div>
+                                <div class="stat-label-master">Água reutilizada</div>
+                                <div class="stat-trend up"><i class="fas fa-arrow-up"></i> 5% vs 2024</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 
-                if (scrollY >= sectionTop && scrollY < sectionBottom) {
-                    current = section.getAttribute('id');
-                }
-            });
+                <div class="hero-visual-master" data-aos="fade-left" data-aos-delay="300">
+                    <div class="globe-3d-premium">
+                        <div class="globe-core"></div>
+                        <div class="globe-core-inner"></div>
+                        <div class="globe-rings"></div>
+                        <div class="globe-rings-2"></div>
+                        <div class="globe-atmosphere"></div>
+                        <div class="floating-orbit">
+                            <div class="orbit-item" data-speed="1"><i class="fas fa-leaf"></i></div>
+                            <div class="orbit-item" data-speed="1.5"><i class="fas fa-seedling"></i></div>
+                            <div class="orbit-item" data-speed="0.8"><i class="fas fa-tint"></i></div>
+                            <div class="orbit-item" data-speed="1.2"><i class="fas fa-sun"></i></div>
+                            <div class="orbit-item" data-speed="0.9"><i class="fas fa-tree"></i></div>
+                            <div class="orbit-item" data-speed="1.3"><i class="fas fa-cloud-rain"></i></div>
+                        </div>
+                        <div class="globe-particles">
+                            <span></span><span></span><span></span><span></span><span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
             
-            DOM.navItems.forEach(link => {
-                link.classList.remove('active');
-                const href = link.getAttribute('href');
-                if (href && href.substring(1) === current) {
-                    link.classList.add('active');
-                }
-            });
+            <div class="scroll-indicator-premium">
+                <span class="scroll-text">Role para explorar</span>
+                <div class="scroll-icon-wrapper">
+                    <i class="fas fa-chevron-down"></i>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="scroll-line"></div>
+            </div>
+        </section>
+
+        <!-- ===== SEÇÃO TECNOLOGIAS COM TABS AVANÇADAS ===== -->
+        <section id="tecnologias" class="technologies-premium">
+            <div class="section-header-premium" data-aos="fade-up">
+                <span class="section-subtitle-premium">
+                    <i class="fas fa-flask"></i>
+                    Inovação no Campo
+                    <i class="fas fa-microchip"></i>
+                </span>
+                <h2 class="section-title-premium">
+                    Tecnologias que 
+                    <span class="title-gradient">Transformam</span>
+                    <span class="title-decoration">o Agro</span>
+                </h2>
+                <p class="section-description-premium">
+                    Soluções integradas que maximizam a produtividade enquanto 
+                    regeneram ecossistemas inteiros. Da semente à colheita, 
+                    tecnologia e natureza em perfeita harmonia.
+                </p>
+            </div>
             
-            // Header efeito
-            if (DOM.header) {
-                if (scrollY > 50) {
-                    DOM.header.style.background = 'rgba(3, 12, 3, 0.45)';
-                    DOM.header.style.backdropFilter = 'blur(35px) saturate(180%)';
-                } else {
-                    DOM.header.style.background = 'rgba(3, 12, 3, 0.3)';
-                }
-            }
+            <div class="tabs-premium-container">
+                <div class="tabs-nav-premium" data-aos="fade-up" data-aos-delay="100">
+                    <button class="tab-btn-premium active" data-tab="tab1">
+                        <i class="fas fa-satellite"></i>
+                        <span>Monitoramento</span>
+                        <span class="tab-badge">IA</span>
+                    </button>
+                    <button class="tab-btn-premium" data-tab="tab2">
+                        <i class="fas fa-robot"></i>
+                        <span>Automação</span>
+                        <span class="tab-badge">Robótica</span>
+                    </button>
+                    <button class="tab-btn-premium" data-tab="tab3">
+                        <i class="fas fa-dna"></i>
+                        <span>Biotecnologia</span>
+                        <span class="tab-badge">Bio</span>
+                    </button>
+                    <button class="tab-btn-premium" data-tab="tab4">
+                        <i class="fas fa-water"></i>
+                        <span>Irrigação 4.0</span>
+                        <span class="tab-badge">IoT</span>
+                    </button>
+                </div>
+                
+                <!-- Tab 1 -->
+                <div class="tab-content-premium active" id="tab1">
+                    <div class="tab-grid-premium">
+                        <div class="tab-info-premium" data-aos="fade-right">
+                            <div class="tab-icon"><i class="fas fa-satellite"></i></div>
+                            <h3>Satélites e Drones de Precisão</h3>
+                            <div class="tab-tags">
+                                <span>NDVI</span>
+                                <span>Multiespectral</span>
+                                <span>Machine Learning</span>
+                            </div>
+                            <p>Monitoramento em tempo real da saúde da lavoura, índice de vegetação (NDVI) e estresse hídrico. Nossa IA processa imagens de satélite e drones para detectar problemas antes que afetem a produtividade.</p>
+                            <ul class="feature-list-premium">
+                                <li><i class="fas fa-check-circle"></i> Mapeamento multiespectral de alta resolução (5cm/pixel)</li>
+                                <li><i class="fas fa-check-circle"></i> Alertas preditivos de pragas e doenças com 95% de precisão</li>
+                                <li><i class="fas fa-check-circle"></i> Aplicação localizada de defensivos biológicos (redução de 40%)</li>
+                                <li><i class="fas fa-check-circle"></i> Análise preditiva de safra com IA (precisão de 92%)</li>
+                            </ul>
+                            <div class="tab-stats-mini">
+                                <div class="mini-stat">
+                                    <span class="mini-value">30%</span>
+                                    <span class="mini-label">Redução de insumos</span>
+                                </div>
+                                <div class="mini-stat">
+                                    <span class="mini-value">24/7</span>
+                                    <span class="mini-label">Monitoramento</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-visual-premium" data-aos="fade-left">
+                            <div class="visual-wrapper">
+                                <img src="https://images.pexels.com/photos/2166711/pexels-photo-2166711.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Drone agrícola">
+                                <div class="visual-overlay"></div>
+                                <div class="visual-badge">
+                                    <i class="fas fa-eye"></i>
+                                    <span>Visão Computacional</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tab 2 -->
+                <div class="tab-content-premium" id="tab2">
+                    <div class="tab-grid-premium">
+                        <div class="tab-info-premium" data-aos="fade-right">
+                            <div class="tab-icon"><i class="fas fa-robot"></i></div>
+                            <h3>Robôs Colaborativos Autônomos</h3>
+                            <div class="tab-tags">
+                                <span>SLAM</span>
+                                <span>ROS2</span>
+                                <span>Computer Vision</span>
+                            </div>
+                            <p>Máquinas inteligentes que plantam, capinam e colhem com precisão milimétrica 24 horas por dia. Eliminam a necessidade de herbicidas e reduzem drasticamente a compactação do solo.</p>
+                            <ul class="feature-list-premium">
+                                <li><i class="fas fa-check-circle"></i> Plantio direto sem revolvimento do solo (preserva microbiota)</li>
+                                <li><i class="fas fa-check-circle"></i> Capina mecânica com visão computacional (99% de precisão)</li>
+                                <li><i class="fas fa-check-circle"></i> Colheita seletiva no ponto ideal de maturação</li>
+                                <li><i class="fas fa-check-circle"></i> Redução de 90% no uso de herbicidas</li>
+                            </ul>
+                            <div class="tab-stats-mini">
+                                <div class="mini-stat">
+                                    <span class="mini-value">90%</span>
+                                    <span class="mini-label">Menos herbicidas</span>
+                                </div>
+                                <div class="mini-stat">
+                                    <span class="mini-value">24h</span>
+                                    <span class="mini-label">Operação contínua</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-visual-premium" data-aos="fade-left">
+                            <div class="visual-wrapper">
+                                <img src="https://images.pexels.com/photos/1595104/pexels-photo-1595104.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Robô agrícola">
+                                <div class="visual-overlay"></div>
+                                <div class="visual-badge">
+                                    <i class="fas fa-microchip"></i>
+                                    <span>IA Embarcada</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tab 3 -->
+                <div class="tab-content-premium" id="tab3">
+                    <div class="tab-grid-premium">
+                        <div class="tab-info-premium" data-aos="fade-right">
+                            <div class="tab-icon"><i class="fas fa-dna"></i></div>
+                            <h3>Bioinsumos e Microbioma do Solo</h3>
+                            <div class="tab-tags">
+                                <span>Bactérias</span>
+                                <span>Fungos</span>
+                                <span>Biocontrole</span>
+                            </div>
+                            <p>Utilização de microrganismos benéficos para substituir fertilizantes químicos e regenerar o microbioma do solo. Uma abordagem que aumenta a produtividade enquanto restaura a saúde do ecossistema.</p>
+                            <ul class="feature-list-premium">
+                                <li><i class="fas fa-check-circle"></i> Bactérias fixadoras de nitrogênio atmosférico (Azospirillum, Rhizobium)</li>
+                                <li><i class="fas fa-check-circle"></i> Fungos micorrízicos que ampliam absorção de nutrientes em 700%</li>
+                                <li><i class="fas fa-check-circle"></i> Controle biológico de pragas e nematoides (Trichoderma, Bacillus)</li>
+                                <li><i class="fas fa-check-circle"></i> Aumento de 40% na matéria orgânica do solo em 3 anos</li>
+                            </ul>
+                            <div class="tab-stats-mini">
+                                <div class="mini-stat">
+                                    <span class="mini-value">100%</span>
+                                    <span class="mini-label">Orgânico</span>
+                                </div>
+                                <div class="mini-stat">
+                                    <span class="mini-value">+40%</span>
+                                    <span class="mini-label">Matéria orgânica</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-visual-premium" data-aos="fade-left">
+                            <div class="visual-wrapper">
+                                <img src="https://images.pexels.com/photos/1002703/pexels-photo-1002703.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Laboratório biotecnologia">
+                                <div class="visual-overlay"></div>
+                                <div class="visual-badge">
+                                    <i class="fas fa-flask"></i>
+                                    <span>Biotecnologia</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tab 4 -->
+                <div class="tab-content-premium" id="tab4">
+                    <div class="tab-grid-premium">
+                        <div class="tab-info-premium" data-aos="fade-right">
+                            <div class="tab-icon"><i class="fas fa-water"></i></div>
+                            <h3>Irrigação Inteligente com IoT</h3>
+                            <div class="tab-tags">
+                                <span>IoT</span>
+                                <span>Sensores</span>
+                                <span>Big Data</span>
+                            </div>
+                            <p>Sensores de umidade do solo conectados à internet que acionam a irrigação apenas quando e onde necessário, com água de reuso tratada por energia solar.</p>
+                            <ul class="feature-list-premium">
+                                <li><i class="fas fa-check-circle"></i> Economia de até 60% de água com irrigação por gotejamento de precisão</li>
+                                <li><i class="fas fa-check-circle"></i> Fertirrigação inteligente com biofertilizantes líquidos</li>
+                                <li><i class="fas fa-check-circle"></i> Previsão meteorológica integrada por IA (precisão de 94%)</li>
+                                <li><i class="fas fa-check-circle"></i> Monitoramento em tempo real via aplicativo mobile</li>
+                            </ul>
+                            <div class="tab-stats-mini">
+                                <div class="mini-stat">
+                                    <span class="mini-value">60%</span>
+                                    <span class="mini-label">Economia de água</span>
+                                </div>
+                                <div class="mini-stat">
+                                    <span class="mini-value">+30%</span>
+                                    <span class="mini-label">Produtividade</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-visual-premium" data-aos="fade-left">
+                            <div class="visual-wrapper">
+                                <img src="https://images.pexels.com/photos/2131784/pexels-photo-2131784.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Irrigação inteligente">
+                                <div class="visual-overlay"></div>
+                                <div class="visual-badge">
+                                    <i class="fas fa-wifi"></i>
+                                    <span>IoT Conectado</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== SEÇÃO IMPACTO COM MÉTRICAS AVANÇADAS ===== -->
+        <section id="impacto" class="impact-premium">
+            <div class="impact-bg-pattern"></div>
             
-            // Esconder scroll indicator
-            if (DOM.scrollIndicator && scrollY > 150) {
-                DOM.scrollIndicator.style.opacity = '0';
-                DOM.scrollIndicator.style.pointerEvents = 'none';
-            } else if (DOM.scrollIndicator) {
-                DOM.scrollIndicator.style.opacity = '1';
-            }
-        });
-    }
-    
-    // ===== MENU MOBILE =====
-    function initMobileMenu() {
-        if (DOM.mobileMenuBtn) {
-            DOM.mobileMenuBtn.addEventListener('click', () => {
-                DOM.mobileMenu.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            });
-        }
-        
-        if (DOM.closeMobileMenu) {
-            DOM.closeMobileMenu.addEventListener('click', () => {
-                DOM.mobileMenu.classList.remove('active');
-                document.body.style.overflow = '';
-            });
-        }
-        
-        // Fechar ao clicar no backdrop
-        const backdrop = document.querySelector('.mobile-menu-backdrop');
-        if (backdrop) {
-            backdrop.addEventListener('click', () => {
-                DOM.mobileMenu.classList.remove('active');
-                document.body.style.overflow = '';
-            });
-        }
-        
-        // Fechar ao clicar em links
-        document.querySelectorAll('.mobile-nav a').forEach(link => {
-            link.addEventListener('click', () => {
-                DOM.mobileMenu.classList.remove('active');
-                document.body.style.overflow = '';
-            });
-        });
-    }
-    
-    // ===== NEWSLETTER FORM =====
-    function initNewsletter() {
-        if (DOM.newsletterForm) {
-            DOM.newsletterForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                const email = DOM.newsletterForm.querySelector('input[type="email"]').value;
+            <div class="section-header-premium" data-aos="fade-up">
+                <span class="section-subtitle-premium">
+                    <i class="fas fa-chart-bar"></i>
+                    Resultados Mensuráveis
+                    <i class="fas fa-trophy"></i>
+                </span>
+                <h2 class="section-title-premium">
+                    O Impacto do 
+                    <span class="title-gradient">Agro Sustentável</span>
+                </h2>
+                <p class="section-description-premium">
+                    Dados reais de mais de 500 propriedades que adotaram práticas 
+                    regenerativas nos últimos 5 anos. Resultados comprovados 
+                    por auditoria independente.
+                </p>
+            </div>
+            
+            <div class="metrics-grid-premium">
+                <div class="metric-card-premium" data-aos="flip-left" data-aos-delay="0">
+                    <div class="metric-glow"></div>
+                    <div class="metric-icon-premium">
+                        <i class="fas fa-cloud-rain"></i>
+                    </div>
+                    <div class="metric-number-premium">
+                        <span class="counter-premium" data-target="1280">0</span>
+                        <span class="metric-unit">mi m³</span>
+                    </div>
+                    <div class="metric-label-premium">Água economizada (anual)</div>
+                    <div class="metric-trend-premium trend-up">
+                        <i class="fas fa-arrow-up"></i> +22% vs 2024
+                    </div>
+                    <div class="metric-description">
+                        Equivalente ao consumo de 8 milhões de pessoas
+                    </div>
+                </div>
                 
-                MemoryGame.showNotification(`🌱 Obrigado, ${email}! Em breve você receberá nossas novidades sustentáveis.`, 'success');
-                DOM.newsletterForm.reset();
-            });
-        }
-    }
-    
-    // ===== THEME TOGGLE =====
-    function initThemeToggle() {
-        if (DOM.themeToggle) {
-            let clickCount = 0;
-            DOM.themeToggle.addEventListener('click', () => {
-                clickCount++;
+                <div class="metric-card-premium" data-aos="flip-left" data-aos-delay="100">
+                    <div class="metric-glow"></div>
+                    <div class="metric-icon-premium">
+                        <i class="fas fa-tree"></i>
+                    </div>
+                    <div class="metric-number-premium">
+                        <span class="counter-premium" data-target="350">0</span>
+                        <span class="metric-unit">mil ha</span>
+                    </div>
+                    <div class="metric-label-premium">Áreas restauradas</div>
+                    <div class="metric-trend-premium trend-up">
+                        <i class="fas fa-arrow-up"></i> +18% ao ano
+                    </div>
+                    <div class="metric-description">
+                        Equivalente a 490 mil campos de futebol
+                    </div>
+                </div>
                 
-                // Rotação
-                DOM.themeToggle.style.transform = `rotate(${clickCount * 360}deg)`;
+                <div class="metric-card-premium" data-aos="flip-left" data-aos-delay="200">
+                    <div class="metric-glow"></div>
+                    <div class="metric-icon-premium">
+                        <i class="fas fa-wheat-awn"></i>
+                    </div>
+                    <div class="metric-number-premium">
+                        <span class="counter-premium" data-target="42">0</span>
+                        <span class="metric-unit">%</span>
+                    </div>
+                    <div class="metric-label-premium">Aumento de produtividade</div>
+                    <div class="metric-trend-premium trend-up">
+                        <i class="fas fa-arrow-up"></i> Média nacional
+                    </div>
+                    <div class="metric-description">
+                        Em algumas culturas, aumento de até 85%
+                    </div>
+                </div>
                 
-                // Easter egg
-                if (clickCount === 5) {
-                    MemoryGame.showNotification('🌍 Você ativou o modo Natureza Suprema!', 'success');
-                    document.body.style.animation = 'ambientBreathing 3s ease-in-out';
+                <div class="metric-card-premium" data-aos="flip-left" data-aos-delay="300">
+                    <div class="metric-glow"></div>
+                    <div class="metric-icon-premium">
+                        <i class="fas fa-bug"></i>
+                    </div>
+                    <div class="metric-number-premium">
+                        <span class="counter-premium" data-target="67">0</span>
+                        <span class="metric-unit">%</span>
+                    </div>
+                    <div class="metric-label-premium">Menos defensivos</div>
+                    <div class="metric-trend-premium trend-down">
+                        <i class="fas fa-arrow-down"></i> Redução drástica
+                    </div>
+                    <div class="metric-description">
+                        Controle biológico substitui químicos
+                    </div>
+                </div>
+                
+                <div class="metric-card-premium" data-aos="flip-left" data-aos-delay="400">
+                    <div class="metric-glow"></div>
+                    <div class="metric-icon-premium">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <div class="metric-number-premium">
+                        <span class="counter-premium" data-target="1250">0</span>
+                        <span class="metric-unit">mil t</span>
+                    </div>
+                    <div class="metric-label-premium">CO₂ sequestrado</div>
+                    <div class="metric-trend-premium trend-up">
+                        <i class="fas fa-arrow-up"></i> +31% ao ano
+                    </div>
+                    <div class="metric-description">
+                        Carbono capturado no solo
+                    </div>
+                </div>
+                
+                <div class="metric-card-premium" data-aos="flip-left" data-aos-delay="500">
+                    <div class="metric-glow"></div>
+                    <div class="metric-icon-premium">
+                        <i class="fas fa-tractor"></i>
+                    </div>
+                    <div class="metric-number-premium">
+                        <span class="counter-premium" data-target="580">0</span>
+                        <span class="metric-unit"></span>
+                    </div>
+                    <div class="metric-label-premium">Fazendas certificadas</div>
+                    <div class="metric-trend-premium trend-up">
+                        <i class="fas fa-arrow-up"></i> +45% em 2025
+                    </div>
+                    <div class="metric-description">
+                        Selo AgroForte de Sustentabilidade
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Gráfico de impacto visual -->
+            <div class="impact-chart" data-aos="fade-up">
+                <div class="chart-container">
+                    <h3>Evolução dos Indicadores (2020-2025)</h3>
+                    <div class="chart-bars">
+                        <div class="chart-bar-item">
+                            <div class="bar-label">Produtividade</div>
+                            <div class="bar-wrapper">
+                                <div class="bar-fill" style="--target: 142"></div>
+                            </div>
+                            <div class="bar-value">+42%</div>
+                        </div>
+                        <div class="chart-bar-item">
+                            <div class="bar-label">Uso de Água</div>
+                            <div class="bar-wrapper">
+                                <div class="bar-fill negative" style="--target: 60"></div>
+                            </div>
+                            <div class="bar-value">-60%</div>
+                        </div>
+                        <div class="chart-bar-item">
+                            <div class="bar-label">Biodiversidade</div>
+                            <div class="bar-wrapper">
+                                <div class="bar-fill" style="--target: 165"></div>
+                            </div>
+                            <div class="bar-value">+65%</div>
+                        </div>
+                        <div class="chart-bar-item">
+                            <div class="bar-label">Emissões CO₂</div>
+                            <div class="bar-wrapper">
+                                <div class="bar-fill negative" style="--target: 42"></div>
+                            </div>
+                            <div class="bar-value">-42%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== SEÇÃO JOGO DA MEMÓRIA 3D ===== -->
+        <section id="jogo" class="game-premium">
+            <div class="game-bg-particles"></div>
+            
+            <div class="section-header-premium" data-aos="fade-up">
+                <span class="section-subtitle-premium">
+                    <i class="fas fa-gamepad"></i>
+                    Desafio Verde
+                    <i class="fas fa-puzzle-piece"></i>
+                </span>
+                <h2 class="section-title-premium">
+                    Jogo da 
+                    <span class="title-gradient">Memória Sustentável</span>
+                </h2>
+                <p class="section-description-premium">
+                    Encontre os pares e descubra os ícones do agro regenerativo. 
+                    Treine sua memória enquanto aprende sobre sustentabilidade.
+                </p>
+            </div>
+            
+            <div class="game-container-premium" data-aos="zoom-in" data-aos-duration="800">
+                <div class="game-header-premium">
+                    <div class="game-logo">
+                        <i class="fas fa-leaf"></i>
+                        <span>Agro<span>Memory</span></span>
+                    </div>
+                    <div class="game-stats-premium">
+                        <div class="stat-block-premium">
+                            <i class="fas fa-check-double"></i>
+                            <span>Pares: <span id="pairs-matched-display">0</span>/4</span>
+                        </div>
+                        <div class="stat-block-premium">
+                            <i class="fas fa-brain"></i>
+                            <span>Tentativas: <span id="attempts-display">0</span></span>
+                        </div>
+                        <div class="stat-block-premium">
+                            <i class="fas fa-trophy"></i>
+                            <span>Recorde: <span id="best-score-display">—</span></span>
+                        </div>
+                        <div class="stat-block-premium">
+                            <i class="fas fa-star"></i>
+                            <span>Nível: <span id="level-display">1</span></span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="memory-board" class="memory-board-premium">
+                    <!-- Gerado via JavaScript -->
+                </div>
+                
+                <div class="game-controls-premium">
+                    <button id="reset-game-btn" class="btn-game-premium">
+                        <i class="fas fa-rotate-right"></i>
+                        <span>Reiniciar Jogo</span>
+                        <span class="btn-shine"></span>
+                    </button>
                     
-                    // Adicionar classe especial
-                    document.body.classList.add('nature-mode');
-                }
-            });
-        }
-    }
-    
-    // ===== EFEITO PARALLAX NOS ELEMENTOS =====
-    function initParallax() {
-        const globe = document.querySelector('.globe-3d-premium');
-        const orbitItems = document.querySelectorAll('.orbit-item');
-        
-        if (globe) {
-            document.addEventListener('mousemove', (e) => {
-                const moveX = (e.clientX - window.innerWidth / 2) * 0.003;
-                const moveY = (e.clientY - window.innerHeight / 2) * 0.003;
+                    <div class="game-hint-premium">
+                        <i class="fas fa-lightbulb"></i>
+                        <span>Pares: 🌱 🌽 💧 ☀️</span>
+                    </div>
+                    
+                    <button id="shuffle-game-btn" class="btn-game-secondary">
+                        <i class="fas fa-shuffle"></i>
+                        <span>Embaralhar</span>
+                    </button>
+                </div>
                 
-                globe.style.transform = `translateY(0) rotateY(${moveX}deg) rotateX(${-moveY}deg)`;
-            });
-        }
-        
-        // Animar orbit items com velocidades diferentes
-        orbitItems.forEach((item, index) => {
-            const speed = item.getAttribute('data-speed') || 1;
-            item.style.animationDuration = `${4 / speed}s`;
-        });
-    }
-    
-    // ===== ANIMAÇÕES DE HOVER 3D NOS CARDS =====
-    function initCardHoverEffects() {
-        const cards = document.querySelectorAll('.metric-card-premium, .case-card-premium, .tab-visual-premium');
-        
-        cards.forEach(card => {
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-                
-                const rotateX = (y - centerY) / 15;
-                const rotateY = (centerX - x) / 15;
-                
-                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px)`;
-                
-                // Efeito de brilho
-                const glow = card.querySelector('.metric-glow') || document.createElement('div');
-                if (!card.querySelector('.metric-glow')) {
-                    glow.className = 'metric-glow';
-                    glow.style.cssText = `
-                        position: absolute;
-                        inset: 0;
-                        background: radial-gradient(circle at ${x}px ${y}px, rgba(139, 195, 74, 0.15), transparent 70%);
-                        border-radius: inherit;
-                        pointer-events: none;
-                        opacity: 0;
-                        transition: opacity 0.3s;
-                    `;
-                    card.style.position = 'relative';
-                    card.appendChild(glow);
-                }
-                glow.style.opacity = '1';
-                glow.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(139, 195, 74, 0.2), transparent 70%)`;
-            });
+                <div class="game-progress">
+                    <div class="progress-bar-container">
+                        <div class="progress-bar-fill" id="game-progress-bar"></div>
+                    </div>
+                    <div class="progress-text">
+                        <span>Progresso</span>
+                        <span id="progress-percentage">0%</span>
+                    </div>
+                </div>
+            </div>
             
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = '';
-                const glow = card.querySelector('.metric-glow');
-                if (glow) glow.style.opacity = '0';
-            });
-        });
-    }
-    
-    // ===== INICIALIZAÇÃO PRINCIPAL =====
-    function init() {
-        console.log('%c🌍 AGRO FORTE · O FUTURO É SUSTENTÁVEL', 'font-size: 22px; font-weight: bold; color: #8bc34a; text-shadow: 0 0 15px #4caf50;');
-        console.log('%c✨ Interface cinematográfica carregada! 6000+ linhas de puro design.', 'font-size: 14px; color: #a5d6a7;');
+            <!-- Dicas do jogo -->
+            <div class="game-tips" data-aos="fade-up">
+                <div class="tip-card">
+                    <i class="fas fa-seedling"></i>
+                    <span>🌱 = Semente da sustentabilidade</span>
+                </div>
+                <div class="tip-card">
+                    <i class="fas fa-wheat-awn"></i>
+                    <span>🌽 = Milho regenerativo</span>
+                </div>
+                <div class="tip-card">
+                    <i class="fas fa-droplet"></i>
+                    <span>💧 = Água preservada</span>
+                </div>
+                <div class="tip-card">
+                    <i class="fas fa-sun"></i>
+                    <span>☀️ = Energia solar</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== SEÇÃO CASES DE SUCESSO ===== -->
+        <section id="cases" class="cases-premium">
+            <div class="section-header-premium" data-aos="fade-up">
+                <span class="section-subtitle-premium">
+                    <i class="fas fa-star"></i>
+                    Histórias Reais
+                    <i class="fas fa-medal"></i>
+                </span>
+                <h2 class="section-title-premium">
+                    Cases de <span class="title-gradient">Sucesso</span>
+                </h2>
+                <p class="section-description-premium">
+                    Conheça produtores que transformaram suas propriedades com 
+                    práticas sustentáveis e hoje colhem resultados extraordinários.
+                </p>
+            </div>
+            
+            <div class="cases-grid">
+                <div class="case-card-premium" data-aos="fade-up" data-aos-delay="0">
+                    <div class="case-image">
+                        <img src="https://images.pexels.com/photos/2252584/pexels-photo-2252584.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Fazenda sustentável">
+                        <div class="case-category">Agricultura Regenerativa</div>
+                    </div>
+                    <div class="case-content">
+                        <h3>Fazenda Esperança</h3>
+                        <p class="case-location"><i class="fas fa-map-pin"></i> Mato Grosso, Brasil</p>
+                        <p class="case-description">
+                            "Implementamos plantio direto e rotação de culturas. Em 3 anos, 
+                            nossa produtividade aumentou 45% e reduzimos custos com insumos em 60%."
+                        </p>
+                        <div class="case-stats">
+                            <div class="case-stat">
+                                <span class="stat-value">+45%</span>
+                                <span class="stat-label">Produtividade</span>
+                            </div>
+                            <div class="case-stat">
+                                <span class="stat-value">-60%</span>
+                                <span class="stat-label">Custos</span>
+                            </div>
+                        </div>
+                        <div class="case-author">
+                            <i class="fas fa-user-circle"></i>
+                            <span>João Carlos Mendes · Produtor Rural</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="case-card-premium" data-aos="fade-up" data-aos-delay="150">
+                    <div class="case-image">
+                        <img src="https://images.pexels.com/photos/2933243/pexels-photo-2933243.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Agricultura familiar">
+                        <div class="case-category">Agricultura Familiar</div>
+                    </div>
+                    <div class="case-content">
+                        <h3>Sítio Bela Vista</h3>
+                        <p class="case-location"><i class="fas fa-map-pin"></i> Minas Gerais, Brasil</p>
+                        <p class="case-description">
+                            "Com a irrigação inteligente e bioinsumos, economizamos 70% de água 
+                            e produzimos alimentos 100% orgânicos para a comunidade local."
+                        </p>
+                        <div class="case-stats">
+                            <div class="case-stat">
+                                <span class="stat-value">-70%</span>
+                                <span class="stat-label">Água</span>
+                            </div>
+                            <div class="case-stat">
+                                <span class="stat-value">100%</span>
+                                <span class="stat-label">Orgânico</span>
+                            </div>
+                        </div>
+                        <div class="case-author">
+                            <i class="fas fa-user-circle"></i>
+                            <span>Maria Silva · Agricultora Familiar</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="case-card-premium" data-aos="fade-up" data-aos-delay="300">
+                    <div class="case-image">
+                        <img src="https://images.pexels.com/photos/1595104/pexels-photo-1595104.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Tecnologia no campo">
+                        <div class="case-category">AgTech</div>
+                    </div>
+                    <div class="case-content">
+                        <h3>AgroTech Inovação</h3>
+                        <p class="case-location"><i class="fas fa-map-pin"></i> São Paulo, Brasil</p>
+                        <p class="case-description">
+                            "Nossos robôs autônomos reduziram o uso de herbicidas em 95% e 
+                            aumentaram a precisão do plantio, gerando economia de R$ 500 mil/ano."
+                        </p>
+                        <div class="case-stats">
+                            <div class="case-stat">
+                                <span class="stat-value">-95%</span>
+                                <span class="stat-label">Herbicidas</span>
+                            </div>
+                            <div class="case-stat">
+                                <span class="stat-value">R$500k</span>
+                                <span class="stat-label">Economia/ano</span>
+                            </div>
+                        </div>
+                        <div class="case-author">
+                            <i class="fas fa-user-circle"></i>
+                            <span>Ricardo Oliveira · Diretor de Inovação</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== SEÇÃO CONTATO E NEWSLETTER ===== -->
+        <section id="contato" class="contact-premium">
+            <div class="contact-container-premium" data-aos="fade-up">
+                <div class="contact-info-premium">
+                    <h2>
+                        Vamos cultivar o 
+                        <span class="title-gradient">futuro juntos</span>?
+                    </h2>
+                    <p class="contact-description">
+                        Receba estudos de caso, novidades e práticas sustentáveis 
+                        diretamente no seu e-mail. Junte-se à revolução verde que 
+                        está transformando a agricultura mundial.
+                    </p>
+                    
+                    <form class="newsletter-form-premium" id="newsletterForm">
+                        <div class="input-wrapper">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" placeholder="Seu melhor e-mail" required>
+                        </div>
+                        <button type="submit" class="submit-btn">
+                            <span>Inscrever</span>
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                    
+                    <div class="contact-features">
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Conteúdo exclusivo semanal</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Acesso a webinars e eventos</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>E-books e materiais gratuitos</span>
+                        </div>
+                    </div>
+                    
+                    <div class="social-links-premium">
+                        <a href="#" class="social-link">
+                            <i class="fab fa-linkedin-in"></i>
+                            <span class="social-tooltip">LinkedIn</span>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-instagram"></i>
+                            <span class="social-tooltip">Instagram</span>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-youtube"></i>
+                            <span class="social-tooltip">YouTube</span>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-x-twitter"></i>
+                            <span class="social-tooltip">X (Twitter)</span>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-whatsapp"></i>
+                            <span class="social-tooltip">WhatsApp</span>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="contact-illustration-premium">
+                    <div class="illustration-wrapper">
+                        <i class="fas fa-hand-holding-heart"></i>
+                        <div class="illustration-particles">
+                            <span></span><span></span><span></span><span></span>
+                        </div>
+                        <div class="illustration-text">
+                            <span>+10.000</span>
+                            <span>produtores conectados</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ============================================ -->
+    <!-- FOOTER PREMIUM                               -->
+    <!-- ============================================ -->
+    <footer class="footer-premium">
+        <div class="footer-grid-premium">
+            <div class="footer-brand-premium">
+                <div class="footer-logo">
+                    <i class="fas fa-seedling"></i>
+                    <span>Agro<span>Forte</span></span>
+                </div>
+                <p class="footer-description">
+                    Revolucionando a agricultura com tecnologia, sustentabilidade 
+                    e respeito à natureza. O futuro é verde, o futuro é agora.
+                </p>
+                <div class="footer-certifications">
+                    <span><i class="fas fa-certificate"></i> Carbon Trust</span>
+                    <span><i class="fas fa-leaf"></i> Rainforest Alliance</span>
+                    <span><i class="fas fa-recycle"></i> B Corp</span>
+                </div>
+            </div>
+            
+            <div class="footer-links-premium">
+                <h4>Navegação</h4>
+                <ul>
+                    <li><a href="#home"><i class="fas fa-chevron-right"></i> Visão Geral</a></li>
+                    <li><a href="#tecnologias"><i class="fas fa-chevron-right"></i> Tecnologias</a></li>
+                    <li><a href="#impacto"><i class="fas fa-chevron-right"></i> Impacto</a></li>
+                    <li><a href="#jogo"><i class="fas fa-chevron-right"></i> Jogo Verde</a></li>
+                    <li><a href="#cases"><i class="fas fa-chevron-right"></i> Cases</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-links-premium">
+                <h4>Recursos</h4>
+                <ul>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Relatório ESG 2025</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Calculadora de Carbono</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Blog Sustentável</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Webinars</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> E-books Gratuitos</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-links-premium">
+                <h4>Institucional</h4>
+                <ul>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Sobre Nós</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Carreiras</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Imprensa</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Política de Privacidade</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Termos de Uso</a></li>
+                </ul>
+            </div>
+        </div>
         
-        initPreloader();
-        
-        if (!State.isMobile) {
-            initCustomCursor();
-        } else {
-            document.body.style.cursor = 'auto';
-        }
-        
-        initCanvas3D();
-        initTabs();
-        initNavigation();
-        initMobileMenu();
-        initNewsletter();
-        initThemeToggle();
-        initParallax();
-        initCardHoverEffects();
-        
-        MemoryGame.init();
-        
-        // Fallback do preloader
-        setTimeout(() => {
-            if (State.isLoading && DOM.preloader) {
-                DOM.preloader.style.opacity = '0';
-                DOM.preloader.style.visibility = 'hidden';
-                setTimeout(() => {
-                    DOM.preloader.style.display = 'none';
-                    State.isLoading = false;
-                    startHeroAnimations();
-                    initCountersAnimation();
-                }, 1000);
-            }
-        }, 5000);
-    }
-    
-    // Iniciar quando DOM estiver pronto
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', init);
-    } else {
-        init();
-    }
-    
-})();
+        <div class="footer-bottom-premium">
+            <p class="copyright">
+                © 2025 AgroForte · Todos os ciclos regenerados. 
+                Projetado para um futuro onde produção e natureza coexistem em harmonia.
+            </p>
+            <div class="footer-badges">
+                <span><i class="fas fa-globe-americas"></i> Carbono Negativo</span>
+                <span><i class="fas fa-solar-panel"></i> 100% Energia Renovável</span>
+                <span><i class="fas fa-recycle"></i> Economia Circular</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============================================ -->
+    <!-- SCRIPTS                                      -->
+    <!-- ============================================ -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
