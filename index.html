@@ -1,1 +1,370 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Agro Forte · Revolução Sustentável 360°</title>
+    
+    <!-- Fontes Premium & Ícones -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- CSS Principal -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
+    <!-- Cursor Personalizado (Elementos DOM) -->
+    <div class="cursor-dot" data-cursor-dot></div>
+    <div class="cursor-outline" data-cursor-outline></div>
+
+    <!-- Partículas de Fundo (Canvas) -->
+    <canvas id="background-canvas"></canvas>
+
+    <!-- Overlay de Carregamento (Cinema) -->
+    <div id="preloader">
+        <div class="preloader-content">
+            <div class="preloader-logo">
+                <i class="fas fa-tractor"></i>
+                <span>AGRO<span>FORTE</span></span>
+            </div>
+            <div class="progress-bar-container">
+                <div class="progress-bar"></div>
+            </div>
+            <p class="loading-message">Cultivando o futuro sustentável...</p>
+        </div>
+    </div>
+
+    <!-- Navegação Principal (Sticky & Glass) -->
+    <header class="main-header">
+        <div class="header-container">
+            <a href="#" class="brand-logo">
+                <div class="logo-icon">
+                    <i class="fas fa-seedling"></i>
+                </div>
+                <span class="logo-text">Agro<span>Forte</span></span>
+            </a>
+            
+            <nav class="desktop-nav">
+                <ul>
+                    <li><a href="#visao-geral" class="nav-link active"><i class="fas fa-home"></i> Visão Geral</a></li>
+                    <li><a href="#tecnologias" class="nav-link"><i class="fas fa-microchip"></i> Tecnologias</a></li>
+                    <li><a href="#impacto" class="nav-link"><i class="fas fa-chart-line"></i> Impacto Real</a></li>
+                    <li><a href="#jogo-interativo" class="nav-link"><i class="fas fa-gamepad"></i> Jogo Verde</a></li>
+                    <li><a href="#contato" class="nav-link"><i class="fas fa-envelope"></i> Contato</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <button class="theme-toggle" aria-label="Alternar contraste natural">
+                    <i class="fas fa-leaf"></i>
+                </button>
+                <button class="mobile-menu-btn" aria-label="Menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Menu Mobile Overlay -->
+    <div class="mobile-menu">
+        <div class="mobile-menu-header">
+            <span>Navegação</span>
+            <button class="close-mobile-menu"><i class="fas fa-times"></i></button>
+        </div>
+        <ul>
+            <li><a href="#visao-geral"><i class="fas fa-home"></i> Visão Geral</a></li>
+            <li><a href="#tecnologias"><i class="fas fa-microchip"></i> Tecnologias</a></li>
+            <li><a href="#impacto"><i class="fas fa-chart-line"></i> Impacto Real</a></li>
+            <li><a href="#jogo-interativo"><i class="fas fa-gamepad"></i> Jogo Verde</a></li>
+            <li><a href="#contato"><i class="fas fa-envelope"></i> Contato</a></li>
+        </ul>
+    </div>
+
+    <main>
+        <!-- Seção Hero / Visão Geral (com ID) -->
+        <section id="visao-geral" class="hero-section-enhanced">
+            <div class="hero-grid">
+                <div class="hero-content-wrapper">
+                    <div class="hero-badge animate-pop">
+                        <span class="pulse-dot"></span> AGRO 5.0 · SUSTENTABILIDADE ATIVA
+                    </div>
+                    <h1 class="hero-title">
+                        <span class="line-1">Equilíbrio</span>
+                        <span class="line-2">entre produção</span>
+                        <span class="line-3 text-gradient">e meio ambiente</span>
+                    </h1>
+                    <p class="hero-description">
+                        O futuro da agricultura é regenerativo. Unimos inteligência artificial, biotecnologia e respeito à terra para alimentar o mundo sem esgotar o planeta.
+                    </p>
+                    <div class="hero-cta-group">
+                        <a href="#jogo-interativo" class="cta-primary">
+                            <span>Jogar Memória</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                        <a href="#impacto" class="cta-secondary">
+                            <span>Descobrir Impacto</span>
+                            <i class="fas fa-chart-simple"></i>
+                        </a>
+                    </div>
+                    <div class="hero-stats-mini">
+                        <div class="stat-item">
+                            <span class="stat-value">-42%</span>
+                            <span class="stat-label">Emissões CO₂</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">+65%</span>
+                            <span class="stat-label">Biodiversidade</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">98%</span>
+                            <span class="stat-label">Água reutilizada</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-visual-complex">
+                    <div class="globe-3d-wrapper">
+                        <div class="rotating-globe">
+                            <div class="globe-layer layer-1"></div>
+                            <div class="globe-layer layer-2"></div>
+                            <div class="globe-layer layer-3"></div>
+                            <i class="fas fa-globe-americas globe-icon"></i>
+                        </div>
+                        <div class="floating-elements">
+                            <div class="float-item leaf1"><i class="fas fa-leaf"></i></div>
+                            <div class="float-item leaf2"><i class="fas fa-seedling"></i></div>
+                            <div class="float-item droplet"><i class="fas fa-tint"></i></div>
+                            <div class="float-item sun"><i class="fas fa-sun"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="scroll-indicator">
+                <span>Role para explorar</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+        </section>
+
+        <!-- Seção Tecnologias (Abas e Cards) -->
+        <section id="tecnologias" class="tech-section">
+            <div class="section-header-enhanced">
+                <span class="section-subtitle">Inovação no Campo</span>
+                <h2>Tecnologias que <span class="text-gradient">Transformam</span></h2>
+                <p>Soluções integradas que maximizam a produtividade enquanto regeneram ecossistemas.</p>
+            </div>
+
+            <div class="tech-tabs-container">
+                <div class="tech-tabs">
+                    <button class="tab-btn active" data-tab="tab1"><i class="fas fa-satellite"></i> Monitoramento</button>
+                    <button class="tab-btn" data-tab="tab2"><i class="fas fa-robot"></i> Automação</button>
+                    <button class="tab-btn" data-tab="tab3"><i class="fas fa-biohazard"></i> Biotecnologia</button>
+                    <button class="tab-btn" data-tab="tab4"><i class="fas fa-water"></i> Irrigação 4.0</button>
+                </div>
+
+                <div class="tab-content active" id="tab1">
+                    <div class="tab-grid">
+                        <div class="tab-info">
+                            <h3>Satélites e Drones de Precisão</h3>
+                            <p>Monitoramento em tempo real da saúde da lavoura, índice de vegetação (NDVI) e estresse hídrico. Redução de insumos em até 30%.</p>
+                            <ul class="feature-list">
+                                <li><i class="fas fa-check-circle"></i> Mapeamento multiespectral</li>
+                                <li><i class="fas fa-check-circle"></i> Alertas de pragas antecipados</li>
+                                <li><i class="fas fa-check-circle"></i> Aplicação localizada de defensivos</li>
+                            </ul>
+                        </div>
+                        <div class="tab-visual">
+                            <img src="https://images.pexels.com/photos/2166711/pexels-photo-2166711.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Drone agrícola" style="width:100%; border-radius: 32px; box-shadow: var(--shadow-lg);">
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-content" id="tab2">
+                    <div class="tab-grid">
+                        <div class="tab-info">
+                            <h3>Robôs Colaborativos no Campo</h3>
+                            <p>Máquinas autônomas que plantam, capinam e colhem com precisão milimétrica, preservando o solo e reduzindo a compactação.</p>
+                            <ul class="feature-list">
+                                <li><i class="fas fa-check-circle"></i> Plantio direto sem arar</li>
+                                <li><i class="fas fa-check-circle"></i> Capina mecânica (sem herbicidas)</li>
+                                <li><i class="fas fa-check-circle"></i> Colheita seletiva</li>
+                            </ul>
+                        </div>
+                        <div class="tab-visual">
+                            <img src="https://images.pexels.com/photos/1595104/pexels-photo-1595104.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Robô agrícola" style="width:100%; border-radius: 32px;">
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-content" id="tab3">
+                    <div class="tab-grid">
+                        <div class="tab-info">
+                            <h3>Bioinsumos e Fixação de Nitrogênio</h3>
+                            <p>Uso de microrganismos benéficos para substituir fertilizantes químicos e promover a saúde do solo de forma natural.</p>
+                            <ul class="feature-list">
+                                <li><i class="fas fa-check-circle"></i> Bactérias fixadoras de N</li>
+                                <li><i class="fas fa-check-circle"></i> Fungos micorrízicos</li>
+                                <li><i class="fas fa-check-circle"></i> Controle biológico de pragas</li>
+                            </ul>
+                        </div>
+                        <div class="tab-visual">
+                            <img src="https://images.pexels.com/photos/1002703/pexels-photo-1002703.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Laboratório biotecnologia" style="width:100%; border-radius: 32px;">
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-content" id="tab4">
+                    <div class="tab-grid">
+                        <div class="tab-info">
+                            <h3>Irrigação de Precisão com IoT</h3>
+                            <p>Sensores de umidade do solo conectados à internet que acionam a irrigação apenas quando e onde necessário.</p>
+                            <ul class="feature-list">
+                                <li><i class="fas fa-check-circle"></i> Economia de até 60% de água</li>
+                                <li><i class="fas fa-check-circle"></i> Fertirrigação inteligente</li>
+                                <li><i class="fas fa-check-circle"></i> Previsão meteorológica integrada</li>
+                            </ul>
+                        </div>
+                        <div class="tab-visual">
+                            <img src="https://images.pexels.com/photos/2131784/pexels-photo-2131784.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Irrigação" style="width:100%; border-radius: 32px;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção Impacto Real (Gráficos e Dados) -->
+        <section id="impacto" class="impact-section">
+            <div class="section-header-enhanced">
+                <span class="section-subtitle">Resultados Mensuráveis</span>
+                <h2>O Impacto do <span class="text-gradient">Agro Sustentável</span></h2>
+            </div>
+
+            <div class="impact-metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-icon"><i class="fas fa-cloud-rain"></i></div>
+                    <div class="metric-number"><span class="counter" data-target="1280">0</span> mi m³</div>
+                    <div class="metric-label">Água economizada (anual)</div>
+                    <div class="metric-trend up"><i class="fas fa-arrow-up"></i> +22% vs 2024</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-icon"><i class="fas fa-tree"></i></div>
+                    <div class="metric-number"><span class="counter" data-target="350">0</span> mil ha</div>
+                    <div class="metric-label">Áreas restauradas</div>
+                    <div class="metric-trend up"><i class="fas fa-arrow-up"></i> +18% ao ano</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-icon"><i class="fas fa-wheat-awn"></i></div>
+                    <div class="metric-number"><span class="counter" data-target="42">0</span>%</div>
+                    <div class="metric-label">Aumento de produtividade</div>
+                    <div class="metric-trend up"><i class="fas fa-arrow-up"></i> Média nacional</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-icon"><i class="fas fa-bug"></i></div>
+                    <div class="metric-number"><span class="counter" data-target="67">0</span>%</div>
+                    <div class="metric-label">Menos defensivos</div>
+                    <div class="metric-trend down"><i class="fas fa-arrow-down"></i> Redução significativa</div>
+                </div>
+            </div>
+
+            <div class="testimonials-carousel">
+                <div class="testimonial-track">
+                    <div class="testimonial-card">
+                        <i class="fas fa-quote-left"></i>
+                        <p>"Implementamos as técnicas de plantio direto e nossa produtividade subiu 30% enquanto o custo com insumos caiu pela metade."</p>
+                        <div class="author">
+                            <strong>João Carlos</strong> · Produtor Rural, MT
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <i class="fas fa-quote-left"></i>
+                        <p>"A integração lavoura-pecuária-floresta mudou a cara da nossa fazenda. Hoje temos sombra, água limpa e mais lucro."</p>
+                        <div class="author">
+                            <strong>Mariana Silva</strong> · Eng. Agrônoma, GO
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <i class="fas fa-quote-left"></i>
+                        <p>"Os drones nos ajudam a identificar pragas antes que se espalhem. É tecnologia a serviço da natureza."</p>
+                        <div class="author">
+                            <strong>Ricardo Oliveira</strong> · Consultor Agrícola, SP
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção Jogo Interativo (Memória 3x3) -->
+        <section id="jogo-interativo" class="game-section-enhanced">
+            <div class="section-header-enhanced">
+                <span class="section-subtitle">Desafio Verde</span>
+                <h2>Jogo da <span class="text-gradient">Memória Sustentável</span></h2>
+                <p>Encontre os pares e descubra os ícones do agro regenerativo.</p>
+            </div>
+
+            <div class="game-area">
+                <div class="game-panel">
+                    <div class="game-stats-panel">
+                        <div class="stat-block">
+                            <i class="fas fa-check-double"></i>
+                            <span>Pares: <span id="pairs-matched">0</span>/4</span>
+                        </div>
+                        <div class="stat-block">
+                            <i class="fas fa-brain"></i>
+                            <span>Tentativas: <span id="attempt-count">0</span></span>
+                        </div>
+                        <div class="stat-block">
+                            <i class="fas fa-trophy"></i>
+                            <span>Recorde: <span id="best-score">—</span></span>
+                        </div>
+                    </div>
+                    <div id="memory-board" class="memory-board-enhanced">
+                        <!-- Grid gerado via JS -->
+                    </div>
+                    <div class="game-controls">
+                        <button id="reset-game" class="game-btn"><i class="fas fa-rotate-right"></i> Reiniciar</button>
+                        <div class="game-hint-badge">
+                            <i class="fas fa-lightbulb"></i> Pares: 🌱 🌽 💧 ☀️
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção Contato / Newsletter -->
+        <section id="contato" class="contact-section">
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h2>Vamos cultivar o futuro <span class="text-gradient">juntos</span>?</h2>
+                    <p>Receba estudos de caso, novidades e práticas sustentáveis diretamente no seu e-mail.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Seu melhor e-mail" required>
+                        <button type="submit" class="submit-btn">Inscrever <i class="fas fa-paper-plane"></i></button>
+                    </form>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="contact-illustration">
+                    <i class="fas fa-hand-holding-heart"></i>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <i class="fas fa-tractor"></i> AgroForte
+                <p>© 2025 · Todos os ciclos regenerados.</p>
+            </div>
+            <div class="footer-links">
+                <a href="#">Política de Sustentabilidade</a>
+                <a href="#">Relatório ESG 2025</a>
+                <a href="#">Trabalhe Conosco</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
